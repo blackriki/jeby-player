@@ -1,6 +1,6 @@
 # Jeby Player 发布与维护
 
-发布目标：[blackriki/jeby-player](https://github.com/blackriki/jeby-player)。当前版本仅支持 Emby；Jellyfin 属于后续计划。本地 Public 发布管线已通过；GitHub 上传、远端 CI 和 Release 尚待完成，本地验证不等于已经公开发布。
+公开仓库：[blackriki/jeby-player](https://github.com/blackriki/jeby-player)。当前版本仅支持 Emby；Jellyfin 属于后续计划。本地 Public 发布管线及 [GitHub CI](https://github.com/blackriki/jeby-player/actions/runs/34250184690) 已通过。公开下载附件见 [Releases](https://github.com/blackriki/jeby-player/releases)。
 
 ## 当前准备状态
 
