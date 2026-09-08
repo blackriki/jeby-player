@@ -11,7 +11,7 @@ namespace EmbyPlayer.UI.Tests;
 public sealed class ReleasePipelineScriptTests
 {
     [TestMethod]
-    public async Task MpvRuntimeManifest_RecordsOnlyAuditedInternalProvenance()
+    public async Task MpvRuntimeManifest_RecordsConsistentBinaryAndDistributionEvidence()
     {
         var root = FindRepositoryRoot();
         var manifestPath = Path.Combine(
@@ -27,21 +27,22 @@ public sealed class ReleasePipelineScriptTests
         var binary = manifest.GetProperty("binary");
         var archive = manifest.GetProperty("localArchive");
 
-        Assert.AreEqual(117549568, binary.GetProperty("sizeBytes").GetInt64());
-        Assert.AreEqual(
-            "02FA97CBDB32A651ADDBB0EAFCDC8446E3B4CB7A09DA83518DAC4FBF8D62FD81",
-            binary.GetProperty("sha256").GetString());
-        Assert.AreEqual("v0.41.0-724-g71ebd0840", binary.GetProperty("fileVersion").GetString());
+        Assert.IsTrue(binary.GetProperty("sizeBytes").GetInt64() > 0);
+        StringAssert.Matches(binary.GetProperty("sha256").GetString()!, new System.Text.RegularExpressions.Regex("^[A-Fa-f0-9]{64}$"));
         Assert.AreEqual("AMD64", binary.GetProperty("architecture").GetString());
-        Assert.AreEqual("mpv-dev-x86_64-20260607-git-71ebd08.7z", archive.GetProperty("fileName").GetString());
-        Assert.AreEqual(
-            "FAA0BE46643CD889A1D816696F60B9962D7BB70E9D9D6E619DA368D0B22211D6",
-            archive.GetProperty("sha256").GetString());
-        Assert.AreEqual("internal-only/unverified", manifest.GetProperty("provenanceStatus").GetString());
-        Assert.AreEqual(JsonValueKind.Null, manifest.GetProperty("sourceUrl").ValueKind);
-        Assert.AreEqual(JsonValueKind.Null, manifest.GetProperty("buildRecipeRevision").ValueKind);
-        Assert.AreEqual(JsonValueKind.Null, manifest.GetProperty("license").GetProperty("expression").ValueKind);
-        Assert.AreEqual(0, manifest.GetProperty("license").GetProperty("files").GetArrayLength());
+        Assert.IsFalse(string.IsNullOrWhiteSpace(archive.GetProperty("fileName").GetString()));
+        StringAssert.Matches(archive.GetProperty("sha256").GetString()!, new System.Text.RegularExpressions.Regex("^[A-Fa-f0-9]{64}$"));
+        var helperPath = Path.Combine(root, "scripts", "release-validation.ps1");
+        var runtimeDirectory = Path.GetDirectoryName(manifestPath)!;
+        var command = $"Set-StrictMode -Version Latest; $ErrorActionPreference='Stop'; . '{QuotePowerShell(helperPath)}'; "
+            + $"$manifest=Get-Content -LiteralPath '{QuotePowerShell(manifestPath)}' -Raw | ConvertFrom-Json; "
+            + $"$binary=Join-Path '{QuotePowerShell(runtimeDirectory)}' 'libmpv-2.dll'; "
+            + "if(Test-Path -LiteralPath $binary){ Assert-MpvRuntime -BinaryPath $binary -Manifest $manifest | Out-Null; "
+            + $"Assert-MpvRuntimeDependencies -RuntimeDirectory '{QuotePowerShell(runtimeDirectory)}' -Manifest $manifest -RequireExactFileSet | Out-Null }}; "
+            + $"$evidence=@(Get-MpvLicenseEvidence -Manifest $manifest -ManifestPath '{QuotePowerShell(manifestPath)}' -WorkspaceRoot '{QuotePowerShell(root)}'); "
+            + "if($manifest.provenanceStatus -eq 'verified' -and -not (Test-MpvPublicDistributionReady -Manifest $manifest -LicenseEvidence $evidence)){ throw 'Verified provenance lacks public distribution evidence' }";
+        var result = await RunPowerShellCommandAsync(command);
+        Assert.AreEqual(0, result.ExitCode, result.CombinedOutput);
     }
 
     [TestMethod]
@@ -141,8 +142,7 @@ public sealed class ReleasePipelineScriptTests
         StringAssert.Contains(script, "Sort-ReleaseManifestEntriesOrdinal -Entries $payloadFiles");
         StringAssert.Contains(script, "release-manifest.json");
         StringAssert.Contains(script, "Compress-Archive -LiteralPath");
-        StringAssert.Contains(appProject, "Content Include=\"runtimes\\win-x64\\native\\libmpv-2.dll\"");
-        StringAssert.Contains(appProject, "Condition=\"Exists('runtimes\\win-x64\\native\\libmpv-2.dll')\"");
+        StringAssert.Contains(appProject, "Content Include=\"runtimes\\win-x64\\native\\*.dll\"");
         StringAssert.Contains(appProject, "Content Include=\"runtimes\\win-x64\\native\\mpv-runtime.json\"");
         Assert.IsFalse(appProject.Contains("native\\**\\*.*", StringComparison.Ordinal));
     }
@@ -407,6 +407,164 @@ public sealed class ReleasePipelineScriptTests
             Assert.AreNotEqual(0, result.ExitCode);
             StringAssert.Contains(result.CombinedOutput, "must be an actual AMD64 PE image");
             StringAssert.Contains(result.CombinedOutput, "0x014C");
+        }
+        finally
+        {
+            Directory.Delete(temporaryRoot, recursive: true);
+        }
+    }
+
+    [DataTestMethod]
+    [DataRow("valid", true)]
+    [DataRow("legacy", true)]
+    [DataRow("missing", false)]
+    [DataRow("hash", false)]
+    [DataRow("published-hash", false)]
+    [DataRow("size", false)]
+    [DataRow("traversal", false)]
+    [DataRow("duplicate", false)]
+    [DataRow("main", false)]
+    [DataRow("undeclared", false)]
+    [DataRow("architecture", false)]
+    [DataRow("directory", false)]
+    public async Task ReleaseValidation_DependencyManifestValidatesSourceAndPublishedFiles(string scenario, bool accepted)
+    {
+        var temporaryRoot = CreateTemporaryDirectory();
+        try
+        {
+            var runtime = Path.Combine(temporaryRoot, "native");
+            var published = Path.Combine(temporaryRoot, "published");
+            Directory.CreateDirectory(runtime);
+            Directory.CreateDirectory(published);
+            var bytes = new byte[512];
+            bytes[0] = (byte)'M';
+            bytes[1] = (byte)'Z';
+            BitConverter.GetBytes(0x80).CopyTo(bytes, 0x3c);
+            bytes[0x80] = (byte)'P';
+            bytes[0x81] = (byte)'E';
+            BitConverter.GetBytes((ushort)(scenario == "architecture" ? 0x014c : 0x8664)).CopyTo(bytes, 0x84);
+            var fileName = scenario == "traversal" ? "../outside.dll" : scenario == "main" ? "libmpv-2.dll" : "dependency.dll";
+            var entry = new
+            {
+                fileName,
+                sizeBytes = scenario == "size" ? bytes.Length + 1 : bytes.Length,
+                sha256 = scenario == "hash" ? new string('0', 64) : Convert.ToHexString(SHA256.HashData(bytes))
+            };
+            var manifest = scenario == "legacy" ? "{}" : JsonSerializer.Serialize(new { dependencies = scenario == "duplicate" ? new[] { entry, entry } : new[] { entry } });
+            var manifestPath = Path.Combine(temporaryRoot, "manifest.json");
+            await File.WriteAllTextAsync(manifestPath, manifest);
+            if (scenario != "legacy")
+            {
+                await File.WriteAllBytesAsync(Path.Combine(runtime, "dependency.dll"), bytes);
+                if (scenario == "directory")
+                    Directory.CreateDirectory(Path.Combine(published, "dependency.dll"));
+                else if (scenario != "missing")
+                {
+                    var publishedBytes = (byte[])bytes.Clone();
+                    if (scenario == "published-hash")
+                        publishedBytes[^1] = 1;
+                    await File.WriteAllBytesAsync(Path.Combine(published, "dependency.dll"), publishedBytes);
+                }
+            }
+            if (scenario == "undeclared")
+                await File.WriteAllBytesAsync(Path.Combine(runtime, "unexpected.dll"), bytes);
+            var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "release-validation.ps1");
+            var command = $"Set-StrictMode -Version Latest; $ErrorActionPreference='Stop'; . '{QuotePowerShell(helperPath)}'; "
+                + $"$manifest=Get-Content -LiteralPath '{QuotePowerShell(manifestPath)}' -Raw | ConvertFrom-Json; "
+                + $"$source=@(Assert-MpvRuntimeDependencies -RuntimeDirectory '{QuotePowerShell(runtime)}' -Manifest $manifest -RequireExactFileSet); "
+                + $"$published=@(Assert-MpvRuntimeDependencies -RuntimeDirectory '{QuotePowerShell(published)}' -Manifest $manifest); "
+                + "if($source.Count -ne $published.Count){ throw 'Dependency count changed during publish' }";
+            var result = await RunPowerShellCommandAsync(command);
+            Assert.AreEqual(accepted, result.ExitCode == 0, result.CombinedOutput);
+        }
+        finally
+        {
+            Directory.Delete(temporaryRoot, recursive: true);
+        }
+    }
+
+    [TestMethod]
+    public async Task DailyPromotion_RunningPlayerGuardRejectsWithoutStoppingProcess()
+    {
+        var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "daily-deploy-support.ps1");
+        var result = await RunPowerShellCommandAsync(
+            $"$ErrorActionPreference='Stop'; . '{QuotePowerShell(helperPath)}'; "
+            + "function Get-Process { param($Name,$ErrorAction) if($Name -ne 'EmbyPlayer.App'){ throw 'Wrong process query' }; [pscustomobject]@{Id=54321} }; "
+            + "function Stop-Process { throw 'Guard must never stop a process' }; Assert-DailyPlayerNotRunning");
+        Assert.AreNotEqual(0, result.ExitCode);
+        StringAssert.Contains(result.CombinedOutput, "54321");
+        Assert.IsFalse(result.CombinedOutput.Contains("Guard must never stop", StringComparison.Ordinal));
+    }
+
+    [DataTestMethod]
+    [DataRow("valid", true)]
+    [DataRow("missing-license", false)]
+    [DataRow("missing-notices", false)]
+    [DataRow("older-cache-only", false)]
+    [DataRow("missing-framework", false)]
+    [DataRow("unsafe-version", false)]
+    public async Task ReleaseValidation_DotNetLicensesUseIncludedFrameworkVersionsAndPreserveBytes(string scenario, bool accepted)
+    {
+        var temporaryRoot = CreateTemporaryDirectory();
+        try
+        {
+            var cache = Path.Combine(temporaryRoot, "configured-cache");
+            var published = Path.Combine(temporaryRoot, "published");
+            Directory.CreateDirectory(cache);
+            Directory.CreateDirectory(published);
+            var frameworks = new[]
+            {
+                new { name = "Microsoft.NETCore.App", version = scenario == "unsafe-version" ? "../outside" : "8.0.11" },
+                new { name = "Microsoft.WindowsDesktop.App", version = "8.0.23" }
+            };
+            var runtimeConfig = Path.Combine(published, "EmbyPlayer.App.runtimeconfig.json");
+            await File.WriteAllTextAsync(runtimeConfig, JsonSerializer.Serialize(new
+            {
+                runtimeOptions = new { includedFrameworks = scenario == "missing-framework" ? frameworks.Take(1).ToArray() : frameworks }
+            }));
+            var inputs = new[]
+            {
+                (Framework: "Microsoft.NETCore.App", Version: "8.0.11", File: "LICENSE.TXT"),
+                (Framework: "Microsoft.NETCore.App", Version: "8.0.11", File: "THIRD-PARTY-NOTICES.TXT"),
+                (Framework: "Microsoft.WindowsDesktop.App", Version: "8.0.23", File: "LICENSE")
+            };
+            var expectedBytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes("License fixture\r\nCopyright fixture — 保留原文\n")).ToArray();
+            foreach (var input in inputs)
+            {
+                var packageId = input.Framework.ToLowerInvariant() + ".runtime.win-x64";
+                var exactDirectory = Path.Combine(cache, packageId, input.Version);
+                var olderDirectory = Path.Combine(cache, packageId, "8.0.1");
+                Directory.CreateDirectory(exactDirectory);
+                Directory.CreateDirectory(olderDirectory);
+                await File.WriteAllTextAsync(Path.Combine(olderDirectory, input.File), "Wrong version decoy");
+                if (scenario == "older-cache-only" ||
+                    (scenario == "missing-license" && input.File == "LICENSE") ||
+                    (scenario == "missing-notices" && input.File == "THIRD-PARTY-NOTICES.TXT"))
+                    continue;
+                await File.WriteAllBytesAsync(Path.Combine(exactDirectory, input.File), expectedBytes);
+            }
+            var helper = Path.Combine(FindRepositoryRoot(), "scripts", "release-validation.ps1");
+            var evidencePath = Path.Combine(temporaryRoot, "evidence.json");
+            var result = await RunPowerShellCommandAsync(
+                $"Set-StrictMode -Version Latest; $ErrorActionPreference='Stop'; . '{QuotePowerShell(helper)}'; "
+                + $"$evidence=@(Copy-DotNetRuntimeLicenseEvidence -RuntimeConfigPath '{QuotePowerShell(runtimeConfig)}' "
+                + $"-GlobalPackagesRoot '{QuotePowerShell(cache + Path.DirectorySeparatorChar)}' -PublishDirectory '{QuotePowerShell(published)}'); "
+                + $"ConvertTo-Json -InputObject $evidence -Depth 5 | Set-Content -LiteralPath '{QuotePowerShell(evidencePath)}' -Encoding UTF8");
+            Assert.AreEqual(accepted, result.ExitCode == 0, result.CombinedOutput);
+            if (accepted)
+            {
+                using var evidence = JsonDocument.Parse(await File.ReadAllTextAsync(evidencePath));
+                Assert.AreEqual(inputs.Length, evidence.RootElement.GetArrayLength());
+                foreach (var entry in evidence.RootElement.EnumerateArray())
+                {
+                    var destination = Path.Combine(published, entry.GetProperty("packagePath").GetString()!);
+                    CollectionAssert.AreEqual(expectedBytes, await File.ReadAllBytesAsync(destination));
+                    Assert.AreEqual(expectedBytes.Length, entry.GetProperty("sizeBytes").GetInt32());
+                    Assert.AreEqual(Convert.ToHexString(SHA256.HashData(expectedBytes)), entry.GetProperty("sha256").GetString());
+                    StringAssert.StartsWith(entry.GetProperty("source").GetString()!, "nuget:");
+                    Assert.IsFalse(entry.GetProperty("source").GetString()!.Contains(temporaryRoot, StringComparison.OrdinalIgnoreCase));
+                }
+            }
         }
         finally
         {
@@ -903,6 +1061,7 @@ public sealed class ReleasePipelineScriptTests
             var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "daily-deploy-support.ps1");
             var command =
                 $". '{QuotePowerShell(helperPath)}'; "
+                + IsolateDailyFixtureProcessProbe
                 + "$script:moveCount=0; $move={ param($source,$destination) "
                 + "$script:moveCount++; if($script:moveCount -eq 2){ throw 'simulated second move failure' }; "
                 + "Move-Item -LiteralPath $source -Destination $destination -ErrorAction Stop }; "
@@ -944,6 +1103,7 @@ public sealed class ReleasePipelineScriptTests
             var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "daily-deploy-support.ps1");
             var command =
                 $". '{QuotePowerShell(helperPath)}'; "
+                + IsolateDailyFixtureProcessProbe
                 + "$script:moveCount=0; $move={ param($source,$destination) $script:moveCount++; "
                 + $"if($script:moveCount -eq {failingMove}){{ throw 'simulated move {failingMove} failure' }}; "
                 + "Move-Item -LiteralPath $source -Destination $destination -ErrorAction Stop }; "
@@ -983,6 +1143,7 @@ public sealed class ReleasePipelineScriptTests
             var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "daily-deploy-support.ps1");
             var command =
                 $". '{QuotePowerShell(helperPath)}'; "
+                + IsolateDailyFixtureProcessProbe
                 + "$remove={ param($path,$controlledRoot,$allowedPrefixes) "
                 + "if(([IO.Path]::GetFileName($path)).StartsWith('.previous-old-',[StringComparison]::Ordinal)){ "
                 + "Remove-Item -LiteralPath (Join-Path $path 'build-label.txt') -Force; throw 'simulated partial oldest cleanup failure' }; "
@@ -1327,6 +1488,10 @@ public sealed class ReleasePipelineScriptTests
             JsonSerializer.Serialize(manifest));
     }
 
+    // Transaction fixtures contain text files, never a running player. Keep user processes
+    // outside these filesystem tests; the production process guard has its own test above.
+    private const string IsolateDailyFixtureProcessProbe = "function Assert-DailyPlayerNotRunning { }; ";
+
     private static Task<CommandResult> PromoteDailyPayloadAsync(
         string payloadRoot,
         string installRoot,
@@ -1335,6 +1500,7 @@ public sealed class ReleasePipelineScriptTests
         var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "daily-deploy-support.ps1");
         var command =
             $". '{QuotePowerShell(helperPath)}'; "
+            + IsolateDailyFixtureProcessProbe
             + $"Invoke-DailyPayloadPromotion -PayloadRoot '{QuotePowerShell(payloadRoot)}' "
             + $"-InstallRoot '{QuotePowerShell(installRoot)}' -ExpectedCommit '{QuotePowerShell(commit)}' | Out-Null";
         return RunPowerShellCommandAsync(command);

@@ -9,7 +9,7 @@ Jeby Player 连接你自己的 Emby Server，让你在桌面浏览媒体库、�
 
 ## 界面预览
 
-以下截图来自实际 WPF 界面，使用虚构的演示账号、片名和原创示例海报，不代表附带影视内容。
+以下截图来自连接实际媒体库的应用，保留影片名称、海报和播放画面，个人账号信息已遮盖。应用不附带这些影片，见 [截图说明](docs/images/README.md)。
 
 ### 首页
 
@@ -17,11 +17,15 @@ Jeby Player 连接你自己的 Emby Server，让你在桌面浏览媒体库、�
 
 ### 影片详情
 
-![Jeby Player 详情页：作品介绍、播放和个人片单操作](docs/images/details.png)
+![Jeby Player 电影详情：作品介绍、播放操作与演职人员](docs/images/movie-details.png)
 
-### 设置
+### 电视剧详情
 
-![Jeby Player 设置：播放与字幕偏好](docs/images/settings.png)
+![Jeby Player 电视剧详情：作品介绍、季与单集](docs/images/series-details.png)
+
+### 播放页
+
+![Jeby Player 播放页：实际画面、进度条和播放控制](docs/images/player.png)
 
 ## 主要功能
 
@@ -50,7 +54,7 @@ Jeby Player 连接你自己的 Emby Server，让你在桌面浏览媒体库、�
 
 开发需要 Windows 和 .NET SDK；[global.json](global.json) 当前选择 `10.0.303`，允许同一 feature band 的更新补丁。应用目标框架为 .NET 8 WPF，运行应用还需要 x64 .NET 8 Desktop Runtime（仅安装 .NET 10 SDK 不会提供这个运行时）。
 
-没有 MPV DLL 也可构建应用并使用浏览界面；实际播放需要 `src/EmbyPlayer.App/runtimes/win-x64/native/libmpv-2.dll`。当前仓库记录的 MPV 二进制来源和许可证证据尚不完整；请先阅读 [发布准备与 MPV 限制](docs/PUBLIC_RELEASE.md)。
+没有 MPV DLL 也可构建应用并使用浏览界面。实际播放需要将发布包中的全部 MPV 原生 DLL 放入 `src/EmbyPlayer.App/runtimes/win-x64/native/`；不能只复制 `libmpv-2.dll`。当前使用 MSYS2 构建的 MPV 0.41.0，版本、依赖哈希和许可证记录见 [发布说明](docs/PUBLIC_RELEASE.md)。
 
 在仓库根目录执行：
 
@@ -80,4 +84,4 @@ dotnet build EmbyPlayer.sln --no-restore
 
 Jeby Player 的自有项目代码采用 **GNU GPL 第 3 版或后续版本**（`GPL-3.0-or-later`），完整条款见 [LICENSE](LICENSE)。
 
-第三方组件保留各自适用的许可。项目选择 GPL 并不代表当前 MPV 二进制已具备完整分发证据；MPV 及其他第三方组件的来源、许可证和随包材料仍需要在公开发布前完成核验，详见 [发布清单](docs/PUBLIC_RELEASE.md)。
+第三方组件保留各自适用的许可。发布包随附 MPV 及依赖的许可证和通知；对应源码作为独立附件提供，普通使用无需下载源码附件。具体组成见 [第三方组件清单](docs/THIRD_PARTY_NOTICES.md)。

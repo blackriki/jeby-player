@@ -335,6 +335,7 @@ $mpvManifest = Get-Content -LiteralPath $mpvManifestPath -Raw | ConvertFrom-Json
 $mpvManifestDirectory = Split-Path -Parent $mpvManifestPath
 $sourceMpvPath = Join-Path $mpvManifestDirectory ([string] $mpvManifest.binary.fileName)
 $mpvRuntime = Assert-MpvRuntime -binaryPath $sourceMpvPath -manifest $mpvManifest
+$mpvDependencies = @(Assert-MpvRuntimeDependencies -RuntimeDirectory (Split-Path -Parent $sourceMpvPath) -Manifest $mpvManifest -RequireExactFileSet)
 $mpvLicenseEvidence = @(
     Get-MpvLicenseEvidence -Manifest $mpvManifest -ManifestPath $mpvManifestPath -WorkspaceRoot $workspaceRoot
 )
@@ -503,6 +504,19 @@ Invoke-DotNet -Arguments $publishArguments -Operation "win-x64 publish"
 
 Assert-NoReparsePointTree -Root $publishDirectory
 Copy-MpvLicenseEvidence -LicenseEvidence $mpvLicenseEvidence -PublishDirectory $publishDirectory
+$dotnetLicenseEvidence = @()
+if ($selfContained) {
+    $nugetCacheOutput = @(& dotnet nuget locals global-packages --list --force-english-output)
+    if ($LASTEXITCODE -ne 0 -or $nugetCacheOutput.Count -ne 1 -or
+        $nugetCacheOutput[0] -notmatch '^global-packages:\s*(.+)$') {
+        throw "Unable to resolve the configured NuGet global-packages cache for .NET license evidence."
+    }
+    $globalPackagesRoot = $Matches[1].Trim()
+    $dotnetLicenseEvidence = @(Copy-DotNetRuntimeLicenseEvidence `
+        -RuntimeConfigPath (Join-Path $publishDirectory "EmbyPlayer.App.runtimeconfig.json") `
+        -GlobalPackagesRoot $globalPackagesRoot `
+        -PublishDirectory $publishDirectory)
+}
 $publishedFileItems = @(Get-ReleaseRegularFiles -Root $publishDirectory)
 $publishedPdbFiles = @($publishedFileItems | Where-Object { $_.Extension.Equals(".pdb", [StringComparison]::OrdinalIgnoreCase) })
 if ($publishedPdbFiles.Count -gt 0) {
@@ -527,6 +541,7 @@ foreach ($requiredPayloadFile in $requiredPayloadFiles) {
 }
 
 $publishedMpvRuntime = Assert-MpvRuntime -binaryPath (Join-Path $publishDirectory "libmpv-2.dll") -manifest $mpvManifest
+$publishedMpvDependencies = @(Assert-MpvRuntimeDependencies -RuntimeDirectory $publishDirectory -Manifest $mpvManifest)
 $publishedMpvManifestHash = Get-FileSha256 -Path (Join-Path $publishDirectory "mpv-runtime.json")
 $sourceMpvManifestHash = Get-FileSha256 -Path $mpvManifestPath
 if (-not $publishedMpvManifestHash.Equals($sourceMpvManifestHash, [StringComparison]::OrdinalIgnoreCase)) {
@@ -594,6 +609,7 @@ $releaseManifest = [ordered]@{
     }
     dotnetSdkVersion = $dotnetSdkVersion
     runtimeRequirement = if ($selfContained) { $null } else { ".NET 8 Desktop Runtime (x64)" }
+    dotnetLicenseEvidence = $dotnetLicenseEvidence
     mpv = [ordered]@{
         provenanceStatus = [string] $mpvManifest.provenanceStatus
         sourceUrl = $mpvManifest.sourceUrl
@@ -604,6 +620,7 @@ $releaseManifest = [ordered]@{
         localArchiveFileName = [string] $mpvManifest.localArchive.fileName
         localArchiveSha256 = [string] $mpvManifest.localArchive.sha256
         binary = $publishedMpvRuntime
+        dependencies = $publishedMpvDependencies
         licenseEvidence = @(
             $mpvLicenseEvidence |
                 ForEach-Object {

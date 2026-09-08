@@ -250,7 +250,7 @@ function Assert-MpvRuntime([string] $BinaryPath, [object] $Manifest) {
     }
 
     $actualVersion = $binaryItem.VersionInfo.FileVersion
-    if (-not $actualVersion.Equals([string] $Manifest.binary.fileVersion, [StringComparison]::Ordinal)) {
+    if (-not [string]::Equals([string] $actualVersion, [string] $Manifest.binary.fileVersion, [StringComparison]::Ordinal)) {
         throw "MPV runtime file version does not match mpv-runtime.json."
     }
 
@@ -266,6 +266,65 @@ function Assert-MpvRuntime([string] $BinaryPath, [object] $Manifest) {
         fileVersion = $actualVersion
         architecture = $actualArchitecture
     }
+}
+
+function Assert-MpvRuntimeDependencies(
+    [string] $RuntimeDirectory,
+    [object] $Manifest,
+    [switch] $RequireExactFileSet) {
+    $runtimeRoot = [System.IO.Path]::GetFullPath($RuntimeDirectory)
+    Assert-NoReparsePointInControlledPath -Root ([System.IO.Path]::GetPathRoot($runtimeRoot)) -Path $runtimeRoot -Description "MPV runtime directory"
+    $fileNames = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    [void] $fileNames.Add("libmpv-2.dll")
+    $dependenciesProperty = $Manifest.PSObject.Properties["dependencies"]
+    $dependencies = @()
+    if ($null -ne $dependenciesProperty) {
+        if ($dependenciesProperty.Value -isnot [Array]) {
+            throw "MPV dependencies must be an array."
+        }
+        $dependencies = $dependenciesProperty.Value
+    }
+
+    $verified = @()
+    foreach ($dependency in $dependencies) {
+        $fileName = [string] $dependency.fileName
+        $expectedHash = [string] $dependency.sha256
+        if ($fileName -notmatch '^[A-Za-z0-9_][A-Za-z0-9_.+-]*\.dll$' -or
+            -not $fileNames.Add($fileName) -or $expectedHash -notmatch '^[A-Fa-f0-9]{64}$' -or
+            [long] $dependency.sizeBytes -le 0) {
+            throw "MPV dependency entry is incomplete, duplicated, or unsafe."
+        }
+
+        $path = [System.IO.Path]::GetFullPath((Join-Path $runtimeRoot $fileName))
+        if (-not (Test-ReleasePathInside -Root $runtimeRoot -Path $path) -or
+            -not (Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw "MPV dependency must be a regular DLL in the runtime directory: $fileName"
+        }
+        Assert-NoReparsePointInControlledPath -Root $runtimeRoot -Path $path -Description "MPV dependency"
+        $item = Get-Item -LiteralPath $path -Force
+        $hash = Get-FileSha256 -Path $path
+        if ($item.Length -ne [long] $dependency.sizeBytes -or
+            -not $hash.Equals($expectedHash, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "MPV dependency size or SHA256 does not match mpv-runtime.json: $fileName"
+        }
+        $architecture = Assert-WinX64MpvArchitecture -Path $path
+        $verified += [ordered]@{
+            fileName = $fileName
+            sizeBytes = $item.Length
+            sha256 = $hash
+            architecture = $architecture
+        }
+    }
+
+    if ($RequireExactFileSet) {
+        foreach ($item in Get-ChildItem -LiteralPath $runtimeRoot -Force) {
+            if ($item.Name.EndsWith(".dll", [StringComparison]::OrdinalIgnoreCase) -and
+                -not $fileNames.Contains($item.Name)) {
+                throw "MPV runtime contains an undeclared DLL: $($item.Name)"
+            }
+        }
+    }
+    return $verified
 }
 
 function Assert-NoReparsePointInFilePath([string] $WorkspaceRoot, [string] $FilePath) {
@@ -341,6 +400,71 @@ function Test-MpvPublicDistributionReady([object] $Manifest, [object[]] $License
     $hasBuildRecipeRevision = -not [string]::IsNullOrWhiteSpace([string] $Manifest.buildRecipeRevision)
     $hasLicenseExpression = -not [string]::IsNullOrWhiteSpace([string] $Manifest.license.expression)
     return $hasSourceUrl -and $hasBuildRecipeRevision -and $hasLicenseExpression -and $LicenseEvidence.Count -gt 0
+}
+
+function Copy-DotNetRuntimeLicenseEvidence(
+    [string] $RuntimeConfigPath,
+    [string] $GlobalPackagesRoot,
+    [string] $PublishDirectory) {
+    $GlobalPackagesRoot = [System.IO.Path]::GetFullPath($GlobalPackagesRoot)
+    if ($GlobalPackagesRoot.Length -gt [System.IO.Path]::GetPathRoot($GlobalPackagesRoot).Length) {
+        $GlobalPackagesRoot = $GlobalPackagesRoot.TrimEnd('\', '/')
+    }
+    $config = Get-Content -LiteralPath $RuntimeConfigPath -Raw | ConvertFrom-Json
+    $frameworks = @($config.runtimeOptions.includedFrameworks)
+    $requiredFrameworks = @{
+        "Microsoft.NETCore.App" = @("LICENSE.TXT", "THIRD-PARTY-NOTICES.TXT")
+        "Microsoft.WindowsDesktop.App" = @("LICENSE")
+    }
+    $seen = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $evidence = @()
+    foreach ($framework in $frameworks) {
+        $name = [string] $framework.name
+        $version = [string] $framework.version
+        if (-not $requiredFrameworks.ContainsKey($name) -or -not $seen.Add($name) -or
+            $version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$') {
+            throw "Self-contained runtimeconfig has an unsupported, duplicated, or unsafe framework entry."
+        }
+        $packageId = $name.ToLowerInvariant() + ".runtime.win-x64"
+        $packageRoot = Join-Path (Join-Path $GlobalPackagesRoot $packageId) $version.ToLowerInvariant()
+        foreach ($fileName in $requiredFrameworks[$name]) {
+            $source = Join-Path $packageRoot $fileName
+            if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+                throw "Self-contained .NET license evidence is missing for exact runtime version: $packageId/$version/$fileName"
+            }
+            Assert-NoReparsePointInControlledPath -Root $GlobalPackagesRoot -Path $source -Description ".NET license source"
+            $item = Get-Item -LiteralPath $source -Force
+            $hash = Get-FileSha256 -Path $source
+            $packagePath = "third-party/dotnet/$name/$version/$fileName"
+            $destination = [System.IO.Path]::GetFullPath((Join-Path $PublishDirectory $packagePath))
+            if (-not (Test-ReleasePathInside -Root $PublishDirectory -Path $destination)) {
+                throw ".NET license destination escaped the publish directory."
+            }
+            $destinationDirectory = Split-Path -Parent $destination
+            [void] [System.IO.Directory]::CreateDirectory($destinationDirectory)
+            Assert-NoReparsePointInControlledPath -Root $PublishDirectory -Path $destinationDirectory -Description ".NET license destination"
+            if (Test-Path -LiteralPath $destination) {
+                throw ".NET license destination already exists: $packagePath"
+            }
+            Copy-Item -LiteralPath $source -Destination $destination
+            if ((Get-Item -LiteralPath $destination).Length -ne $item.Length -or
+                -not (Get-FileSha256 -Path $destination).Equals($hash, [StringComparison]::OrdinalIgnoreCase)) {
+                throw "Published .NET license evidence differs from its NuGet input: $packagePath"
+            }
+            $evidence += [ordered]@{
+                framework = $name
+                version = $version
+                source = "nuget:$packageId/$version/$fileName"
+                packagePath = $packagePath
+                sizeBytes = $item.Length
+                sha256 = $hash
+            }
+        }
+    }
+    if ($seen.Count -ne $requiredFrameworks.Count) {
+        throw "Self-contained runtimeconfig must identify both .NETCore and WindowsDesktop framework versions."
+    }
+    return $evidence
 }
 
 function Copy-MpvLicenseEvidence([object[]] $LicenseEvidence, [string] $PublishDirectory) {

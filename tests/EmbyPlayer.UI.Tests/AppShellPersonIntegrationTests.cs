@@ -239,13 +239,13 @@ public sealed partial class AppShellPersonIntegrationTests
         public WatchLaterViewModel WatchLater { get; }
         public HomeViewModel Home { get; }
         public PlayerViewModel Player { get; }
-        public Context(string type = "Movie", EmbyPlayer.Core.Home.IHomeService? homeService = null)
+        public Context(string type = "Movie")
         {
             var settings = new TestAppSettingsService();
             var account = new AccountSessionService(AuthStore, Sessions, settings);
             var connection = new ServerConnectionViewModel(Navigation, new TestServerConnectionService(), settings);
             Login = new(Navigation, new TestAuthenticationService(), Sessions, AuthStore, settings, account);
-            var home = new HomeViewModel(Navigation, homeService ?? new TestHomeService(), new TestPlaybackService(), Sessions, AuthStore, Login.ShowError,
+            var home = new HomeViewModel(Navigation, new TestHomeService(), new TestPlaybackService(), Sessions, AuthStore, Login.ShowError,
                 watchLaterStore: WatchLaterStore, playbackQueue: Queue);
             Home = home;
             var library = new LibraryViewModel(Navigation, new TestLibraryService(), Sessions, AuthStore, Login.ShowError);

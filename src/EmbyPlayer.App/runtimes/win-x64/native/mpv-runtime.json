@@ -3,22 +3,3150 @@
   "componentName": "libmpv-2",
   "binary": {
     "fileName": "libmpv-2.dll",
-    "sizeBytes": 117549568,
-    "sha256": "02FA97CBDB32A651ADDBB0EAFCDC8446E3B4CB7A09DA83518DAC4FBF8D62FD81",
-    "fileVersion": "v0.41.0-724-g71ebd0840",
+    "sizeBytes": 3010315,
+    "sha256": "808744f489a235d390020b4b1baba956b2427a6ca20c4e3846a1c33851a9da25",
+    "fileVersion": "v0.41.0",
     "architecture": "AMD64"
   },
   "localArchive": {
-    "fileName": "mpv-dev-x86_64-20260607-git-71ebd08.7z",
-    "sha256": "FAA0BE46643CD889A1D816696F60B9962D7BB70E9D9D6E619DA368D0B22211D6"
+    "fileName": "mingw-w64-x86_64-mpv-0.41.0-7-any.pkg.tar.zst",
+    "sha256": "4b958c3a705bbf196b3efd6f2c5809c9f5c59e4ff0fa4f4dc03deaccbe16eba2"
   },
-  "embeddedRevisionLabel": "71ebd0840",
-  "buildRecipeClue": "mpv-winbuild-cmake",
-  "buildRecipeRevision": null,
-  "sourceUrl": null,
+  "embeddedRevisionLabel": "v0.41.0",
+  "buildRecipeClue": "msys2/MINGW-packages",
+  "buildRecipeRevision": "052099e63e69816e35b05f28c852a5209c4dd1e0",
+  "sourceUrl": "https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-mpv-0.41.0-7-any.pkg.tar.zst",
   "license": {
-    "expression": null,
-    "files": []
+    "expression": "GPL-3.0-or-later",
+    "files": [
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/AUTHORS",
+        "sizeBytes": 13178,
+        "sha256": "C31B80CA48FDE06CA03AEF2F3DEC15413FE0C2661FE6B56E86CCD69DBC6F9A1D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/LICENSE",
+        "sizeBytes": 1316,
+        "sha256": "4764A286D8B2FAEAF42F4418E7D7A28D58FC8FD4D00A3D0A7F44B0A4099DE7F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/fastfeat/LICENSE",
+        "sizeBytes": 1504,
+        "sha256": "499041DDEE5227B6F29CA06C17803E5FE24D60F243C69635CD76B7BA08D0DDD5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/googletest/src/LICENSE",
+        "sizeBytes": 1475,
+        "sha256": "9702DE7E4117A8E2B20DAFAB11FFDA58C198AEDE066406496BEF670D40A22138"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/highway/LICENSE-BSD3",
+        "sizeBytes": 1515,
+        "sha256": "D25E82E26ACD42CA3CCC9993622631163425B869B9E16284226D534CFF6470F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/libwebm/AUTHORS.TXT",
+        "sizeBytes": 137,
+        "sha256": "3EDB5F5496BFFF3D6D4A62FA75FE996B814920D0D6E348C2E65C589E7AC5D177"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/libwebm/LICENSE.TXT",
+        "sizeBytes": 1496,
+        "sha256": "5AEC868F669E384A22372A4E8A1A6CD7D44C64CD451F960CA69CC170D1E13ACF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/libyuv/LICENSE",
+        "sizeBytes": 1506,
+        "sha256": "2B2CC1180C7E6988328AD2033B04B80117419DB9C4C584918BBB3CFEC7E9364F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/vector/LICENSE",
+        "sizeBytes": 1084,
+        "sha256": "FF6C857CE2708E87701323078AEF115C1872A1F80A9649F86DC899B48083BC60"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/libaom-3.15.0.tar.gz.notices/libaom-3.15.0/third_party/x86inc/LICENSE",
+        "sizeBytes": 936,
+        "sha256": "719D8FA235F2068E0AE6D6A7DCEB0A7720D7840F0F0EBED29957989E6DED3CD8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/package-notices/aom/LICENSE",
+        "sizeBytes": 1316,
+        "sha256": "4764A286D8B2FAEAF42F4418E7D7A28D58FC8FD4D00A3D0A7F44B0A4099DE7F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-aom/package-notices/aom/PATENTS",
+        "sizeBytes": 5701,
+        "sha256": "661FB8E504744E95587B556B94A58343448300606A41BEA8C7A9B97125696E61"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-brotli/brotli-1.2.0.tar.gz.notices/brotli-1.2.0/LICENSE",
+        "sizeBytes": 1084,
+        "sha256": "3D180008E36922A4E8DAEC11C34C7AF264FED5962D07924AEA928C38E8663C94"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-brotli/package-notices/brotli/LICENSE",
+        "sizeBytes": 1084,
+        "sha256": "3D180008E36922A4E8DAEC11C34C7AF264FED5962D07924AEA928C38E8663C94"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-bzip2/bzip2-1.0.8.tar.gz.notices/bzip2-1.0.8/LICENSE",
+        "sizeBytes": 1896,
+        "sha256": "C6DBBF828498BE844A89EAA3B84ADBAB3199E342EB5CB2ED2F0D4BA7EC0F38A3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-bzip2/package-notices/bzip2/LICENSE",
+        "sizeBytes": 1896,
+        "sha256": "C6DBBF828498BE844A89EAA3B84ADBAB3199E342EB5CB2ED2F0D4BA7EC0F38A3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/AUTHORS",
+        "sizeBytes": 8148,
+        "sha256": "7118B55C2D911781622ECB281D9E11FD7EEB5F46C8925E6D740F96F89E79A8FE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/COPYING",
+        "sizeBytes": 1576,
+        "sha256": "67228A9F7C5F9B67C58F556F1BE178F62DA4D9E2E6285318D8C74D567255ABDF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/COPYING-LGPL-2.1",
+        "sizeBytes": 26533,
+        "sha256": "9E9E8608C4CDDA51A78CC3A385F4EC9A2E4C96D5ECAD74AC8BCA5FCA3E563B7D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/COPYING-MPL-1.1",
+        "sizeBytes": 25755,
+        "sha256": "53692A2ED6C6A2C6EC9B32DD0B820DFAE91E0A1FCDF625CA9ED0BDF8705FCC4F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/perf/COPYING",
+        "sizeBytes": 229,
+        "sha256": "6F93B45EA874706058AE35BC02DF79C3F9DAF00948672EEA8394CC25D1327D49"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/test/COPYING",
+        "sizeBytes": 1026,
+        "sha256": "A37812E0E27A211272D4C27FA45028C3653E78BB708ACCCB77C94128DC72B98E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/util/cairo-script/COPYING",
+        "sizeBytes": 656,
+        "sha256": "25F4D4CE651B1EE6AFF713FF986275D6C190A8537E36437886F8BF1497B0A174"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/util/cairo-trace/COPYING",
+        "sizeBytes": 179,
+        "sha256": "421158645572270264A980B8B130DD988138E4DAE20144E22455446E0EF90902"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/util/cairo-trace/COPYING-GPL-3",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/cairo-1.18.4.tar.xz.notices/cairo-1.18.4/util/COPYING",
+        "sizeBytes": 138,
+        "sha256": "008E976B6E5E7155EE24322073F42CAB7CD6DAF90BC2322F1D5C3AACAB94111C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/package-notices/cairo/COPYING",
+        "sizeBytes": 1576,
+        "sha256": "67228A9F7C5F9B67C58F556F1BE178F62DA4D9E2E6285318D8C74D567255ABDF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/package-notices/cairo/COPYING-LGPL-2.1",
+        "sizeBytes": 26533,
+        "sha256": "9E9E8608C4CDDA51A78CC3A385F4EC9A2E4C96D5ECAD74AC8BCA5FCA3E563B7D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-cairo/package-notices/cairo/COPYING-MPL-1.1",
+        "sizeBytes": 25755,
+        "sha256": "53692A2ED6C6A2C6EC9B32DD0B820DFAE91E0A1FCDF625CA9ED0BDF8705FCC4F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-dav1d/dav1d-1.5.4.tar.xz.notices/dav1d-1.5.4/COPYING",
+        "sizeBytes": 1317,
+        "sha256": "DD92C3C2247C5651606FC23A5E2D6A1EBC5ACE9A3E49CBDE0E12F05AD1CB1EE5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-dav1d/package-notices/dav1d/COPYING",
+        "sizeBytes": 1317,
+        "sha256": "DD92C3C2247C5651606FC23A5E2D6A1EBC5ACE9A3E49CBDE0E12F05AD1CB1EE5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-dav1d/package-notices/dav1d/PATENTS",
+        "sizeBytes": 5730,
+        "sha256": "335ECA574598BF4CA181B12F708D6669E5A5E78C8E1513E5B35FA1F03901484B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-expat/expat-2.8.4.tar.xz.notices/expat-2.8.4/AUTHORS",
+        "sizeBytes": 142,
+        "sha256": "59F14371C6B75912CFEBB46E6247EE5146766E803A0365B124E5D3011E7D0877"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-expat/expat-2.8.4.tar.xz.notices/expat-2.8.4/COPYING",
+        "sizeBytes": 1144,
+        "sha256": "31B15DE82AA19A845156169A17A5488BF597E561B2C318D159ED583139B25E87"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-expat/package-notices/expat/COPYING",
+        "sizeBytes": 1144,
+        "sha256": "31B15DE82AA19A845156169A17A5488BF597E561B2C318D159ED583139B25E87"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/COPYING.GPLv2",
+        "sizeBytes": 18092,
+        "sha256": "8177F97513213526DF2CF6184D8FF986C675AFB514D4E68A404010521B880643"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/COPYING.GPLv3",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/COPYING.LGPLv2.1",
+        "sizeBytes": 26517,
+        "sha256": "246041B6ECF9BC32D718A62C57877C78B5EB397B6467E74ED7AE2626AB189C30"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/COPYING.LGPLv3",
+        "sizeBytes": 7651,
+        "sha256": "DA7EABB7BAFDF7D3AE5E9F223AA5BDC1EECE45AC569DC21B3B037520B4464768"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/doc/authors.texi",
+        "sizeBytes": 403,
+        "sha256": "FB5FAC6DD8F7474033E933814491A8297D8723C52BE4DCBCC82EEF9C4F008DD2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/LICENSE.md",
+        "sizeBytes": 4346,
+        "sha256": "2E1D16C72FD74E12063776371DA757322F8B77589386532F4FD8634BDE7DE1AF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/tests/checkasm/ext/LICENSE",
+        "sizeBytes": 1402,
+        "sha256": "A2DC8194271E5989C0622531C645A7B41AF5DA92EEB2531E4F2A3EC31023BC52"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ffmpeg/ffmpeg-9.0.1.tar.xz.notices/ffmpeg-9.0.1/tests/checkasm/ext/src/html_data/LICENSE",
+        "sizeBytes": 1361,
+        "sha256": "0FD2C601FB2EAD2ADD56807B7E32664DA8D973B9835A422464F210BFEA997A52"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fftw/fftw-3.3.11.tar.gz.notices/fftw-3.3.11/AUTHORS",
+        "sizeBytes": 585,
+        "sha256": "14E1B1C6A7D84613C85A4C457B4167FB4927CE239EC45123E85BA5EEFCA4E7BB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fftw/fftw-3.3.11.tar.gz.notices/fftw-3.3.11/COPYING",
+        "sizeBytes": 18002,
+        "sha256": "231F7EDCC7352D7734A96EEF0B8030F77982678C516876FCB81E25B32D68564C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fftw/fftw-3.3.11.tar.gz.notices/fftw-3.3.11/COPYRIGHT",
+        "sizeBytes": 844,
+        "sha256": "8A74B35D541D93FDF58A22A3D3BAA48AE3EDBF6D715EDFEB6457C21968AE43AC"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fftw/fftw-3.3.11.tar.gz.notices/fftw-3.3.11/doc/html/License-and-Copyright.html",
+        "sizeBytes": 4923,
+        "sha256": "EFFECE8DCB3DCF04FD13B0903A5E66A3A35237A34248D3CA090DB318560B47BB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fftw/fftw-3.3.11.tar.gz.notices/fftw-3.3.11/doc/license.texi",
+        "sizeBytes": 1842,
+        "sha256": "68F733830A3B4DBF66815CA54B5637015517848C5F32F38F1EA2057782161A77"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fontconfig/fontconfig-2.18.3.tar.gz.notices/fontconfig-2.18.3/AUTHORS",
+        "sizeBytes": 62,
+        "sha256": "DB6D73A160BB2DE10268F88EF60AAE91771FEFDEEE4992B791C76CE6592A4A4B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fontconfig/fontconfig-2.18.3.tar.gz.notices/fontconfig-2.18.3/COPYING",
+        "sizeBytes": 8616,
+        "sha256": "51A51AA9823704FD90BCCC616CDD17EBABB5B2B3E9CBDE886CA02C7002288067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fontconfig/package-notices/fontconfig/COPYING",
+        "sizeBytes": 8616,
+        "sha256": "51A51AA9823704FD90BCCC616CDD17EBABB5B2B3E9CBDE886CA02C7002288067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-freetype/freetype-2.14.3.tar.xz.notices/freetype-2.14.3/LICENSE.TXT",
+        "sizeBytes": 2149,
+        "sha256": "BD36C8B474855FA294C2EC5C184544478EF3720AAD37D65A6296A4F264FD2D3B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-freetype/package-notices/freetype/FTL.TXT",
+        "sizeBytes": 6743,
+        "sha256": "5A5EE54C5001BBAD1CDC1A57CC3DD4C42199B2DA09D39C7EE41FAB002D02967F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-freetype/package-notices/freetype/GPLv2.TXT",
+        "sizeBytes": 17994,
+        "sha256": "C4120C6752C910C299E3BD9CB3A46FF262C268303CA2069B61F92F10A5656C18"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fribidi/fribidi-1.0.16.tar.xz.notices/fribidi-1.0.16/AUTHORS",
+        "sizeBytes": 1640,
+        "sha256": "CB173F55C9514C8F38F4647AC3FEDD5F8611358D331E65AB955DA931E826861C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fribidi/fribidi-1.0.16.tar.xz.notices/fribidi-1.0.16/COPYING",
+        "sizeBytes": 26440,
+        "sha256": "32434AFCC8666BA060E111D715BFDB6C2D5DD8A35FA4D3AB8AD67D8F850D2F2B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-fribidi/package-notices/fribidi/COPYING",
+        "sizeBytes": 26440,
+        "sha256": "32434AFCC8666BA060E111D715BFDB6C2D5DD8A35FA4D3AB8AD67D8F850D2F2B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/COPYING",
+        "sizeBytes": 18002,
+        "sha256": "231F7EDCC7352D7734A96EEF0B8030F77982678C516876FCB81E25B32D68564C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/COPYING.LIB",
+        "sizeBytes": 26527,
+        "sha256": "A9BDDE5616ECDD1E980B44F360600EE8783B1F99B8CC83A2BEB163A0A390E861"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/COPYING.RUNTIME",
+        "sizeBytes": 3324,
+        "sha256": "9D6B43CE4D8DE0C878BF16B54D8E7A10D9BD42B75178153E3AF6A815BDC90F74"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/COPYING3",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/COPYING3.LIB",
+        "sizeBytes": 7639,
+        "sha256": "A853C2FFEC17057872340EEE242AE4D96CBF2B520AE27D903E1B2FEF1A5F9D1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/ada/doc/share/copyright.tex",
+        "sizeBytes": 695,
+        "sha256": "C0A2678E14049EF3D4BA0D9DD7ABF8B0DBB8335D6E2311B2D2F568035321F2B7"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/COPYING",
+        "sizeBytes": 18002,
+        "sha256": "231F7EDCC7352D7734A96EEF0B8030F77982678C516876FCB81E25B32D68564C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/COPYING.LIB",
+        "sizeBytes": 26440,
+        "sha256": "32434AFCC8666BA060E111D715BFDB6C2D5DD8A35FA4D3AB8AD67D8F850D2F2B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/COPYING3",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/COPYING3.LIB",
+        "sizeBytes": 7639,
+        "sha256": "A853C2FFEC17057872340EEE242AE4D96CBF2B520AE27D903E1B2FEF1A5F9D1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/go/gofrontend/LICENSE",
+        "sizeBytes": 1479,
+        "sha256": "2D36597F7117C38B006835AE7F537487207D8EC407AA9D9980794B2030CBC067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/m2/COPYING.FDL",
+        "sizeBytes": 20355,
+        "sha256": "4887B107E3D1ACE106AA293FE73B4AA9BE52EDBC5B96E5A9B672C8916FEDE722"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/m2/COPYING.RUNTIME",
+        "sizeBytes": 3329,
+        "sha256": "145AEEBBFD1EDA3E31353158311B12478AAD06BCE8BFFC22184F33CE2FFCE64F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/m2/COPYING3",
+        "sizeBytes": 35148,
+        "sha256": "0AE0485A5BD37A63E63603596417E4EB0E653334FA6C7F932CA3A0E85D4AF227"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/m2/COPYING3.LIB",
+        "sizeBytes": 7639,
+        "sha256": "A853C2FFEC17057872340EEE242AE4D96CBF2B520AE27D903E1B2FEF1A5F9D1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/m2/images/LICENSE.IMG",
+        "sizeBytes": 762,
+        "sha256": "E234BF4BC7276B6F48A0EE9EFCBC652EF3072573D996DD590287110ADC2F1922"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/rust/checks/errors/borrowck/ffi-polonius/vendor/datafrog/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/rust/checks/errors/borrowck/ffi-polonius/vendor/datafrog/LICENSE-MIT",
+        "sizeBytes": 1023,
+        "sha256": "23F18E03DC49DF91622FE2A76176497404E46CED8A715D9D2B67A7446571CCA3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/rust/checks/errors/borrowck/ffi-polonius/vendor/log/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/rust/checks/errors/borrowck/ffi-polonius/vendor/log/LICENSE-MIT",
+        "sizeBytes": 1071,
+        "sha256": "6485B8ED310D3F0340BF1AD1F47645069CE4069DCC6BB46C7D5C6FAF41DE1FDB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/rust/checks/errors/borrowck/ffi-polonius/vendor/rustc-hash/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/rust/checks/errors/borrowck/ffi-polonius/vendor/rustc-hash/LICENSE-MIT",
+        "sizeBytes": 1023,
+        "sha256": "23F18E03DC49DF91622FE2A76176497404E46CED8A715D9D2B67A7446571CCA3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/testsuite/gcc.dg/params/LICENSE",
+        "sizeBytes": 1901,
+        "sha256": "4919CFB14A73CD64FCEF67B107613970CF1659A09AA675DBA31314F373BC7204"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/gcc/testsuite/gcc.dg/vect/tsvc/license.txt",
+        "sizeBytes": 1738,
+        "sha256": "0BF700C6654F3E72308035D7EBB60ABCC486E673EE8A72D19101F80812288F1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/include/COPYING",
+        "sizeBytes": 18002,
+        "sha256": "231F7EDCC7352D7734A96EEF0B8030F77982678C516876FCB81E25B32D68564C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/include/COPYING3",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libcody/LICENSE",
+        "sizeBytes": 11357,
+        "sha256": "C71D239DF91726FC519C6EB72D318EC65820627232B2F796219E87DCF35D0AB4"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libffi/LICENSE",
+        "sizeBytes": 1132,
+        "sha256": "A61D06E8F7BE57928E71E800EB9273B05CB8868C484108AFE41E4305BB320DDE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libffi/LICENSE-BUILDTOOLS",
+        "sizeBytes": 18698,
+        "sha256": "E67978CD18816C0CB7D29AAAACDE7B7447402C2FB321A051698890A8EAEDDA94"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgcobol/LICENSE",
+        "sizeBytes": 1478,
+        "sha256": "685FBA36BB54AB016D4665E3A7EEA9807509B091C27F4E3172AD5B45D9F8EE64"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgo/go/golang.org/x/mod/LICENSE",
+        "sizeBytes": 1479,
+        "sha256": "2D36597F7117C38B006835AE7F537487207D8EC407AA9D9980794B2030CBC067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgo/go/golang.org/x/sync/AUTHORS",
+        "sizeBytes": 173,
+        "sha256": "B82446C166DAA6932DC33418961ED7A7F06C5A9FEE17E9D214E16079E3442757"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgo/go/golang.org/x/sync/LICENSE",
+        "sizeBytes": 1479,
+        "sha256": "2D36597F7117C38B006835AE7F537487207D8EC407AA9D9980794B2030CBC067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgo/go/golang.org/x/tools/LICENSE",
+        "sizeBytes": 1479,
+        "sha256": "2D36597F7117C38B006835AE7F537487207D8EC407AA9D9980794B2030CBC067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgo/go/golang.org/x/xerrors/LICENSE",
+        "sizeBytes": 1479,
+        "sha256": "84D554E7A5D139B7C7B5D6EF0670AE556C4CDCFA354EAAD72A1C07C08012C96F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgo/LICENSE",
+        "sizeBytes": 1479,
+        "sha256": "2D36597F7117C38B006835AE7F537487207D8EC407AA9D9980794B2030CBC067"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/libformat_parser/vendor/libc/LICENSE-APACHE",
+        "sizeBytes": 9723,
+        "sha256": "62C7A1E35F56406896D7AA7CA52D0CC0D272AC022B5D2796E7D6905DB8A3636A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/libformat_parser/vendor/libc/LICENSE-MIT",
+        "sizeBytes": 1076,
+        "sha256": "A8D47FF51CA256F56A8932DBA07660672DBFE3004257CA8DE708AAC1415937A1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/libformat_parser/vendor/unicode-xid/COPYRIGHT",
+        "sizeBytes": 321,
+        "sha256": "23860C2A7B5D96B21569AFEDF033469BAB9FE14A1B24A35068B8641C578CE24D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/libformat_parser/vendor/unicode-xid/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/libformat_parser/vendor/unicode-xid/LICENSE-MIT",
+        "sizeBytes": 1071,
+        "sha256": "7B63ECD5F1902AF1B63729947373683C32745C16A10E8E6292E2E2DCD7E90AE0"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/LICENSE-APACHE",
+        "sizeBytes": 9723,
+        "sha256": "62C7A1E35F56406896D7AA7CA52D0CC0D272AC022B5D2796E7D6905DB8A3636A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/LICENSE-MIT",
+        "sizeBytes": 1023,
+        "sha256": "23F18E03DC49DF91622FE2A76176497404E46CED8A715D9D2B67A7446571CCA3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/stdarch/crates/core_arch/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/stdarch/crates/core_arch/LICENSE-MIT",
+        "sizeBytes": 1071,
+        "sha256": "29662666B44DFF84977B46E05642CDEF910BC3A93A17B5FD86E632BAFA59CF21"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/stdarch/crates/std_detect/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/stdarch/crates/std_detect/LICENSE-MIT",
+        "sizeBytes": 1071,
+        "sha256": "29662666B44DFF84977B46E05642CDEF910BC3A93A17B5FD86E632BAFA59CF21"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/stdarch/LICENSE-APACHE",
+        "sizeBytes": 10847,
+        "sha256": "A60EEA817514531668D7E00765731449FE14D059D3249E0BC93B36DE45F759F2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libgrust/rustc-lib/stdarch/LICENSE-MIT",
+        "sizeBytes": 1071,
+        "sha256": "29662666B44DFF84977B46E05642CDEF910BC3A93A17B5FD86E632BAFA59CF21"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libiberty/copying-lib.texi",
+        "sizeBytes": 26755,
+        "sha256": "048BE075E2F6468C1F32840499D9970240306FD401570D876AAFC4F81327B4D3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libiberty/COPYING.LIB",
+        "sizeBytes": 26440,
+        "sha256": "32434AFCC8666BA060E111D715BFDB6C2D5DD8A35FA4D3AB8AD67D8F850D2F2B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libphobos/libdruntime/LICENSE.txt",
+        "sizeBytes": 1338,
+        "sha256": "C9BFF75738922193E67FA726FA225535870D2AA1059F91452C411736284AD566"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libphobos/src/LICENSE_1_0.txt",
+        "sizeBytes": 1338,
+        "sha256": "C9BFF75738922193E67FA726FA225535870D2AA1059F91452C411736284AD566"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libquadmath/COPYING.LIB",
+        "sizeBytes": 26440,
+        "sha256": "32434AFCC8666BA060E111D715BFDB6C2D5DD8A35FA4D3AB8AD67D8F850D2F2B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libsanitizer/LICENSE.TXT",
+        "sizeBytes": 4506,
+        "sha256": "74C2B24539A53C34ABDDB559266D89CB653B0198CD2FAF9C04763D3223DB7F6D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libstdc++-v3/doc/html/manual/license.html",
+        "sizeBytes": 8434,
+        "sha256": "6EF2606FAD7FCE5BA388FEF9D8D137178D0135F3D2C538B664229B58EAE5CE06"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libstdc++-v3/doc/xml/authors.xml",
+        "sizeBytes": 3512,
+        "sha256": "5300074C44853CE8F728EEF46916A8D428EDF8147A48F4903A97E43F69D6C2D3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/libstdc++-v3/include/pstl/LICENSE.txt",
+        "sizeBytes": 16700,
+        "sha256": "0CA8CBE9219A841F9BC8FBB1F8ECDF5E39B1B0E23EE10FB6B0C090D8987DD1EB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/zlib/contrib/dotzlib/LICENSE_1_0.txt",
+        "sizeBytes": 1359,
+        "sha256": "36266A8FD073568394CB81CDB2B124F7FDAE2C64C1A7ED09DB34B4D22EFA2951"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/gcc-16.2.0.tar.xz.notices/gcc-16.2.0/zlib/LICENSE",
+        "sizeBytes": 1002,
+        "sha256": "845EFC77857D485D91FB3E0B884AAA929368C717AE8186B66FE1ED2495753243"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/package-notices/gcc-libs/COPYING.LIB",
+        "sizeBytes": 26527,
+        "sha256": "A9BDDE5616ECDD1E980B44F360600EE8783B1F99B8CC83A2BEB163A0A390E861"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/package-notices/gcc-libs/COPYING.RUNTIME",
+        "sizeBytes": 3324,
+        "sha256": "9D6B43CE4D8DE0C878BF16B54D8E7A10D9BD42B75178153E3AF6A815BDC90F74"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/package-notices/gcc-libs/COPYING3",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gcc-libs/package-notices/gcc-libs/README",
+        "sizeBytes": 236,
+        "sha256": "33400D067FA3E2BD670A0868DCDB60C9486E8F559B675CF9FF1FF55D4E0D06AB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gdk-pixbuf2/gdk-pixbuf-2.44.7.tar.xz.notices/gdk-pixbuf-2.44.7/COPYING",
+        "sizeBytes": 26530,
+        "sha256": "DC626520DCD53A22F727AF3EE42C770E56C97A64FE3ADB063799D8AB032FE551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gdk-pixbuf2/package-notices/gdk-pixbuf2/COPYING",
+        "sizeBytes": 26530,
+        "sha256": "DC626520DCD53A22F727AF3EE42C770E56C97A64FE3ADB063799D8AB032FE551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gettext-runtime/package-notices/gettext-runtime/COPYING",
+        "sizeBytes": 495,
+        "sha256": "7EF2CDFE58E0C0460657B6598B49AF29D4E03C1E41CBAF0E1DA1EB8AD74B95D0"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gettext-runtime/package-notices/gettext-runtime/intl/COPYING.LIB",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gettext-runtime/package-notices/gettext-runtime/libasprintf/COPYING",
+        "sizeBytes": 65,
+        "sha256": "03133ADDAE5B99A6148C538300E6D97074453089BE1423B741BD081F18E2B298"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gettext-runtime/package-notices/gettext-runtime/libasprintf/COPYING.LIB",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ggml/package-notices/ggml/LICENSE",
+        "sizeBytes": 1078,
+        "sha256": "94F29BBED6A22C35B992C5C6EBF0E7C92F13B836B90F36F461C9CF2F0F1D010D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ggml/v0.22.0.tar.gz.notices/ggml-0.22.0/AUTHORS",
+        "sizeBytes": 14359,
+        "sha256": "922076FA7D30ACBA9058ABE144B9FE22815D26AC2EC3241E02977A20DD5DF218"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-ggml/v0.22.0.tar.gz.notices/ggml-0.22.0/LICENSE",
+        "sizeBytes": 1078,
+        "sha256": "94F29BBED6A22C35B992C5C6EBF0E7C92F13B836B90F36F461C9CF2F0F1D010D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-glib2/glib-2.88.3.tar.xz.notices/glib-2.88.3/docs/reference/AUTHORS",
+        "sizeBytes": 122,
+        "sha256": "B4F60A02B2B1F82764F8295B2EAFBFCD4C33F596D70ABCF5CB3C3623B1CFBC6D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-glib2/glib-2.88.3.tar.xz.notices/glib-2.88.3/docs/reference/COPYING",
+        "sizeBytes": 1698,
+        "sha256": "B1EC1D0E5947F81E815D8771F7D4D90671A94BB10A42DC687FB566DE461A57AA"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-glib2/glib-2.88.3.tar.xz.notices/glib-2.88.3/gmodule/AUTHORS",
+        "sizeBytes": 25,
+        "sha256": "28073C8C65C072387B778BA00B6C24A2FF1B573CA4415E151AA91FAB5A6454BE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-glib2/glib-2.88.3.tar.xz.notices/glib-2.88.3/LICENSES/LicenseRef-old-glib-tests.txt",
+        "sizeBytes": 841,
+        "sha256": "FB261B2D5DBE76C4850F90DA763210BC385E52428DF6BBFD7B06295AC8A32914"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-glib2/glib-2.88.3.tar.xz.notices/glib-2.88.3/subprojects/gvdb/COPYING",
+        "sizeBytes": 26445,
+        "sha256": "BDBCDAA7858872393E9D6B216BBDC8A23E99D98DD6CDB7CDA19458025B9E19FC"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-glib2/package-notices/glib2/COPYING",
+        "sizeBytes": 25967,
+        "sha256": "FA6F36630BB1E0C571D34B2BBDF188D08495C9DBF58F28CAC112F303FC1F58FB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gmp/gmp-6.3.0.tar.xz.notices/gmp-6.3.0/AUTHORS",
+        "sizeBytes": 4098,
+        "sha256": "DA5870E2F0482C5DC15B4CFED8BBFB51CE1279C8F8FC52BDB8C13C7CEE949C32"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gmp/gmp-6.3.0.tar.xz.notices/gmp-6.3.0/COPYING",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gmp/gmp-6.3.0.tar.xz.notices/gmp-6.3.0/COPYING.LESSERv3",
+        "sizeBytes": 7639,
+        "sha256": "A853C2FFEC17057872340EEE242AE4D96CBF2B520AE27D903E1B2FEF1A5F9D1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gmp/gmp-6.3.0.tar.xz.notices/gmp-6.3.0/COPYINGv2",
+        "sizeBytes": 18092,
+        "sha256": "8177F97513213526DF2CF6184D8FF986C675AFB514D4E68A404010521B880643"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gmp/gmp-6.3.0.tar.xz.notices/gmp-6.3.0/COPYINGv3",
+        "sizeBytes": 35150,
+        "sha256": "E6037104443F9A7829B2AA7C5370D0789A7BDA3CA65A0B904CDC0C2E285D9195"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/AUTHORS",
+        "sizeBytes": 11500,
+        "sha256": "79BCA1136DC515B930F2F85975C0C4C687E7D430BE27A9B59113637C33B8E7A3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/COPYING",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/COPYING.LESSERv2",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/doc/examples/tlsproxy/LICENSE",
+        "sizeBytes": 1090,
+        "sha256": "B42DBE48110754B99F026AD30E69B1069F826FB07E7C616B526BD1090952FB1B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/lib/accelerated/x86/license.txt",
+        "sizeBytes": 2463,
+        "sha256": "0C35A52BCFA4DA2F0DF4A1282A6034E211C976B8B6D43691A639EEF9C8AEBF7E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/lib/crau/LICENSE",
+        "sizeBytes": 1067,
+        "sha256": "B3C9AED2F5750F6BF698C74916D675D1734E12455B96BFDF6F90E23AB01595CD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gnutls/gnutls-3.8.13.tar.xz.notices/gnutls-3.8.13/lib/inih/LICENSE.txt",
+        "sizeBytes": 1510,
+        "sha256": "9AE3B39E83E9158E44B67733BAA3BB2D84E80EFDCFB14A5820210A42C7ABDF7F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-graphite2/graphite2-1.3.15.tgz.notices/graphite2-1.3.15/COPYING",
+        "sizeBytes": 1235,
+        "sha256": "2C272829FF23F182C8BF7EA12FEDEA69B0AE148663123ED5240C117CB129C9C1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-graphite2/graphite2-1.3.15.tgz.notices/graphite2-1.3.15/debian-src/copyright",
+        "sizeBytes": 10027,
+        "sha256": "88F17179E66C9EFCDD88316A0294499BD5E221E8CCB14523C389FCCC491BFB3A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-graphite2/graphite2-1.3.15.tgz.notices/graphite2-1.3.15/LICENSE",
+        "sizeBytes": 29228,
+        "sha256": "CAB46CD45ADBFEA4B1D0F14B033C70062C73074FA0B56532C2F351576DDF455E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-graphite2/graphite2-1.3.15.tgz.notices/graphite2-1.3.15/site/LICENSE",
+        "sizeBytes": 1070,
+        "sha256": "D33679DCEB70F30ADC7D184AB009DC92E7B03385A606E544FEB7465357E078D3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-graphite2/package-notices/graphite2/COPYING",
+        "sizeBytes": 1235,
+        "sha256": "2C272829FF23F182C8BF7EA12FEDEA69B0AE148663123ED5240C117CB129C9C1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-graphite2/package-notices/graphite2/LICENSE",
+        "sizeBytes": 29228,
+        "sha256": "CAB46CD45ADBFEA4B1D0F14B033C70062C73074FA0B56532C2F351576DDF455E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gsm/gsm-1.0.24.tar.gz.notices/gsm-1.0-pl24/COPYRIGHT",
+        "sizeBytes": 1450,
+        "sha256": "81C68A3374937ED9B5E4929C709E81A2C4B35B5D1F450ECF8C473E2DAEA46FF6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-gsm/package-notices/gsm/license.txt",
+        "sizeBytes": 1450,
+        "sha256": "81C68A3374937ED9B5E4929C709E81A2C4B35B5D1F450ECF8C473E2DAEA46FF6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/harfbuzz-14.4.0.tar.xz.notices/harfbuzz-14.4.0/AUTHORS",
+        "sizeBytes": 201,
+        "sha256": "19BFE8F5ED100636CD24AB0C90A3F71C21D8B02D9BA00719447A0FAAB364D49F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/harfbuzz-14.4.0.tar.xz.notices/harfbuzz-14.4.0/COPYING",
+        "sizeBytes": 1971,
+        "sha256": "BA8F810F2455C2F08E2D56BB49B72F37FCF68F1F4FADE38977CFD7372050AD64"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/harfbuzz-14.4.0.tar.xz.notices/harfbuzz-14.4.0/src/ms-use/COPYING",
+        "sizeBytes": 1141,
+        "sha256": "C2CFCCB812FE482101A8F04597DFC5A9991A6B2748266C47AC91B6A5AAE15383"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/harfbuzz-14.4.0.tar.xz.notices/harfbuzz-14.4.0/test/COPYING",
+        "sizeBytes": 4370,
+        "sha256": "9B35B8485F69CD298FCCBB3C40A827DC06CF1185553BEF827903497D2944A8D7"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/harfbuzz-14.4.0.tar.xz.notices/harfbuzz-14.4.0/test/shape/data/aots/COPYING",
+        "sizeBytes": 593,
+        "sha256": "F55F74BF740DB07BB032A90AA74AF4307ADEA3D489C1CCBA12453CF0C0A764CB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/harfbuzz-14.4.0.tar.xz.notices/harfbuzz-14.4.0/test/shape/data/text-rendering-tests/COPYING",
+        "sizeBytes": 584,
+        "sha256": "D24039E4D22C9BC72096F6174374539D92A3D6E1163938546EC59179FE095E6F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-harfbuzz/package-notices/harfbuzz/COPYING",
+        "sizeBytes": 1971,
+        "sha256": "BA8F810F2455C2F08E2D56BB49B72F37FCF68F1F4FADE38977CFD7372050AD64"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-highway/highway-1.4.0.tar.gz.notices/highway-1.4.0/debian/copyright",
+        "sizeBytes": 825,
+        "sha256": "6E4ECF1CAE052B678EA3178DD4B3652D581EE66A82D58DB8800DD7D80DD6DE76"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-highway/highway-1.4.0.tar.gz.notices/highway-1.4.0/LICENSE",
+        "sizeBytes": 20785,
+        "sha256": "E340270D4F64384569A91D546ACB5B094D69CE47F0C015DB77ABB74DC6F815AF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-highway/package-notices/highway/LICENSE",
+        "sizeBytes": 20785,
+        "sha256": "E340270D4F64384569A91D546ACB5B094D69CE47F0C015DB77ABB74DC6F815AF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-jbigkit/jbigkit-2.1.tar.gz.notices/jbigkit-2.1/COPYING",
+        "sizeBytes": 17982,
+        "sha256": "91DF39D1816BFB17A4DDA2D3D2C83B1F6F2D38D53E53E41E8F97AD5AC46A0CAD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-jbigkit/package-notices/jbigkit/COPYING",
+        "sizeBytes": 17982,
+        "sha256": "91DF39D1816BFB17A4DDA2D3D2C83B1F6F2D38D53E53E41E8F97AD5AC46A0CAD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lame/lame-3.100.tar.gz.notices/lame-3.100/COPYING",
+        "sizeBytes": 25284,
+        "sha256": "BFE4A52DC4645385F356A8E83CC54216A293E3B6F1CB4F79F5FC0277ABF937FD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lame/lame-3.100.tar.gz.notices/lame-3.100/debian/copyright",
+        "sizeBytes": 2303,
+        "sha256": "1F27F9F698183275BD615C1140B7BF6E498750E9280597C6EB39790E54AE809B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lame/lame-3.100.tar.gz.notices/lame-3.100/LICENSE",
+        "sizeBytes": 487,
+        "sha256": "7A40CBD8818C57E5285E83C772A459A996D1662C824A879836B97B473C07CAE4"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lame/lame-3.100.tar.gz.notices/lame-3.100/mpglib/AUTHORS",
+        "sizeBytes": 604,
+        "sha256": "D8ECF9556AAFA8C653796D6BE3DC43DEEA374257680E21C30109A5C3C4484263"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/lcms2-2.19.1.tar.gz.notices/lcms2-2.19.1/AUTHORS",
+        "sizeBytes": 1010,
+        "sha256": "4847D97CD41E980794939B1D2694BD8F67B92856EC80E95C2FCFC34066F0DF93"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/lcms2-2.19.1.tar.gz.notices/lcms2-2.19.1/LICENSE",
+        "sizeBytes": 1080,
+        "sha256": "6DBD60437F8EF91D8DE1F08AD75882547FD4931BFCC3566A0735F28DB1484D31"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/lcms2-2.19.1.tar.gz.notices/lcms2-2.19.1/plugins/fast_float/COPYING.GPL3",
+        "sizeBytes": 35146,
+        "sha256": "C53A65C2FD561C87EAABF1072EF5DCAB8653042BC15308465F52413585EB6271"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/lcms2-2.19.1.tar.gz.notices/lcms2-2.19.1/plugins/threaded/COPYING.GPL3",
+        "sizeBytes": 35146,
+        "sha256": "C53A65C2FD561C87EAABF1072EF5DCAB8653042BC15308465F52413585EB6271"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/lcms2-2.19.1.tar.gz.notices/lcms2-2.19.1/utils/jpgicc/LICENSE_iccjpeg",
+        "sizeBytes": 3234,
+        "sha256": "8BAAC37D14EED89B82FFCB041677DD701164EB5CC0F26E165FE47EB11AFA0DCA"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/package-notices/lcms2/LICENSE",
+        "sizeBytes": 1080,
+        "sha256": "6DBD60437F8EF91D8DE1F08AD75882547FD4931BFCC3566A0735F28DB1484D31"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lcms2/package-notices/lcms2/LICENSE-fast_float",
+        "sizeBytes": 35146,
+        "sha256": "C53A65C2FD561C87EAABF1072EF5DCAB8653042BC15308465F52413585EB6271"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lerc/package-notices/lerc/LICENSE",
+        "sizeBytes": 9198,
+        "sha256": "77A8B761727C75E2167B15BFDF61B2C0BCF8792271228BEBE80779106AD00671"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libarchive/libarchive-3.8.9.tar.xz.notices/libarchive-3.8.9/COPYING",
+        "sizeBytes": 3089,
+        "sha256": "30E556B3959E3985D66EFEFEC5EAAC51D4995053CAA1D3CFFE6EB916F146F229"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libarchive/package-notices/libarchive/LICENSE",
+        "sizeBytes": 3089,
+        "sha256": "30E556B3959E3985D66EFEFEC5EAAC51D4995053CAA1D3CFFE6EB916F146F229"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libass/libass-0.17.5.tar.xz.notices/libass-0.17.5/COPYING",
+        "sizeBytes": 755,
+        "sha256": "F7E30699D02798351E7F839E3D3BFEB29CE65E44EFA7735C225464C4FD7DFE9C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libb2/libb2-0.98.1.tar.gz.notices/libb2-0.98.1/COPYING",
+        "sizeBytes": 6556,
+        "sha256": "6A1EE543E5282CD9061881EDF462E6FDAB181F328DA71FC2C9A6950A80E94D01"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libb2/package-notices/libb2/LICENSE",
+        "sizeBytes": 6556,
+        "sha256": "6A1EE543E5282CD9061881EDF462E6FDAB181F328DA71FC2C9A6950A80E94D01"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libbluray/libbluray-1.5.0.tar.xz.notices/libbluray-1.5.0/contrib/asm/LICENSE.txt",
+        "sizeBytes": 1598,
+        "sha256": "293B6AF371EEE28B0FF16F0334EA19E20A3D5522143FAA4B95B346855507879A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libbluray/libbluray-1.5.0.tar.xz.notices/libbluray-1.5.0/contrib/libudfread/COPYING",
+        "sizeBytes": 26530,
+        "sha256": "DC626520DCD53A22F727AF3EE42C770E56C97A64FE3ADB063799D8AB032FE551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libbluray/libbluray-1.5.0.tar.xz.notices/libbluray-1.5.0/COPYING",
+        "sizeBytes": 24478,
+        "sha256": "B3AA400ACA6D2BA1F0BD03BD98D03D1FE7489A3BBB26969D72016360AF8A5C9D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libbluray/package-notices/libbluray/COPYING",
+        "sizeBytes": 24478,
+        "sha256": "B3AA400ACA6D2BA1F0BD03BD98D03D1FE7489A3BBB26969D72016360AF8A5C9D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcaca/libcaca-0.99.beta20.tar.gz.notices/libcaca-0.99.beta20/AUTHORS",
+        "sizeBytes": 628,
+        "sha256": "3EC83FD70806B29112D06BE9E96392DDD439F85A8B9D2B37E1D924039B0E529E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcaca/libcaca-0.99.beta20.tar.gz.notices/libcaca-0.99.beta20/COPYING",
+        "sizeBytes": 466,
+        "sha256": "D20AD7990610153B563C52681DA860B8302AFCF0778F75237F8815C07D05141F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcaca/libcaca-0.99.beta20.tar.gz.notices/libcaca-0.99.beta20/COPYING.GPL",
+        "sizeBytes": 17989,
+        "sha256": "C38AEE9E3C8C4D5D594FF548A1BE05453023016D6286931F6512DB215EC1FD42"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcaca/libcaca-0.99.beta20.tar.gz.notices/libcaca-0.99.beta20/COPYING.ISC",
+        "sizeBytes": 763,
+        "sha256": "7DE62D31DF6E3D2DACC9E8A6FCDCFC189035493C28A99F717F73A367DC6E1934"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcaca/libcaca-0.99.beta20.tar.gz.notices/libcaca-0.99.beta20/COPYING.LGPL",
+        "sizeBytes": 26528,
+        "sha256": "D80C9D084EBFB50EA1ED91BFBC2410D6CE542097A32C43B00781B83ADCB8C77F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio-paranoia/libcdio-paranoia-10.2+2.0.2.tar.bz2.notices/libcdio-paranoia-10.2+2.0.2/AUTHORS",
+        "sizeBytes": 239,
+        "sha256": "E10969D650526B39E9EB49B5A3E76E2F0BA796A83C3106A2BE78DEE3D34244AA"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio-paranoia/libcdio-paranoia-10.2+2.0.2.tar.bz2.notices/libcdio-paranoia-10.2+2.0.2/COPYING",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/AUTHORS",
+        "sizeBytes": 69,
+        "sha256": "92C1AB5A3F8D10C3DE8252776FBF8EA0AE7302A0DC35E384B0932158FF526A93"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/COPYING",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/copying-rr-mingw.right",
+        "sizeBytes": 1086,
+        "sha256": "BBD4FAD0D5F66183BB61439EB32A393AEB714A62B547EB9721F54347E339E87F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/copying-rr.gpl",
+        "sizeBytes": 17992,
+        "sha256": "32B1062F7DA84967E7019D01AB805935CAA7AB7321A7CED0E30EBE75E5DF1670"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/copying-rr.right",
+        "sizeBytes": 1111,
+        "sha256": "F232610D5593875418986A80AF36BCF966E0064AFB340E9FCD079FAF53355684"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/copying.gpl",
+        "sizeBytes": 18002,
+        "sha256": "231F7EDCC7352D7734A96EEF0B8030F77982678C516876FCB81E25B32D68564C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/copying.right",
+        "sizeBytes": 220,
+        "sha256": "2C913A89ED26072D4B2E82F38964B2984720649285EBA748381F461773D92908"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/data/copying-rr.iso",
+        "sizeBytes": 380928,
+        "sha256": "B877FF4F890E4DC640392E81352CA03970412096CEFC07B7599635983BD60976"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libcdio/libcdio-2.4.0.tar.bz2.notices/libcdio-2.4.0/test/data/copying.iso",
+        "sizeBytes": 131072,
+        "sha256": "5BB4AB6B1C8941D3AA2ADA6CD93557FACF314FFD9194B771A21655012EF95F1E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdatrie/libdatrie-0.2.14.tar.xz.notices/libdatrie-0.2.14/AUTHORS",
+        "sizeBytes": 49,
+        "sha256": "F19C2C2EDD7949624787E376D9B461289D78761458A14B341EF112653B1FA0C2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdatrie/libdatrie-0.2.14.tar.xz.notices/libdatrie-0.2.14/COPYING",
+        "sizeBytes": 26527,
+        "sha256": "A9BDDE5616ECDD1E980B44F360600EE8783B1F99B8CC83A2BEB163A0A390E861"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdatrie/package-notices/libdatrie/COPYING",
+        "sizeBytes": 26527,
+        "sha256": "A9BDDE5616ECDD1E980B44F360600EE8783B1F99B8CC83A2BEB163A0A390E861"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdeflate/libdeflate-1.26.tar.gz.notices/libdeflate-1.26/COPYING",
+        "sizeBytes": 1078,
+        "sha256": "4AD69099CB4374836FD27583D9991E2838CD86B6E4666AB26B2D32582C91E73A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdeflate/package-notices/libdeflate/COPYING",
+        "sizeBytes": 1078,
+        "sha256": "4AD69099CB4374836FD27583D9991E2838CD86B6E4666AB26B2D32582C91E73A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdovi/libdovi-3.4.0.tar.gz.notices/dovi_tool-libdovi-3.4.0/dolby_vision/LICENSE",
+        "sizeBytes": 1066,
+        "sha256": "E9D76C149B1176DE4AA0202CFB6A4A266A0C4CB71959F429D670C3A857F95E52"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdovi/libdovi-3.4.0.tar.gz.notices/dovi_tool-libdovi-3.4.0/LICENSE",
+        "sizeBytes": 1066,
+        "sha256": "E9D76C149B1176DE4AA0202CFB6A4A266A0C4CB71959F429D670C3A857F95E52"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdovi/package-notices/libdovi/LICENSE",
+        "sizeBytes": 1066,
+        "sha256": "E9D76C149B1176DE4AA0202CFB6A4A266A0C4CB71959F429D670C3A857F95E52"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdcss/libdvdcss-1.6.0.tar.gz.notices/libdvdcss-1.6.0/AUTHORS",
+        "sizeBytes": 1708,
+        "sha256": "B2DE31AC3382BBADD18EB2F9ABEA4E209372C62BDF722C96A62043AD074E93B1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdcss/libdvdcss-1.6.0.tar.gz.notices/libdvdcss-1.6.0/COPYING",
+        "sizeBytes": 18092,
+        "sha256": "8177F97513213526DF2CF6184D8FF986C675AFB514D4E68A404010521B880643"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdcss/package-notices/libdvdcss/COPYING",
+        "sizeBytes": 18092,
+        "sha256": "8177F97513213526DF2CF6184D8FF986C675AFB514D4E68A404010521B880643"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdnav/libdvdnav-7.0.0.tar.gz.notices/libdvdnav-7.0.0/AUTHORS",
+        "sizeBytes": 455,
+        "sha256": "0D688BCF35FAF86F4D9747F677DA278189932EEAD3F1D05CDE637D9EA93A7816"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdnav/libdvdnav-7.0.0.tar.gz.notices/libdvdnav-7.0.0/COPYING",
+        "sizeBytes": 17992,
+        "sha256": "32B1062F7DA84967E7019D01AB805935CAA7AB7321A7CED0E30EBE75E5DF1670"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdnav/package-notices/libdvdnav/COPYING",
+        "sizeBytes": 17992,
+        "sha256": "32B1062F7DA84967E7019D01AB805935CAA7AB7321A7CED0E30EBE75E5DF1670"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdread/libdvdread-7.1.1.tar.gz.notices/libdvdread-7.1.1/AUTHORS",
+        "sizeBytes": 947,
+        "sha256": "E49066CD889298C75CF2B37167557004C43112EC6BE90C487644FC6B3B737FCF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdread/libdvdread-7.1.1.tar.gz.notices/libdvdread-7.1.1/COPYING",
+        "sizeBytes": 18097,
+        "sha256": "D6CB0E9E560F51085556949A84AF12B79A00F10AB8B66C752537FAF7CD665572"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libdvdread/package-notices/libdvdread/COPYING",
+        "sizeBytes": 18097,
+        "sha256": "D6CB0E9E560F51085556949A84AF12B79A00F10AB8B66C752537FAF7CD665572"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libffi/libffi-3.8.0.tar.gz.notices/libffi-3.8.0/LICENSE",
+        "sizeBytes": 1132,
+        "sha256": "17B64DC60F3B6897A60F971E288B973F655C2EDCDF08B25F3C3DD5549857881C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libffi/libffi-3.8.0.tar.gz.notices/libffi-3.8.0/LICENSE-BUILDTOOLS",
+        "sizeBytes": 18698,
+        "sha256": "E67978CD18816C0CB7D29AAAACDE7B7447402C2FB321A051698890A8EAEDDA94"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libffi/package-notices/libffi/LICENSE",
+        "sizeBytes": 1132,
+        "sha256": "17B64DC60F3B6897A60F971E288B973F655C2EDCDF08B25F3C3DD5549857881C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libgme/libgme-0.6.5-src.tar.gz.notices/libgme-0.6.5/gme/ext/LICENSE",
+        "sizeBytes": 1089,
+        "sha256": "8FB093F26ED0D78C8CA033BBEC7063AC5B34C5D2475E6BD121D03CCFAAF2355F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libgme/libgme-0.6.5-src.tar.gz.notices/libgme-0.6.5/license.gpl2.txt",
+        "sizeBytes": 18092,
+        "sha256": "8177F97513213526DF2CF6184D8FF986C675AFB514D4E68A404010521B880643"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libgme/libgme-0.6.5-src.tar.gz.notices/libgme-0.6.5/license.txt",
+        "sizeBytes": 26938,
+        "sha256": "D2EFC89FBB7533572A472D34E07964951810A3A4F8D3159ECC2DCAA1452C5C26"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libgme/package-notices/libgme/license.txt",
+        "sizeBytes": 26938,
+        "sha256": "D2EFC89FBB7533572A472D34E07964951810A3A4F8D3159ECC2DCAA1452C5C26"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/libiconv-1.19.tar.gz.notices/libiconv-1.19/AUTHORS",
+        "sizeBytes": 31,
+        "sha256": "ED10EF2A01EFFB12849006D43262FFDE5CF72A7D5423BBC8AA66FC6959774C0C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/libiconv-1.19.tar.gz.notices/libiconv-1.19/COPYING",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/libiconv-1.19.tar.gz.notices/libiconv-1.19/COPYING.LIB",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/libiconv-1.19.tar.gz.notices/libiconv-1.19/libcharset/AUTHORS",
+        "sizeBytes": 31,
+        "sha256": "ED10EF2A01EFFB12849006D43262FFDE5CF72A7D5423BBC8AA66FC6959774C0C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/libiconv-1.19.tar.gz.notices/libiconv-1.19/libcharset/COPYING.LIB",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/package-notices/libiconv/COPYING",
+        "sizeBytes": 35147,
+        "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/package-notices/libiconv/COPYING.LIB",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/package-notices/libiconv/libcharset/COPYING.LIB",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libiconv/package-notices/libiconv/README",
+        "sizeBytes": 5741,
+        "sha256": "4AE66E61D1C6593C84C47105B368D579BCEE1AF566DBB959EC63A0C48425DCF4"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libidn2/libidn2-2.3.8.tar.gz.notices/libidn2-2.3.8/AUTHORS",
+        "sizeBytes": 212,
+        "sha256": "7719304DF806CA5CD68C1F1C7E0139E0C11ED14FEDE560AE192D3C4D1989E839"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libidn2/libidn2-2.3.8.tar.gz.notices/libidn2-2.3.8/COPYING",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libidn2/libidn2-2.3.8.tar.gz.notices/libidn2-2.3.8/COPYING.LESSERv3",
+        "sizeBytes": 7652,
+        "sha256": "E3A994D82E644B03A792A930F574002658412F62407F5FEE083F2555C5F23118"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libidn2/libidn2-2.3.8.tar.gz.notices/libidn2-2.3.8/COPYING.unicode",
+        "sizeBytes": 8782,
+        "sha256": "01D621EEF165CF4D3D3DBB737AA0699178D94C6F18CF87E9DDE6DB3CA7790F46"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libidn2/libidn2-2.3.8.tar.gz.notices/libidn2-2.3.8/COPYINGv2",
+        "sizeBytes": 17984,
+        "sha256": "EDAEF632CBB643E4E7A221717A6C441A4C1A7C918E6E4D56DEBC3D8739B233F6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/libjpeg-turbo-3.2.0.tar.gz.notices/libjpeg-turbo-3.2.0/LICENSE.md",
+        "sizeBytes": 6077,
+        "sha256": "BA6BCEEBCBA0FDD35488477C2CCA8C4632CE82C74DBFBC87D886CE6FC4433579"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/libjpeg-turbo-3.2.0.tar.gz.notices/libjpeg-turbo-3.2.0/release/License.rtf",
+        "sizeBytes": 2178,
+        "sha256": "D26120AB237F87DEA10AA4FA7FD4243CADFFD26E54EB2F3903D5FB0F8ED336B2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/libjpeg-turbo-3.2.0.tar.gz.notices/libjpeg-turbo-3.2.0/src/spng/LICENSE",
+        "sizeBytes": 1341,
+        "sha256": "0622B0794D0FECDE47D743F1BB70A03E6FDF082BE8E71F39DE672ED995D96FF9"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/libjpeg-turbo-3.2.0.tar.gz.notices/libjpeg-turbo-3.2.0/src/spng/zlib/LICENSE",
+        "sizeBytes": 1002,
+        "sha256": "E32FF4E00D9D94930537635291DA39E7E612703334BF6FDE8C7F1686FE8A45A2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/libjpeg-turbo-3.2.0.tar.gz.notices/libjpeg-turbo-3.2.0/testimages/LICENSE.txt",
+        "sizeBytes": 2075,
+        "sha256": "1C4D5DFC985D5061BA11180A8FFB541CC1778BCCF87FD9F0FB92CBAE69D8A9CC"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/package-notices/libjpeg-turbo/LICENSE.md",
+        "sizeBytes": 6077,
+        "sha256": "BA6BCEEBCBA0FDD35488477C2CCA8C4632CE82C74DBFBC87D886CE6FC4433579"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/package-notices/libjpeg-turbo/README.ijg",
+        "sizeBytes": 12799,
+        "sha256": "75815E3BF6484201A3C3D17A1BBF10F2E8E3237F84DF10A2357EA896DB2A81D6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/package-notices/libjpeg-turbo/README.md",
+        "sizeBytes": 17722,
+        "sha256": "A44BA17AC66C57EDAF0EA7C6E4B31358F08322C780E4E6AF092082ABB3E20793"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjpeg-turbo/package-notices/libjpeg-turbo/simd/jsimdext.inc",
+        "sizeBytes": 15563,
+        "sha256": "68C5D236785EDF75344CEBE8B9BEC36568BD35C96EB72CC67FFECD66C17DBD74"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjxl/libjxl-0.12.0.tar.gz.notices/libjxl-0.12.0/AUTHORS",
+        "sizeBytes": 3913,
+        "sha256": "C987F35E1E87C45AEEF0C7D204F0003EB4CB9652C6F1AAD45F5521E8A22D8BDD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjxl/libjxl-0.12.0.tar.gz.notices/libjxl-0.12.0/debian/copyright",
+        "sizeBytes": 10405,
+        "sha256": "EC6F5BC1043FBA8FFA648157B5BEEE8915865A54F25C5F3201B0E910CD09EBDE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjxl/libjxl-0.12.0.tar.gz.notices/libjxl-0.12.0/lib/extras/LICENSE.apngdis",
+        "sizeBytes": 1017,
+        "sha256": "4319C422C3BF10168877A83CD9FF848684B9E53DCE9A68DE0A3F454A825933F6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjxl/libjxl-0.12.0.tar.gz.notices/libjxl-0.12.0/LICENSE",
+        "sizeBytes": 1508,
+        "sha256": "8405932022A556380C2D8C272EFF154A923FEB197233F348CE5F7334FB0A5EDE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjxl/libjxl-0.12.0.tar.gz.notices/libjxl-0.12.0/third_party/HEVCSoftware/cfg/LICENSE",
+        "sizeBytes": 1744,
+        "sha256": "44A2C5F2CE34D00A30554A44D3E51377852F84BC183DC1B9FB2B48ECE976EBEF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libjxl/package-notices/libjxl/LICENSE",
+        "sizeBytes": 1508,
+        "sha256": "8405932022A556380C2D8C272EFF154A923FEB197233F348CE5F7334FB0A5EDE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-liblc3/package-notices/liblc3/LICENSE",
+        "sizeBytes": 11358,
+        "sha256": "CFC7749B96F63BD31C3C42B5C471BF756814053E847C10F3EB003417BC523D30"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-liblc3/v1.1.3.tar.gz.notices/liblc3-1.1.3/LICENSE",
+        "sizeBytes": 11358,
+        "sha256": "CFC7749B96F63BD31C3C42B5C471BF756814053E847C10F3EB003417BC523D30"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-liblc3/v1.1.3.tar.gz.notices/liblc3-1.1.3/python/LICENSE",
+        "sizeBytes": 11358,
+        "sha256": "CFC7749B96F63BD31C3C42B5C471BF756814053E847C10F3EB003417BC523D30"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libmodplug/libmodplug-0.8.9.0.tar.gz.notices/libmodplug-0.8.9.0/AUTHORS",
+        "sizeBytes": 648,
+        "sha256": "9BF4FDCA73ED1F9654BA5930261FD8D31D3874327E9925BF64C4AC7DFD9AC11A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libmodplug/libmodplug-0.8.9.0.tar.gz.notices/libmodplug-0.8.9.0/COPYING",
+        "sizeBytes": 57,
+        "sha256": "49942E7B3B175F549E751FEB08B5270CA6F6C5FB7A1BE9F9517DB275EC32C92E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libmodplug/package-notices/libmodplug/LICENSE",
+        "sizeBytes": 57,
+        "sha256": "49942E7B3B175F549E751FEB08B5270CA6F6C5FB7A1BE9F9517DB275EC32C92E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libogg/libogg-1.3.6.tar.gz.notices/libogg-1.3.6/AUTHORS",
+        "sizeBytes": 198,
+        "sha256": "6FCB33D0CDD60B5054E7DF820916388B590427514288C2BAB01C626BB8AE9506"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libogg/libogg-1.3.6.tar.gz.notices/libogg-1.3.6/COPYING",
+        "sizeBytes": 1466,
+        "sha256": "D2AB5758336489DA61C12CC5BB757DA5339C4AE9001F9BB0562B4370249AF814"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libogg/package-notices/libogg/COPYING",
+        "sizeBytes": 1466,
+        "sha256": "D2AB5758336489DA61C12CC5BB757DA5339C4AE9001F9BB0562B4370249AF814"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libplacebo/libplacebo-v7.360.1.tar.gz.notices/libplacebo-v7.360.1/demos/LICENSE",
+        "sizeBytes": 7048,
+        "sha256": "A2010F343487D3F7618AFFE54F789F5487602331C0A8D03F49E9A7C547CF0499"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libplacebo/libplacebo-v7.360.1.tar.gz.notices/libplacebo-v7.360.1/LICENSE",
+        "sizeBytes": 24478,
+        "sha256": "B3AA400ACA6D2BA1F0BD03BD98D03D1FE7489A3BBB26969D72016360AF8A5C9D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libplacebo/package-notices/libplacebo/LICENSE",
+        "sizeBytes": 24478,
+        "sha256": "B3AA400ACA6D2BA1F0BD03BD98D03D1FE7489A3BBB26969D72016360AF8A5C9D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/AUTHORS",
+        "sizeBytes": 1773,
+        "sha256": "0C777E9F2A67BD4058AB91050EB7A56106C92ED038BA8FE5F54C83344F2D93CA"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/ci/LICENSE_MIT.txt",
+        "sizeBytes": 1036,
+        "sha256": "508A77D2E7B51D98ADEED32648AD124B7B30241A8E70B2E72C99F92D8E5874D1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/contrib/gregbook/COPYING",
+        "sizeBytes": 18097,
+        "sha256": "D6CB0E9E560F51085556949A84AF12B79A00F10AB8B66C752537FAF7CD665572"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/contrib/gregbook/LICENSE",
+        "sizeBytes": 2373,
+        "sha256": "B6A03C1803EB58FFB1F1278D5C7D4096C4C116E66DCE8A7553E8C77D163C3438"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/contrib/pngexif/LICENSE_MIT.txt",
+        "sizeBytes": 1036,
+        "sha256": "508A77D2E7B51D98ADEED32648AD124B7B30241A8E70B2E72C99F92D8E5874D1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/contrib/pngminus/LICENSE.txt",
+        "sizeBytes": 1164,
+        "sha256": "1806F1F10D393E9E377B3A8D1B968452B54F1A90378F14EEEF45426946ACE330"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/LICENSE",
+        "sizeBytes": 5345,
+        "sha256": "BDB0A645EA18C60507D0368379B1AC5474B92255FCC2D115E07486A7672BA526"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/libpng-1.6.58.tar.xz.notices/libpng-1.6.58/scripts/cmake/AUTHORS.md",
+        "sizeBytes": 862,
+        "sha256": "50633B976F0133862C921AA67D56DE2C0B42EB344C8CA3853686EFB092A447DB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libpng/package-notices/libpng/LICENSE",
+        "sizeBytes": 5345,
+        "sha256": "BDB0A645EA18C60507D0368379B1AC5474B92255FCC2D115E07486A7672BA526"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-librsvg/librsvg-2.62.3.tar.xz.notices/librsvg-2.62.3/AUTHORS",
+        "sizeBytes": 1798,
+        "sha256": "14E765B9C1097D93F4B842A6AD23172B530CC00DFE7A5AAE1B9AFEFDCA54531B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-librsvg/librsvg-2.62.3.tar.xz.notices/librsvg-2.62.3/COPYING.LIB",
+        "sizeBytes": 26530,
+        "sha256": "DC626520DCD53A22F727AF3EE42C770E56C97A64FE3ADB063799D8AB032FE551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-librsvg/librsvg-2.62.3.tar.xz.notices/librsvg-2.62.3/librsvg-rebind/LICENSE",
+        "sizeBytes": 1023,
+        "sha256": "F9C4C77BAA3828004EE54B8A4F2DB2E88ED44A6237A493965BF551FAC0FCB62D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-librsvg/package-notices/librsvg/COPYING.LIB",
+        "sizeBytes": 26530,
+        "sha256": "DC626520DCD53A22F727AF3EE42C770E56C97A64FE3ADB063799D8AB032FE551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsamplerate/libsamplerate-0.2.2.tar.xz.notices/libsamplerate-0.2.2/AUTHORS",
+        "sizeBytes": 326,
+        "sha256": "1407129D9CF9EE8444E0A397577FA384C945646D74BEB3C66AAB626024418230"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsamplerate/libsamplerate-0.2.2.tar.xz.notices/libsamplerate-0.2.2/COPYING",
+        "sizeBytes": 1334,
+        "sha256": "2C1F76CE2EFFDDDB425018405D5690C0B1AB4E6976E35296B0A6DB65C5E1A55D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsamplerate/libsamplerate-0.2.2.tar.xz.notices/libsamplerate-0.2.2/docs/license.md",
+        "sizeBytes": 377,
+        "sha256": "9722032E4B5684F0ECD399480183A9029623636ADD1E9515621DEFAF8DBCF3ED"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsamplerate/package-notices/libsamplerate/COPYING",
+        "sizeBytes": 1334,
+        "sha256": "2C1F76CE2EFFDDDB425018405D5690C0B1AB4E6976E35296B0A6DB65C5E1A55D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsoxr/package-notices/libsoxr/COPYING.LGPL",
+        "sizeBytes": 26432,
+        "sha256": "F2F118B9029EC1871B953639ECC46651B2FC7B62E295E6CF3EF2AC4C9A058B33"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsoxr/package-notices/libsoxr/LICENSE",
+        "sizeBytes": 1024,
+        "sha256": "DC98676341FDCD29D9F279C9679D6A75288785B174DED8D1B2E316C366166135"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libsoxr/package-notices/libsoxr/LICENSE-PFFFT",
+        "sizeBytes": 2122,
+        "sha256": "A9F3D236F3C14A41A1293F176D4C7C46D85404403417FCB8DF6D6C9707104E42"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libssh/libssh-0.12.2.tar.xz.notices/libssh-0.12.2/AUTHORS",
+        "sizeBytes": 488,
+        "sha256": "95B6A58AB69D7687D9486B4A859EBFC00FFF25B0942CC51239ADA2702AE69D1B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libssh/libssh-0.12.2.tar.xz.notices/libssh-0.12.2/cmake/Modules/COPYING-CMAKE-SCRIPTS",
+        "sizeBytes": 1327,
+        "sha256": "46CDE7DC11E64C78D650B4851B88F6704B4665FF60F22A1CAF68CEB15E217E5B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libssh/libssh-0.12.2.tar.xz.notices/libssh-0.12.2/COPYING",
+        "sizeBytes": 25008,
+        "sha256": "1656186E951DB1C010A8485481FA94587F7E53A26D24976BEF97945AD0C4DF5A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtasn1/libtasn1-4.21.0.tar.gz.notices/libtasn1-4.21.0/AUTHORS",
+        "sizeBytes": 456,
+        "sha256": "34384E8860C713E31E9339A5D4EB0727A9A93D2A5BB74B36053D9A66920BFF9E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtasn1/libtasn1-4.21.0.tar.gz.notices/libtasn1-4.21.0/COPYING",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtasn1/libtasn1-4.21.0.tar.gz.notices/libtasn1-4.21.0/COPYING.LESSERv2",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtasn1/package-notices/libtasn1/COPYING",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtasn1/package-notices/libtasn1/COPYING.LESSERv2",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libthai/libthai-0.1.30.tar.xz.notices/libthai-0.1.30/AUTHORS",
+        "sizeBytes": 250,
+        "sha256": "0A04DC105F3EDF568D6FFF4CB38EFAF9888F957B32C0FA8A562D46D885D78524"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libthai/libthai-0.1.30.tar.xz.notices/libthai-0.1.30/COPYING",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libthai/package-notices/libthai/COPYING",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtheora/libtheora-1.2.0.tar.gz.notices/libtheora-1.2.0/AUTHORS",
+        "sizeBytes": 828,
+        "sha256": "EF0BA8DA05924CF4E2F9ACF782076892ED477C01A6D4CC9F5D107652CF84DA8C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtheora/libtheora-1.2.0.tar.gz.notices/libtheora-1.2.0/COPYING",
+        "sizeBytes": 1470,
+        "sha256": "8417FAD7DA775735564E209484A2E011E0FA201E94F01FDBEE6E4977E478E6FC"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtheora/libtheora-1.2.0.tar.gz.notices/libtheora-1.2.0/LICENSE",
+        "sizeBytes": 960,
+        "sha256": "2C902950C73A63CD285DC0C36573DE9C5FEFE66D49312949C51D941F33E92932"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtiff/package-notices/libtiff/LICENSE.md",
+        "sizeBytes": 2416,
+        "sha256": "0E27C2382D7B8147972BBB746E04059A1152C8D0FDA9D03EF1399D1A433C4ADE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtiff/tiff-4.7.2.tar.gz.notices/tiff-4.7.2/doc/html-prebuilt/_sources/project/license.rst.txt",
+        "sizeBytes": 1181,
+        "sha256": "02E86AF3B805E0F2075EBB5AC512831F6AB2A97DDEB186DE076C418956418BA1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtiff/tiff-4.7.2.tar.gz.notices/tiff-4.7.2/doc/html-prebuilt/project/license.html",
+        "sizeBytes": 5663,
+        "sha256": "6C9436F8E9F58A79E044949E360291B9C910715FAD31CDAED66BC61B0DCF33E6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtiff/tiff-4.7.2.tar.gz.notices/tiff-4.7.2/doc/project/license.rst",
+        "sizeBytes": 1181,
+        "sha256": "02E86AF3B805E0F2075EBB5AC512831F6AB2A97DDEB186DE076C418956418BA1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libtiff/tiff-4.7.2.tar.gz.notices/tiff-4.7.2/LICENSE.md",
+        "sizeBytes": 2416,
+        "sha256": "0E27C2382D7B8147972BBB746E04059A1152C8D0FDA9D03EF1399D1A433C4ADE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunibreak/libunibreak-7.0.tar.gz.notices/libunibreak-libunibreak_7_0/AUTHORS",
+        "sizeBytes": 697,
+        "sha256": "34E46E31651A6FE15D1A802D7AAA0F349A0529B84D7CF03EB00C96C9F07F789A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunibreak/libunibreak-7.0.tar.gz.notices/libunibreak-libunibreak_7_0/LICENCE",
+        "sizeBytes": 1045,
+        "sha256": "0C57E2EC42ECE17791A75D2F9B2F8E0663181BE008667A507F765B3EF22522DB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunibreak/package-notices/libunibreak/LICENCE",
+        "sizeBytes": 1045,
+        "sha256": "0C57E2EC42ECE17791A75D2F9B2F8E0663181BE008667A507F765B3EF22522DB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunistring/libunistring-1.4.2.tar.gz.notices/libunistring-1.4.2/AUTHORS",
+        "sizeBytes": 444,
+        "sha256": "9877EE5D24B5FA059FCC3FF2F4AF36918F7C5676DE000B9CB5EC11EFA6AAC149"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunistring/libunistring-1.4.2.tar.gz.notices/libunistring-1.4.2/COPYING",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunistring/libunistring-1.4.2.tar.gz.notices/libunistring-1.4.2/COPYING.LIB",
+        "sizeBytes": 7639,
+        "sha256": "A853C2FFEC17057872340EEE242AE4D96CBF2B520AE27D903E1B2FEF1A5F9D1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunistring/package-notices/libunistring/LICENSE",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libunistring/package-notices/libunistring/LICENSE.LIB",
+        "sizeBytes": 7639,
+        "sha256": "A853C2FFEC17057872340EEE242AE4D96CBF2B520AE27D903E1B2FEF1A5F9D1C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libva/libva-2.24.1.tar.gz.notices/libva-2.24.1/COPYING",
+        "sizeBytes": 1130,
+        "sha256": "C86A782EE845B52472DAE9B9D79FB915D333628AC0EFE49CDCE63644814931DE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libva/package-notices/libva/COPYING",
+        "sizeBytes": 1130,
+        "sha256": "C86A782EE845B52472DAE9B9D79FB915D333628AC0EFE49CDCE63644814931DE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvorbis/libvorbis-1.3.7.tar.gz.notices/libvorbis-1.3.7/AUTHORS",
+        "sizeBytes": 65,
+        "sha256": "F5CAB9F16035F770F50299F85CF2938C06DC3A9A30425961067788102EC896D3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvorbis/libvorbis-1.3.7.tar.gz.notices/libvorbis-1.3.7/COPYING",
+        "sizeBytes": 1470,
+        "sha256": "EC1815DB59FCD302846DF949D7424876CB2E2DC5ED1606C5FB0B36787B1CF43A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api1x_core/legacy-decode/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api1x_core/legacy-encode/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api1x_core/legacy-vpp/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-decode/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-decvpp/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-encode-jpeg/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-encode/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-sharing-dx11/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-sharing-ocl/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-sharing-vaapi/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-transcode/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/api2x/hello-vpp/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/interop/vpl-infer/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/examples/tutorials/01_transition/License.txt",
+        "sizeBytes": 1052,
+        "sha256": "2E35006C345787F7205BDAA86920C8FAC86ABD19B95D7B4C1BA5531853EA3938"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/libvpl/test/ext/googletest/LICENSE",
+        "sizeBytes": 1475,
+        "sha256": "9702DE7E4117A8E2B20DAFAB11FFDA58C198AEDE066406496BEF670D40A22138"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/libvpl-2.17.0.tar.gz.notices/libvpl-2.17.0/LICENSE",
+        "sizeBytes": 1074,
+        "sha256": "BF1CFAC2E2792B6E1E995CE103D70796AECAF2EC7E4C5FE5474F7ACEC7B4A677"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpl/package-notices/libvpl/LICENSE",
+        "sizeBytes": 1074,
+        "sha256": "BF1CFAC2E2792B6E1E995CE103D70796AECAF2EC7E4C5FE5474F7ACEC7B4A677"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/AUTHORS",
+        "sizeBytes": 9579,
+        "sha256": "8A98B560E5314713550E6D3BA2D8ACF3EF54DFC870FC448BEF08A7C57648A0BD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/LICENSE",
+        "sizeBytes": 1537,
+        "sha256": "8267348D5AF1262C11D1A08DE2F5AFC77457755F1AC658627DD9ACF71011D615"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/third_party/googletest/src/LICENSE",
+        "sizeBytes": 1475,
+        "sha256": "9702DE7E4117A8E2B20DAFAB11FFDA58C198AEDE066406496BEF670D40A22138"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/third_party/libwebm/AUTHORS.TXT",
+        "sizeBytes": 137,
+        "sha256": "3EDB5F5496BFFF3D6D4A62FA75FE996B814920D0D6E348C2E65C589E7AC5D177"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/third_party/libwebm/LICENSE.TXT",
+        "sizeBytes": 1496,
+        "sha256": "5AEC868F669E384A22372A4E8A1A6CD7D44C64CD451F960CA69CC170D1E13ACF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/third_party/libyuv/LICENSE",
+        "sizeBytes": 1506,
+        "sha256": "2B2CC1180C7E6988328AD2033B04B80117419DB9C4C584918BBB3CFEC7E9364F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/third_party/nalloc/LICENSE",
+        "sizeBytes": 1069,
+        "sha256": "D7DD0396EC46975E1BF9093680068EF301BC0ED204603E623A6F7073AB922AB1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libvpx/libvpx-1.17.0.tar.gz.notices/libvpx-1.17.0/third_party/x86inc/LICENSE",
+        "sizeBytes": 936,
+        "sha256": "719D8FA235F2068E0AE6D6A7DCEB0A7720D7840F0F0EBED29957989E6DED3CD8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libwebp/libwebp-1.6.0.tar.gz.notices/libwebp-1.6.0/AUTHORS",
+        "sizeBytes": 3279,
+        "sha256": "F251BE89FD442BD9D701360730AEA163CC8E2076FF03528F59267DC2C4F8B60A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libwebp/libwebp-1.6.0.tar.gz.notices/libwebp-1.6.0/COPYING",
+        "sizeBytes": 1496,
+        "sha256": "5AEC868F669E384A22372A4E8A1A6CD7D44C64CD451F960CA69CC170D1E13ACF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libwebp/package-notices/libwebp/COPYING",
+        "sizeBytes": 1496,
+        "sha256": "5AEC868F669E384A22372A4E8A1A6CD7D44C64CD451F960CA69CC170D1E13ACF"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libwinpthread/package-notices/libwinpthread/COPYING",
+        "sizeBytes": 2883,
+        "sha256": "63263614CDD29F2F93CBA85E992F041B31F9FC7B4033692F31269489A8A1B177"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libx264/AUTHORS",
+        "sizeBytes": 2098,
+        "sha256": "1BA5EC9985331FD868BEEF6A304F54D1C18B0F1F2956812039393BE2A1AE29E8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libx264/COPYING",
+        "sizeBytes": 18332,
+        "sha256": "DA0ECA0FB517AC939D167924C9D4B3F8750A6B7191932EF2CB145ACFA624AC7E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libx264/x264.h",
+        "sizeBytes": 50083,
+        "sha256": "669E188859E6503912AF694416F2DECFEE640EE0D31DC1C5565EA02CF62649C6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libxml2/libxml2-2.15.4.tar.xz.notices/libxml2-2.15.4/Copyright",
+        "sizeBytes": 1314,
+        "sha256": "5D4873884A890122A4B9B20AD56AC6F7DA1D796A5BFCF04A427970AC96217626"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libxml2/libxml2-2.15.4.tar.xz.notices/libxml2-2.15.4/result/html-tokenizer/NOTICE",
+        "sizeBytes": 1270,
+        "sha256": "D6A2CB265A0A249A234B89EEFFA7F316EBE5BFF546672A0A2B1A861DD2238460"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libxml2/libxml2-2.15.4.tar.xz.notices/libxml2-2.15.4/test/html-tokenizer/NOTICE",
+        "sizeBytes": 1270,
+        "sha256": "D6A2CB265A0A249A234B89EEFFA7F316EBE5BFF546672A0A2B1A861DD2238460"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-libxml2/package-notices/libxml2/COPYING",
+        "sizeBytes": 1314,
+        "sha256": "5D4873884A890122A4B9B20AD56AC6F7DA1D796A5BFCF04A427970AC96217626"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lua51/lua-5.1.5.tar.gz.notices/lua-5.1.5/COPYRIGHT",
+        "sizeBytes": 1528,
+        "sha256": "EE5E3E82AF1E1B543C4F216E399D7C8CFEE797711913F349E385101C4AE60A79"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lua51/package-notices/lua51/COPYRIGHT",
+        "sizeBytes": 1528,
+        "sha256": "EE5E3E82AF1E1B543C4F216E399D7C8CFEE797711913F349E385101C4AE60A79"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/contrib/debian/copyright",
+        "sizeBytes": 321,
+        "sha256": "4F6EF9D0E844BF432D6A0ABB2623F5A61175AE40F7F0E3665490311D89E3AF87"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/contrib/djgpp/LICENSE",
+        "sizeBytes": 1292,
+        "sha256": "D011D1E02CB32B71C1CE2922AB41A2E2AD30F4ECF8DE22C078D53618205ABC05"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/examples/COPYING",
+        "sizeBytes": 14901,
+        "sha256": "609B910EF05C9C855ECC1DA155A36ED0F57514EAC452CF93446530B5EA4B3BC3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/lib/LICENSE",
+        "sizeBytes": 1311,
+        "sha256": "8B58C446121A109CCF32EDC094BBA3010A3D85E4EE3702950DB55E4D3E87736C"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/LICENSE",
+        "sizeBytes": 646,
+        "sha256": "4BC9C403F6B679CC076DEE210E0E21C27B4E8F6D3FB43D85364C76657BFAAAC5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/programs/COPYING",
+        "sizeBytes": 14901,
+        "sha256": "609B910EF05C9C855ECC1DA155A36ED0F57514EAC452CF93446530B5EA4B3BC3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-lz4/lz4-1.10.0.tar.gz.notices/lz4-1.10.0/tests/COPYING",
+        "sizeBytes": 14901,
+        "sha256": "609B910EF05C9C855ECC1DA155A36ED0F57514EAC452CF93446530B5EA4B3BC3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mpv/mpv-0.41.0.tar.gz.notices/mpv-0.41.0/Copyright",
+        "sizeBytes": 4096,
+        "sha256": "BFE9EE4CCEABCB8ECBFADF208D04156F73D801E6A57369A5606BB8341E204A23"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mpv/mpv-0.41.0.tar.gz.notices/mpv-0.41.0/LICENSE.GPL",
+        "sizeBytes": 17984,
+        "sha256": "EDAEF632CBB643E4E7A221717A6C441A4C1A7C918E6E4D56DEBC3D8739B233F6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mpv/mpv-0.41.0.tar.gz.notices/mpv-0.41.0/LICENSE.LGPL",
+        "sizeBytes": 26410,
+        "sha256": "72B672113D642CBB8EF5DCC76938DB801983C56E50B1400AB930F1A64D6DC8D9"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mujs/mujs-1.3.9.tar.gz.notices/mujs-1.3.9/AUTHORS",
+        "sizeBytes": 42,
+        "sha256": "D24F0CF75BDFE4E003592FB3EABCA1EE8DB9698B162E241C081462461EB9369F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mujs/mujs-1.3.9.tar.gz.notices/mujs-1.3.9/COPYING",
+        "sizeBytes": 759,
+        "sha256": "0CA9B4FBFBCAB8AC7D32475890D866EFC02F4CFFB6B6DA5C0E9A0615CC3D82FE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mujs/mujs-1.3.9.tar.gz.notices/mujs-1.3.9/docs/license.html",
+        "sizeBytes": 1400,
+        "sha256": "533D750392FDFA8A856732A479F9B267310B4FD31732B21695FA3663444DD344"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-mujs/package-notices/mujs/COPYING",
+        "sizeBytes": 759,
+        "sha256": "0CA9B4FBFBCAB8AC7D32475890D866EFC02F4CFFB6B6DA5C0E9A0615CC3D82FE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-nettle/nettle-4.0.tar.gz.notices/nettle-4.0/AUTHORS",
+        "sizeBytes": 4267,
+        "sha256": "6FD91E60CAA0C33DD22888B710FCFA36532BBBEF00D85C78DE385DCD97F7B9EE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-nettle/nettle-4.0.tar.gz.notices/nettle-4.0/COPYING.LESSERv3",
+        "sizeBytes": 7652,
+        "sha256": "E3A994D82E644B03A792A930F574002658412F62407F5FEE083F2555C5F23118"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-nettle/nettle-4.0.tar.gz.notices/nettle-4.0/COPYINGv2",
+        "sizeBytes": 18092,
+        "sha256": "8177F97513213526DF2CF6184D8FF986C675AFB514D4E68A404010521B880643"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-nettle/nettle-4.0.tar.gz.notices/nettle-4.0/COPYINGv3",
+        "sizeBytes": 35150,
+        "sha256": "E6037104443F9A7829B2AA7C5370D0789A7BDA3CA65A0B904CDC0C2E285D9195"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openal/openal-1.25.2.tar.gz.notices/openal-soft-1.25.2/COPYING",
+        "sizeBytes": 23330,
+        "sha256": "D808CE217E5B611854DA622B57EC29FE545584C48BC5352FAE72A4B6E5074A15"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openal/openal-1.25.2.tar.gz.notices/openal-soft-1.25.2/fmt-11.2.0/LICENSE",
+        "sizeBytes": 1431,
+        "sha256": "07580F2A3B35709CE703D523F447B242F6DFEC7582A8C0DF102C7FA2849375F8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openal/openal-1.25.2.tar.gz.notices/openal-soft-1.25.2/gsl/LICENSE",
+        "sizeBytes": 1157,
+        "sha256": "4C21DC82A1C7186EA754FD59D504C00947953A3401FE8E24EAA44109EF8E2555"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openal/openal-1.25.2.tar.gz.notices/openal-soft-1.25.2/LICENSE-pffft",
+        "sizeBytes": 1669,
+        "sha256": "64056328B3E7BC104E24EF96ACCC1A7ABEAD156F0C02D1B87C97E3F3A28030DE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-opencore-amr/opencore-amr-0.1.6.tar.gz.notices/opencore-amr-0.1.6/LICENSE",
+        "sizeBytes": 10271,
+        "sha256": "8B3F1762349248D444AB9ACBAFE73941254E36E1064954DA56BB9DDBD5873DDB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-opencore-amr/opencore-amr-0.1.6.tar.gz.notices/opencore-amr-0.1.6/opencore/NOTICE",
+        "sizeBytes": 12498,
+        "sha256": "D106802B5E406073C1D10FBE9F638234C6973EBCE37DF71773179642085EB489"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/openjpeg-2.5.4.tar.gz.notices/openjpeg-2.5.4/AUTHORS.md",
+        "sizeBytes": 712,
+        "sha256": "CF22E984F9FBB9BE7550E9A94120595BA8C4A7DE0D63F47D3725F4B2E28A4387"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/openjpeg-2.5.4.tar.gz.notices/openjpeg-2.5.4/LICENSE",
+        "sizeBytes": 2112,
+        "sha256": "A6AF136F3E15038A666B61F376612A07D9A4E48CB7C01ADBF3E33B3F14AB49B6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/openjpeg-2.5.4.tar.gz.notices/openjpeg-2.5.4/src/bin/wx/OPJViewer/source/license.txt",
+        "sizeBytes": 1683,
+        "sha256": "8081C33F6953950DCF424AA844714658B73ADA0FCAEA16E4487F5FA07EF0960D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/openjpeg-2.5.4.tar.gz.notices/openjpeg-2.5.4/thirdparty/astyle/LICENSE.md",
+        "sizeBytes": 1094,
+        "sha256": "2E8480E753B7A1D100C80920F4250B1BC9F93A18C6A5953C42B11445218CD0FB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/openjpeg-2.5.4.tar.gz.notices/openjpeg-2.5.4/thirdparty/liblcms2/COPYING",
+        "sizeBytes": 1078,
+        "sha256": "C725DAAC91A9259CE5E195683C0EEB797D345035C36AC5BA114C9FA80E11639A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/openjpeg-2.5.4.tar.gz.notices/openjpeg-2.5.4/thirdparty/libpng/LICENSE",
+        "sizeBytes": 5345,
+        "sha256": "7317E078E2D3B5D7BA5A6159E650945153262B44B76F6700F8E9EDB261C5143E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openjpeg2/package-notices/openjpeg/LICENSE",
+        "sizeBytes": 2112,
+        "sha256": "A6AF136F3E15038A666B61F376612A07D9A4E48CB7C01ADBF3E33B3F14AB49B6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openssl/openssl-3.6.4.tar.gz.notices/openssl-3.6.4/AUTHORS.md",
+        "sizeBytes": 1022,
+        "sha256": "B9F638DFC06B59C2D3B808186C3B30F713805A5DB390F5B77B1703AC58ACB83E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openssl/openssl-3.6.4.tar.gz.notices/openssl-3.6.4/external/perl/Text-Template-1.56/LICENSE",
+        "sizeBytes": 18412,
+        "sha256": "9837F05336EF3CBACB6A96E1672A0426D81AD01191F214B8D48E22CA62338181"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openssl/openssl-3.6.4.tar.gz.notices/openssl-3.6.4/LICENSE.txt",
+        "sizeBytes": 10175,
+        "sha256": "7D5450CB2D142651B8AFA315B5F238EFC805DAD827D91BA367D8516BC9D49E7A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openssl/openssl-3.6.4.tar.gz.notices/openssl-3.6.4/util/perl/OpenSSL/copyright.pm",
+        "sizeBytes": 1145,
+        "sha256": "04213B69DBEBC8BA0DD8A6216AF1D9422F9B63619C1CF2F1D8AA107B83BBB608"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-openssl/package-notices/openssl/LICENSE",
+        "sizeBytes": 10175,
+        "sha256": "7D5450CB2D142651B8AFA315B5F238EFC805DAD827D91BA367D8516BC9D49E7A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-opus/opus-1.6.1.tar.gz.notices/opus-1.6.1/AUTHORS",
+        "sizeBytes": 239,
+        "sha256": "F9FD849E652219CE98E008303370B352D37663D0FFB27B8DC514AD93C9C7438B"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-opus/opus-1.6.1.tar.gz.notices/opus-1.6.1/COPYING",
+        "sizeBytes": 1945,
+        "sha256": "01E1167D54A096D123CF6DFBBEB19587278845C6481D2D66D545669846079551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-opus/package-notices/opus/COPYING",
+        "sizeBytes": 1945,
+        "sha256": "01E1167D54A096D123CF6DFBBEB19587278845C6481D2D66D545669846079551"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-p11-kit/p11-kit-0.26.5.tar.xz.notices/p11-kit-0.26.5/AUTHORS",
+        "sizeBytes": 36,
+        "sha256": "CDE5CCBF5083E28D1B38333B5817BE06C158FB3218F21EE5594B6125A9372591"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-p11-kit/p11-kit-0.26.5.tar.xz.notices/p11-kit-0.26.5/COPYING",
+        "sizeBytes": 1447,
+        "sha256": "2E1BA993904DF807A10C3EDA1E5C272338EDC35674B679773A8B3AD460731054"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pango/package-notices/pango/COPYING",
+        "sizeBytes": 25292,
+        "sha256": "D245807F90032872D1438D741ED21E2490E1175DC8AA3AFA5DDB6C8E529B58E5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pango/pango-1.58.2.tar.xz.notices/pango-1.58.2/COPYING",
+        "sizeBytes": 25292,
+        "sha256": "D245807F90032872D1438D741ED21E2490E1175DC8AA3AFA5DDB6C8E529B58E5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/package-notices/pcre2/COPYING",
+        "sizeBytes": 97,
+        "sha256": "99272C55F3DCFA07A8A7E15A5C1A33096E4727DE74241D65FA049FCCFDD59507"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/package-notices/pcre2/LICENCE.md",
+        "sizeBytes": 4011,
+        "sha256": "197D8A73FFEE0D6B09ADBA2F9C677B5F5AEDE24EDF89258A68E48248D010D811"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/pcre2-10.48.tar.bz2.notices/pcre2-10.48/AUTHORS.md",
+        "sizeBytes": 4232,
+        "sha256": "412ACE3355A4D6A4D835C350A7DF172903811EAFDA7B13500DACF58429EE757E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/pcre2-10.48.tar.bz2.notices/pcre2-10.48/cmake/COPYING-CMAKE-SCRIPTS",
+        "sizeBytes": 1326,
+        "sha256": "C666EC2313DBA24523CCAD88F4C04EA4B24FAD6545263A35B1D4AB2B08EFE50A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/pcre2-10.48.tar.bz2.notices/pcre2-10.48/COPYING",
+        "sizeBytes": 97,
+        "sha256": "99272C55F3DCFA07A8A7E15A5C1A33096E4727DE74241D65FA049FCCFDD59507"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/pcre2-10.48.tar.bz2.notices/pcre2-10.48/deps/sljit/LICENSE",
+        "sizeBytes": 1444,
+        "sha256": "5F216505C0F6EA3273CAEC89E766EEF93CDEB7BBB0C429F9360116D7C938FEEB"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pcre2/pcre2-10.48.tar.bz2.notices/pcre2-10.48/LICENCE.md",
+        "sizeBytes": 4011,
+        "sha256": "197D8A73FFEE0D6B09ADBA2F9C677B5F5AEDE24EDF89258A68E48248D010D811"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pixman/package-notices/pixman/COPYING",
+        "sizeBytes": 2087,
+        "sha256": "FAC9270F0987B96FF4533FCA3548C633E02083CBBA4A0172A3B149B2E4019793"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pixman/pixman-0.46.4.tar.xz.notices/pixman-0.46.4/AUTHORS",
+        "sizeBytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-pixman/pixman-0.46.4.tar.xz.notices/pixman-0.46.4/COPYING",
+        "sizeBytes": 2087,
+        "sha256": "FAC9270F0987B96FF4533FCA3548C633E02083CBBA4A0172A3B149B2E4019793"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/package-notices/python3.14/LICENSE",
+        "sizeBytes": 13804,
+        "sha256": "B0E25A78CFFB43F4D92DE8B61CCFA1F1F98ECBC22330B54B5251E7B6BA010231"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/Python-3.14.7.tar.xz.notices/Python-3.14.7/Doc/copyright.rst",
+        "sizeBytes": 446,
+        "sha256": "F2C1D094466270ED41FC4DD2904D91B34D58CBB5033403B2DE5CC153ABA8E608"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/Python-3.14.7.tar.xz.notices/Python-3.14.7/Doc/license.rst",
+        "sizeBytes": 60039,
+        "sha256": "CD6F471C0BFDB099EFEFC25DDFF9B3DF8BF62E10428987F1F05E6F2F9E35D563"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/Python-3.14.7.tar.xz.notices/Python-3.14.7/LICENSE",
+        "sizeBytes": 13804,
+        "sha256": "B0E25A78CFFB43F4D92DE8B61CCFA1F1F98ECBC22330B54B5251E7B6BA010231"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/Python-3.14.7.tar.xz.notices/Python-3.14.7/Mac/BuildScript/resources/License.rtf",
+        "sizeBytes": 15063,
+        "sha256": "F948498992E522EDC050B1C0147E7125C33F16FCE2B9FC6E02539B2FB10FDD71"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/Python-3.14.7.tar.xz.notices/Python-3.14.7/Modules/expat/COPYING",
+        "sizeBytes": 1144,
+        "sha256": "31B15DE82AA19A845156169A17A5488BF597E561B2C318D159ED583139B25E87"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-python/Python-3.14.7.tar.xz.notices/Python-3.14.7/Tools/msi/bundle/bootstrap/LICENSE.txt",
+        "sizeBytes": 3273,
+        "sha256": "CB95DAF98EDDA8E08A242E1060691B6941F0911692BF468A3F9C5E4B58C09B8F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rav1e/package-notices/rav1e/LICENSE",
+        "sizeBytes": 1332,
+        "sha256": "2DD0A109751E939DEC3F80DDCFBC1BA91553F18C574399E85C159632182A2C0A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rav1e/package-notices/rav1e/PATENTS",
+        "sizeBytes": 5702,
+        "sha256": "7B14A70C194B19DBD0625E7EAC839A63200F67484521CE5E8D8244B127E8907A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rav1e/rav1e-0.8.1.tar.gz.notices/rav1e-0.8.1/ivf/LICENSE",
+        "sizeBytes": 1332,
+        "sha256": "5D3C397A3AEEECBC417962E4DF8E8432AF8219FDA8A56EBE601A638A1E76C522"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rav1e/rav1e-0.8.1.tar.gz.notices/rav1e-0.8.1/LICENSE",
+        "sizeBytes": 1332,
+        "sha256": "2DD0A109751E939DEC3F80DDCFBC1BA91553F18C574399E85C159632182A2C0A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rav1e/rav1e-0.8.1.tar.gz.notices/rav1e-0.8.1/license_template.txt",
+        "sizeBytes": 526,
+        "sha256": "5097DF781D1759AABEA7EEAA308A591E9B6E0E4389EFF515FDAB458C4B4389AC"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rtmpdump/COPYING",
+        "sizeBytes": 18326,
+        "sha256": "9F2E250993C6206FAC643824E05E5A0D7D3E0895D9E09A5CE4B12BC2610AFC11"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rtmpdump/librtmp/COPYING",
+        "sizeBytes": 27032,
+        "sha256": "521772C4E9EEBF87B677360766B9AFF51664EA740F8951C96764276A5F5474C6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rubberband/package-notices/rubberband/COPYING",
+        "sizeBytes": 30260,
+        "sha256": "CEDD4C1885D75991BF1077CC6E33359103CF04FBC996F20D30AB043D5FC5FCC5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rubberband/rubberband-3.3.0.tar.bz2.notices/rubberband-3.3.0/COPYING",
+        "sizeBytes": 30260,
+        "sha256": "CEDD4C1885D75991BF1077CC6E33359103CF04FBC996F20D30AB043D5FC5FCC5"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rubberband/rubberband-3.3.0.tar.bz2.notices/rubberband-3.3.0/src/ext/kissfft/COPYING",
+        "sizeBytes": 246,
+        "sha256": "A2840585F8411BE8E6826A31EF15AE65C950BD74A2437A73B013398A934AD0C6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-rubberband/rubberband-3.3.0.tar.bz2.notices/rubberband-3.3.0/src/ext/speex/COPYING",
+        "sizeBytes": 1774,
+        "sha256": "B3DA65C2CFF5522B5A22438AFB1FA99873E6567A2AEBB17B198C58B15B09D5F3"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-shaderc/package-notices/shaderc/LICENSE",
+        "sizeBytes": 11357,
+        "sha256": "C71D239DF91726FC519C6EB72D318EC65820627232B2F796219E87DCF35D0AB4"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-shaderc/shaderc-2026.3.tar.gz.notices/shaderc-2026.3/AUTHORS",
+        "sizeBytes": 310,
+        "sha256": "9FB4B067E4C9A1F91EA1C26465B3D1C6B515CB24860E0DBB719879925A5A1248"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-shaderc/shaderc-2026.3.tar.gz.notices/shaderc-2026.3/LICENSE",
+        "sizeBytes": 11357,
+        "sha256": "C71D239DF91726FC519C6EB72D318EC65820627232B2F796219E87DCF35D0AB4"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-shaderc/shaderc-2026.3.tar.gz.notices/shaderc-2026.3/license-checker.cfg",
+        "sizeBytes": 872,
+        "sha256": "FF39F110E4B17C6A2E24EACC14A32674C2C1F2385828BDC23A0399D3475FFFC8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-shaderc/shaderc-2026.3.tar.gz.notices/shaderc-2026.3/third_party/LICENSE.glslang",
+        "sizeBytes": 8280,
+        "sha256": "B5A00E94F058EDC87E05978329B55730D8689ABE61205D9018443D03DE4F07DA"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-shaderc/shaderc-2026.3.tar.gz.notices/shaderc-2026.3/third_party/LICENSE.spirv-tools",
+        "sizeBytes": 11650,
+        "sha256": "47E20CE182BC68FAB1A0CFB129B03C326AAF4F2B6B7905AA9D376D31018BD29F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-speex/package-notices/speex/LICENSE",
+        "sizeBytes": 1773,
+        "sha256": "2654A4264B2BFE298DEDC508748D140111840C315CC8EB646A3A68C13FA75B01"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-speex/speex-Speex-1.2.1.tar.gz.notices/speex-Speex-1.2.1/AUTHORS",
+        "sizeBytes": 502,
+        "sha256": "6E5A9D92C5F9CCD28FE0B15AD59443FBF435BFC6AB2221F532006D3717DDF642"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-speex/speex-Speex-1.2.1.tar.gz.notices/speex-Speex-1.2.1/COPYING",
+        "sizeBytes": 1773,
+        "sha256": "2654A4264B2BFE298DEDC508748D140111840C315CC8EB646A3A68C13FA75B01"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-spirv-cross/package-notices/spirv-cross/LICENSE",
+        "sizeBytes": 11358,
+        "sha256": "CFC7749B96F63BD31C3C42B5C471BF756814053E847C10F3EB003417BC523D30"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-spirv-cross/spirv-cross-1.4.357.0.tar.gz.notices/SPIRV-Cross-vulkan-sdk-1.4.357.0/LICENSE",
+        "sizeBytes": 11358,
+        "sha256": "CFC7749B96F63BD31C3C42B5C471BF756814053E847C10F3EB003417BC523D30"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-spirv-cross/spirv-cross-1.4.357.0.tar.gz.notices/SPIRV-Cross-vulkan-sdk-1.4.357.0/LICENSES/LicenseRef-KhronosFreeUse.txt",
+        "sizeBytes": 1305,
+        "sha256": "FBEACA472F4F70E276DD1106CA5097435967A22AD6C1D8200AEF7AD9F70AAF3F"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-srt/package-notices/srt/LICENSE",
+        "sizeBytes": 16726,
+        "sha256": "FAB3DD6BDAB226F1C08630B1DD917E11FCB4EC5E1E020E2C16F83A0A13863E85"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-srt/srt-1.5.7.tar.gz.notices/srt-1.5.7/LICENSE",
+        "sizeBytes": 16726,
+        "sha256": "FAB3DD6BDAB226F1C08630B1DD917E11FCB4EC5E1E020E2C16F83A0A13863E85"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-svt-av1/package-notices/svt-av1/LICENSE",
+        "sizeBytes": 1709,
+        "sha256": "0ACC2FCB27472BDC9AAF8B71F37055BBDAC4F54671B7D922F241BD7FCD0DD3E6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-svt-av1/package-notices/svt-av1/PATENTS.md",
+        "sizeBytes": 5767,
+        "sha256": "20678AB10402659106DC4C147C97B2A6E94B5C0695415E15A8F195EBC3547922"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-svt-av1/SVT-AV1-v4.2.0.tar.gz.notices/SVT-AV1-v4.2.0/LICENSE-BSD2.md",
+        "sizeBytes": 1316,
+        "sha256": "C582FCBEB9CF972A60D298BFAF41DC5ADFF2DD14208946EDCB9BB56A281E8438"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-svt-av1/SVT-AV1-v4.2.0.tar.gz.notices/SVT-AV1-v4.2.0/LICENSE.md",
+        "sizeBytes": 1709,
+        "sha256": "0ACC2FCB27472BDC9AAF8B71F37055BBDAC4F54671B7D922F241BD7FCD0DD3E6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-svt-av1/SVT-AV1-v4.2.0.tar.gz.notices/SVT-AV1-v4.2.0/third_party/fastfeat/LICENSE",
+        "sizeBytes": 1506,
+        "sha256": "043DCFD059386F9FACD376351B2BD79325778744AA442177390CDFCCA54BABED"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-svt-av1/SVT-AV1-v4.2.0.tar.gz.notices/SVT-AV1-v4.2.0/third_party/safestringlib/LICENSE",
+        "sizeBytes": 2247,
+        "sha256": "C0F99A208799CA20C9CCF31A30533D49334EB458DCA5A3D14F9AFE3E884E5D7D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-uchardet/package-notices/uchardet/COPYING",
+        "sizeBytes": 70517,
+        "sha256": "107A29CCDD2D778AA2DF5462F85DDDFA099059ABD22E064E07EC2CC9BAFC37CD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-uchardet/uchardet-0.0.8.tar.xz.notices/uchardet-0.0.8/AUTHORS",
+        "sizeBytes": 449,
+        "sha256": "36C52690FB39C9C4D2929577577050F486B5BE36ACB5C0038339B7B83C892536"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-uchardet/uchardet-0.0.8.tar.xz.notices/uchardet-0.0.8/COPYING",
+        "sizeBytes": 70517,
+        "sha256": "107A29CCDD2D778AA2DF5462F85DDDFA099059ABD22E064E07EC2CC9BAFC37CD"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-vapoursynth/package-notices/vapoursynth/COPYING.LESSER",
+        "sizeBytes": 26526,
+        "sha256": "B634AB5640E258563C536E658CAD87080553DF6F34F62269A21D554844E58BFE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-vapoursynth/vapoursynth-65.tar.gz.notices/vapoursynth-R65/COPYING.LESSER",
+        "sizeBytes": 26526,
+        "sha256": "B634AB5640E258563C536E658CAD87080553DF6F34F62269A21D554844E58BFE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-vid.stab/package-notices/vid.stab/LICENSE",
+        "sizeBytes": 1135,
+        "sha256": "03F095C5C70EA18FFB2B89DD58E4EE57E4F613D04632993F90C890F4CC125B99"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-vulkan-loader/package-notices/vulkan-loader/LICENSE",
+        "sizeBytes": 11661,
+        "sha256": "43C0A37E6A0FA7FF3C843B3EC5A4FAC84B712558DDAC103FBD4C1649662A9ECE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-vulkan-loader/Vulkan-Loader-1.4.357.0.tar.gz.notices/Vulkan-Loader-vulkan-sdk-1.4.357.0/LICENSE.txt",
+        "sizeBytes": 11661,
+        "sha256": "43C0A37E6A0FA7FF3C843B3EC5A4FAC84B712558DDAC103FBD4C1649662A9ECE"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-whisper.cpp/package-notices/whisper.cpp/LICENSE",
+        "sizeBytes": 1078,
+        "sha256": "94F29BBED6A22C35B992C5C6EBF0E7C92F13B836B90F36F461C9CF2F0F1D010D"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-x265/x265-4.3.tar.gz.notices/x265_4.3/COPYING",
+        "sizeBytes": 18120,
+        "sha256": "D8AFB1BCC7A2CFC603683B168D6987EF0A48E59E0DA3693BF55C5D33B67E2B49"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-x265/x265-4.3.tar.gz.notices/x265_4.3/source/dynamicHDR10/json11/LICENSE.txt",
+        "sizeBytes": 1057,
+        "sha256": "950E288A2548CB33F6A90D23958806B0803F510AB17C600D661619A73AE3A6C8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-x265/x265-4.3.tar.gz.notices/x265_4.3/source/dynamicHDR10/LICENSE.txt",
+        "sizeBytes": 849,
+        "sha256": "47F15D63E82EB8A4DE6E46471D5F96CF6D052FD5355944A002C3157880248B69"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xvidcore/xvidcore-1.3.7.tar.bz2.notices/xvidcore/AUTHORS",
+        "sizeBytes": 1233,
+        "sha256": "C6FC2BBC06918472097224A9D7096CF47D8337643AFD3B9B9B281CB17711B29E"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xvidcore/xvidcore-1.3.7.tar.bz2.notices/xvidcore/dshow/authors.txt",
+        "sizeBytes": 37,
+        "sha256": "A9818B7AB3C79F3250DA933369AB71B806410CF5C683B2EF78A6517001E8E224"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xvidcore/xvidcore-1.3.7.tar.bz2.notices/xvidcore/LICENSE",
+        "sizeBytes": 17987,
+        "sha256": "2AB06D2335F9781F1A485C78A557E6C61B6C24E118CAAD4D4210C46426BBCE95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xvidcore/xvidcore-1.3.7.tar.bz2.notices/xvidcore/vfw/LICENSE",
+        "sizeBytes": 18327,
+        "sha256": "40A8C1EA469C6813413443DF59115ECC781421CC7D184839CCC7C9F54057A283"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/package-notices/xz/COPYING",
+        "sizeBytes": 3119,
+        "sha256": "616A3AD264CE29B8F1CB97E53037B139D406899CA8D1F799651E17BFA09830B8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/package-notices/xz/COPYING.0BSD",
+        "sizeBytes": 607,
+        "sha256": "0B01625D853911CD0E2E088DCFB743261034A091BB379246CB25A14CC4C74BF1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/package-notices/xz/COPYING.GPLv2",
+        "sizeBytes": 17984,
+        "sha256": "EDAEF632CBB643E4E7A221717A6C441A4C1A7C918E6E4D56DEBC3D8739B233F6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/package-notices/xz/COPYING.GPLv3",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/package-notices/xz/COPYING.LGPLv2.1",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/AUTHORS",
+        "sizeBytes": 2146,
+        "sha256": "01E6DF90D71D591F4307DB3F397A5A4FAC93B18533F5A3862156F1A0A7DC8610"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/build-aux/license-check.sh",
+        "sizeBytes": 5127,
+        "sha256": "2B3FA1D23CB2AB084F3D919908159473CC0E1EED059D106E2A2857C0EC8AF98A"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/COPYING",
+        "sizeBytes": 3119,
+        "sha256": "616A3AD264CE29B8F1CB97E53037B139D406899CA8D1F799651E17BFA09830B8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/COPYING.0BSD",
+        "sizeBytes": 607,
+        "sha256": "0B01625D853911CD0E2E088DCFB743261034A091BB379246CB25A14CC4C74BF1"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/COPYING.GPLv2",
+        "sizeBytes": 17984,
+        "sha256": "EDAEF632CBB643E4E7A221717A6C441A4C1A7C918E6E4D56DEBC3D8739B233F6"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/COPYING.GPLv3",
+        "sizeBytes": 35149,
+        "sha256": "3972DC9744F6499F0F9B2DBF76696F2AE7AD8AF9B23DDE66D6AF86C9DFB36986"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-xz/xz-5.8.3.tar.xz.notices/xz-5.8.3/COPYING.LGPLv2.1",
+        "sizeBytes": 26419,
+        "sha256": "20E50FE7AAE3E56378EBF0417D9DE904F55A0E61E4DF315333E632A4D3555D95"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zimg/zimg-3.0.6.tar.gz.notices/zimg-release-3.0.6/COPYING",
+        "sizeBytes": 484,
+        "sha256": "7637386B5F81E8A719CA336233149005E5FA28B5E6054EA7B67DE49355B0AD40"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zimg/zimg-3.0.6.tar.gz.notices/zimg-release-3.0.6/test/extra/musl-libm/COPYRIGHT",
+        "sizeBytes": 6166,
+        "sha256": "15D9AFBF84041872B4D840ED7D165D3EEE786FF3F97E703B10467C259FF4E7D9"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zlib/package-notices/zlib/LICENSE",
+        "sizeBytes": 1002,
+        "sha256": "E32FF4E00D9D94930537635291DA39E7E612703334BF6FDE8C7F1686FE8A45A2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zlib/zlib-1.3.2.tar.xz.notices/zlib-1.3.2/contrib/dotzlib/LICENSE_1_0.txt",
+        "sizeBytes": 1359,
+        "sha256": "36266A8FD073568394CB81CDB2B124F7FDAE2C64C1A7ED09DB34B4D22EFA2951"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zlib/zlib-1.3.2.tar.xz.notices/zlib-1.3.2/contrib/minizip/LICENSE.Info-Zip",
+        "sizeBytes": 3509,
+        "sha256": "FC686023047CE5CE3A18A9B8A777156F0E475929D3DE06BAC279F3C025D2B2CA"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zlib/zlib-1.3.2.tar.xz.notices/zlib-1.3.2/LICENSE",
+        "sizeBytes": 1002,
+        "sha256": "E32FF4E00D9D94930537635291DA39E7E612703334BF6FDE8C7F1686FE8A45A2"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zstd/package-notices/zstd/LICENSE",
+        "sizeBytes": 1549,
+        "sha256": "7055266497633C9025B777C78EB7235AF13922117480ED5C674677ADC381C9D8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zstd/zstd-1.5.7.tar.gz.notices/zstd-1.5.7/build/LICENSE",
+        "sizeBytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zstd/zstd-1.5.7.tar.gz.notices/zstd-1.5.7/COPYING",
+        "sizeBytes": 18091,
+        "sha256": "F9C375A1BE4A41F7B70301DD83C91CB89E41567478859B77EEF375A52D782505"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zstd/zstd-1.5.7.tar.gz.notices/zstd-1.5.7/LICENSE",
+        "sizeBytes": 1549,
+        "sha256": "7055266497633C9025B777C78EB7235AF13922117480ED5C674677ADC381C9D8"
+      },
+      {
+        "path": "licenses/mingw-w64-x86_64-zvbi/package-notices/zvbi/COPYING.md",
+        "sizeBytes": 78695,
+        "sha256": "6D679539253897582D38FCD1EABFA670C01C0ECE73D8CD3DC97869FCF723F106"
+      },
+      {
+        "path": "licenses/packages.lock.json",
+        "sizeBytes": 103262,
+        "sha256": "CF475DB45EF0E90280843A26F46D0560262CDDE08EC76D39AD59239D9E1F5D31"
+      },
+      {
+        "path": "licenses/runtime-files.json",
+        "sizeBytes": 46239,
+        "sha256": "C1EE9644447D8AA64CF5A9E13B238D5EAD4FA6D1F10FBD0B7BCD6E18CFC92CB4"
+      },
+      {
+        "path": "licenses/RUNTIME-NOTICE.md",
+        "sizeBytes": 2503,
+        "sha256": "8645135D4322C5D2EC512A7610A88FBA5C75ECED3E1469E5FA6AB598024750B0"
+      },
+      {
+        "path": "licenses/sources.lock.json",
+        "sizeBytes": 135652,
+        "sha256": "7A4B23EEA51B391D3E263B867529362B47CEAE712B624E092C4A64978F52FD61"
+      }
+    ]
   },
-  "provenanceStatus": "internal-only/unverified"
+  "provenanceStatus": "verified",
+  "dependencies": [
+    {
+      "fileName": "avcodec-63.dll",
+      "sizeBytes": 20632509,
+      "sha256": "464afcb48f6804cc5c6feaef9ee12112da1e92598c0c600ca399baa50e6b3386"
+    },
+    {
+      "fileName": "avdevice-63.dll",
+      "sizeBytes": 174540,
+      "sha256": "c7c1826239480702956df9781e86ebe0b892c64f2524a143bcf588681546e6af"
+    },
+    {
+      "fileName": "avfilter-12.dll",
+      "sizeBytes": 6816518,
+      "sha256": "803d2dd2f7ab01b4a3a7ccf8fb722bffc6053d73dbe3be9f866204022056dc50"
+    },
+    {
+      "fileName": "avformat-63.dll",
+      "sizeBytes": 2993106,
+      "sha256": "4eec4cf1d795cc1b7ff37ddeb87fe3aba5400974a2100412db0fc0d2d6822ab0"
+    },
+    {
+      "fileName": "avutil-61.dll",
+      "sizeBytes": 1303631,
+      "sha256": "0fa873c6e1e9bb8c81d1580a61073f9327f29bdd92495ac3386b5d4d14c6001d"
+    },
+    {
+      "fileName": "ggml-0.dll",
+      "sizeBytes": 54685,
+      "sha256": "690d93646eb459aa1c56038f2fb3f1a8c7064bb97946690ff46573871fb8b541"
+    },
+    {
+      "fileName": "ggml-base-0.dll",
+      "sizeBytes": 908384,
+      "sha256": "50157c872ca5ab187b90994a4138db8499979f67f580b67b4d27a53625aabb8e"
+    },
+    {
+      "fileName": "libaom.dll",
+      "sizeBytes": 9688502,
+      "sha256": "0d43a27f3f2e1ebb4d25236122a6e7b14a190cc986a28f8fe0443d1f045edae8"
+    },
+    {
+      "fileName": "libarchive-13.dll",
+      "sizeBytes": 978283,
+      "sha256": "e4fcffb9e10cac802d01831b5a978b6dc662d576fa03351efdfc72ba8c99d6e4"
+    },
+    {
+      "fileName": "libass-9.dll",
+      "sizeBytes": 351277,
+      "sha256": "d7e21a7fa952033ff5bbacd2564b343671bf0ad4ae9338613935f2709861b9d2"
+    },
+    {
+      "fileName": "libb2-1.dll",
+      "sizeBytes": 34653,
+      "sha256": "77bab532b5421d6cdddb96c3ae9a4bde144eb481ccaf243336c9f8c690a50987"
+    },
+    {
+      "fileName": "libbluray-4.dll",
+      "sizeBytes": 374967,
+      "sha256": "b7d67f3dddd4cf78ef6579fd660384ca80f9f737c6fb5ac6c9e3cdf3464cfc07"
+    },
+    {
+      "fileName": "libbrotlicommon.dll",
+      "sizeBytes": 143429,
+      "sha256": "ca7bc06ead80259971badf2cd0bfc688db9154dad65f139f49a38b4be9976f97"
+    },
+    {
+      "fileName": "libbrotlidec.dll",
+      "sizeBytes": 62461,
+      "sha256": "a142dc6cfa77cb907028aa9426f486f3d8de37855e8db2ae2894147908121881"
+    },
+    {
+      "fileName": "libbrotlienc.dll",
+      "sizeBytes": 788364,
+      "sha256": "50c3aca8abcf0d5576f0b62dbd608be285246f8fd1b48ef87d58fa6b8b744e5f"
+    },
+    {
+      "fileName": "libbz2-1.dll",
+      "sizeBytes": 108633,
+      "sha256": "a4fbb97c26662d2b8a80bf4597ed3effb69b12048b0cb1eef2c3f211e2e66673"
+    },
+    {
+      "fileName": "libcaca-0.dll",
+      "sizeBytes": 862030,
+      "sha256": "54730393b26010bdb0797fe41bec38b8092400b4bbda0e35530fe8af320d8c3d"
+    },
+    {
+      "fileName": "libcairo-2.dll",
+      "sizeBytes": 1247164,
+      "sha256": "c474166543aed18b389b20122ca2741189504994dafd86cd5ed121e95bd82ce4"
+    },
+    {
+      "fileName": "libcairo-gobject-2.dll",
+      "sizeBytes": 35639,
+      "sha256": "faf68e5929b89461ad58c5d26c549cde07bc06b368fb89ace82923df645c9bd5"
+    },
+    {
+      "fileName": "libcdio_cdda-2.dll",
+      "sizeBytes": 62091,
+      "sha256": "fc7d6a36ed1d68bd2e478c396c682cdec71280d664abc06d599aa8e9fa452997"
+    },
+    {
+      "fileName": "libcdio_paranoia-2.dll",
+      "sizeBytes": 35311,
+      "sha256": "5de2609be64dc1baf3fb9eccf83c3cf3f9b8015cdbec7a18e669ad532d973f74"
+    },
+    {
+      "fileName": "libcdio-21.dll",
+      "sizeBytes": 221337,
+      "sha256": "05f0262cc4a4525a627a508d3ddac1afa1193d83d06ce8c51aff524a64b7c4a0"
+    },
+    {
+      "fileName": "libcrypto-3-x64.dll",
+      "sizeBytes": 5495630,
+      "sha256": "ad397e1391ae38100fa1043d69a3495efa73fd9c2784de0ffc3ede3df1fd092e"
+    },
+    {
+      "fileName": "libdatrie-1.dll",
+      "sizeBytes": 35033,
+      "sha256": "2f784872e6404e57847201fe1e7e591bd5b5be4a319ef38ebcb36014ac7f385d"
+    },
+    {
+      "fileName": "libdav1d-7.dll",
+      "sizeBytes": 1931258,
+      "sha256": "29385f5f9b9f8c945eac3366403f529b3bd4bd59aa6eb492e043ffd2d82268c0"
+    },
+    {
+      "fileName": "libdeflate.dll",
+      "sizeBytes": 95902,
+      "sha256": "4be2ffe36137f533825a853642051f2c1f6ddd2f6515e33c2c32712bc9a6d214"
+    },
+    {
+      "fileName": "libdovi.dll",
+      "sizeBytes": 1370085,
+      "sha256": "d0ebc0d98ac67dc28b176f77af125f2066dcb6cf6283f71c102d67f0eeb1df7c"
+    },
+    {
+      "fileName": "libdvdcss-2.dll",
+      "sizeBytes": 123441,
+      "sha256": "8e5699ca29d860c756c75388add90f4cf4616adb8357969342a598ed4963b1f2"
+    },
+    {
+      "fileName": "libdvdnav-4.dll",
+      "sizeBytes": 131830,
+      "sha256": "38b9bc94a34a39842c5d379f3497ac9585ff49d41531d8db8463d858559298fb"
+    },
+    {
+      "fileName": "libdvdread-8.dll",
+      "sizeBytes": 191580,
+      "sha256": "06b5fba2405ae7ef71a26037992b41754daba1a7dcaa59edaaa35c923cdbf19a"
+    },
+    {
+      "fileName": "libexpat-1.dll",
+      "sizeBytes": 237501,
+      "sha256": "fe72e241d004d8704208abe02cb2c8340d442c06f5c27dd2627a075beb1885e0"
+    },
+    {
+      "fileName": "libffi-8.dll",
+      "sizeBytes": 39699,
+      "sha256": "b649c515907436a3299326f83aea0e8d75c61853eb1609602603bbcb9b00b4db"
+    },
+    {
+      "fileName": "libfftw3-3.dll",
+      "sizeBytes": 4291210,
+      "sha256": "3cf91e10bd0c715e9e2a8a595d653dfa27252f587861ffbdc321806e1b259c89"
+    },
+    {
+      "fileName": "libfontconfig-1.dll",
+      "sizeBytes": 508462,
+      "sha256": "bed1827dbb226483026b2b33127866ce173aa2423d89ae7da6f88d6328792ec9"
+    },
+    {
+      "fileName": "libfreetype-6.dll",
+      "sizeBytes": 790651,
+      "sha256": "bbb3e6390ee229c867ef31f10e42a49a61a92e434a11d40c6139a2608ebc6194"
+    },
+    {
+      "fileName": "libfribidi-0.dll",
+      "sizeBytes": 156403,
+      "sha256": "84930fd86a3b46b62794a3bbaff21fbbaeaade5ff7cdc70be7f717ad29af87ed"
+    },
+    {
+      "fileName": "libgcc_s_seh-1.dll",
+      "sizeBytes": 150998,
+      "sha256": "b37c1770c8ca092700875845b34918803ee6311573eba1c32ff4b1166e4a0e1e"
+    },
+    {
+      "fileName": "libgdk_pixbuf-2.0-0.dll",
+      "sizeBytes": 362253,
+      "sha256": "de8c9155341167121f1890224a152da4d283753bac74a0325dee770d76ce30ab"
+    },
+    {
+      "fileName": "libgio-2.0-0.dll",
+      "sizeBytes": 1913623,
+      "sha256": "50a134823cd2f5849f3d43889077164a16f5fc79ec8a9f26e8af77ef3e9906ca"
+    },
+    {
+      "fileName": "libglib-2.0-0.dll",
+      "sizeBytes": 1566649,
+      "sha256": "7b5c19f5540857ec2288323f3b1654cbe5655fc3ea21417a25da69bece489eec"
+    },
+    {
+      "fileName": "libgme.dll",
+      "sizeBytes": 376413,
+      "sha256": "fcf63dc0a1dc22c885b8cd858b5f1e62a8d916ca6a8c7b9fd867ea46583925b1"
+    },
+    {
+      "fileName": "libgmodule-2.0-0.dll",
+      "sizeBytes": 26748,
+      "sha256": "8dbef9e9647d773433cddfdfba84fd34dd699955c78cceea6ff7d7fc45efc495"
+    },
+    {
+      "fileName": "libgmp-10.dll",
+      "sizeBytes": 679747,
+      "sha256": "37248cda33845e7c5c35a574e57da762dd0a8268f0270d179f30a33746809681"
+    },
+    {
+      "fileName": "libgnutls-30.dll",
+      "sizeBytes": 2316158,
+      "sha256": "aca67ef2c8429557e9ac3a02ad313e9fdad35a1416972a248f0a205f83d39fbd"
+    },
+    {
+      "fileName": "libgobject-2.0-0.dll",
+      "sizeBytes": 359475,
+      "sha256": "912936c8782605f29db0abfd528aeecbc550c45782ae14d7e2f0aa0c4809136f"
+    },
+    {
+      "fileName": "libgomp-1.dll",
+      "sizeBytes": 329299,
+      "sha256": "acf25eeee8cb358db82e3f42c96d1934b915d62b883ea8bef31d766946f1c326"
+    },
+    {
+      "fileName": "libgraphite2.dll",
+      "sizeBytes": 167155,
+      "sha256": "063a9ad34a5ec87d038b4646660957395224ecf2cf707917256b7d251a7c5f57"
+    },
+    {
+      "fileName": "libgsm.dll",
+      "sizeBytes": 56554,
+      "sha256": "687f6fd4d7aaa7a725e856000e5e9f3bfb77fcaa554713db432cf6c4f433a3a1"
+    },
+    {
+      "fileName": "libharfbuzz-0.dll",
+      "sizeBytes": 1563763,
+      "sha256": "d132f28331767af741e75684fdeb48a91c9be88285020afb7ba8bf0d80f7a3b5"
+    },
+    {
+      "fileName": "libhogweed-7.dll",
+      "sizeBytes": 275389,
+      "sha256": "8a4785b98e5418c32035f570904f65360c89825358702954b53c77ee2df8c97d"
+    },
+    {
+      "fileName": "libhwy.dll",
+      "sizeBytes": 88615,
+      "sha256": "4cd65f4bb3c123471a23f3eed734adbb31522b012c2c1776640d9634fbeb623c"
+    },
+    {
+      "fileName": "libiconv-2.dll",
+      "sizeBytes": 1143148,
+      "sha256": "7a282a854e01be726c6cccfe46f548c716aa45b3014818468253aaa4efbcd067"
+    },
+    {
+      "fileName": "libidn2-0.dll",
+      "sizeBytes": 247081,
+      "sha256": "9880b52651a0247640a2531d777380f7c35fac7efa7e3979b265ddcb78db8642"
+    },
+    {
+      "fileName": "libintl-8.dll",
+      "sizeBytes": 298731,
+      "sha256": "0537c3dd2378218508ebe3cc416d72a99ee2d24ae1c5525e23458f32544ef861"
+    },
+    {
+      "fileName": "libjbig-0.dll",
+      "sizeBytes": 60973,
+      "sha256": "9286b1f637ff4a249d81238ea9c9ebf4fb083727dfc4235c750bf749606d85f0"
+    },
+    {
+      "fileName": "libjpeg-8.dll",
+      "sizeBytes": 967968,
+      "sha256": "b564d34adaca83e73af0e2231719dd0198ea6cd074c64b2ba85bfd7182f27db7"
+    },
+    {
+      "fileName": "libjxl_cms.dll",
+      "sizeBytes": 147921,
+      "sha256": "6d822a9ac8288fda334b460cbe008716c7b6e9b20e160b9b6ca23871506f0a00"
+    },
+    {
+      "fileName": "libjxl_threads.dll",
+      "sizeBytes": 25750,
+      "sha256": "5a70b49f81063b865225871a3ae0c70566a7c8357058b6c243855c23b143e076"
+    },
+    {
+      "fileName": "libjxl.dll",
+      "sizeBytes": 6218625,
+      "sha256": "d8d1ba0ba4c12ae74a15d44e06a798eafe18842dde71130653dd982dab5fe2a1"
+    },
+    {
+      "fileName": "liblc3-1.dll",
+      "sizeBytes": 165244,
+      "sha256": "ead8e36dd9b502baccfd4814eb84e3047a597fb2b96231592367f1fac7587904"
+    },
+    {
+      "fileName": "liblcms2-2.dll",
+      "sizeBytes": 456345,
+      "sha256": "dc241cbdf2d295846ec564c1eb3c01639d43c0d72415a8758e65d71df31cc0ba"
+    },
+    {
+      "fileName": "libLerc.dll",
+      "sizeBytes": 804265,
+      "sha256": "6887fb5aeabf382a835a4cb693025e8d48d9c90e82ca4eae5d2d8ffb70c6ca9a"
+    },
+    {
+      "fileName": "liblz4.dll",
+      "sizeBytes": 158649,
+      "sha256": "35f917274bca8f19677ba66f1b3cc3c83568c3249fc43215fc16e76439c8e856"
+    },
+    {
+      "fileName": "liblzma-5.dll",
+      "sizeBytes": 191836,
+      "sha256": "dc9edb9bd83b0371fe68d96cb3e70cd17b7a5aba958326a18f8210cb812432e9"
+    },
+    {
+      "fileName": "libmodplug-1.dll",
+      "sizeBytes": 399547,
+      "sha256": "e570d941ff40c0329dbd9bdbe9735d583c7836b1ecb3513d6fb767bcee889186"
+    },
+    {
+      "fileName": "libmp3lame-0.dll",
+      "sizeBytes": 329506,
+      "sha256": "f40c566b56a97e32036f3d5263fd7dc2dafa6fc7ded326045dd637dd55d68c24"
+    },
+    {
+      "fileName": "libmujs.dll",
+      "sizeBytes": 409626,
+      "sha256": "c24d11bfa423c15ccb378c92afffdd29f72ecf8f93c6437b3b3c6c20403b3eb5"
+    },
+    {
+      "fileName": "libnettle-9.dll",
+      "sizeBytes": 360977,
+      "sha256": "208002d990684946c7923a87022bedea588fef8e31286598c08805e37be2a95a"
+    },
+    {
+      "fileName": "libogg-0.dll",
+      "sizeBytes": 40580,
+      "sha256": "3038ce8d161324a6349bf7c83b78493857ff6a3501e3adb3d541c6a07bd94a57"
+    },
+    {
+      "fileName": "libopenal-1.dll",
+      "sizeBytes": 2728444,
+      "sha256": "cb97d2f5a9797ff64db90d0691e4ff9eb2a088026351c9bad7aa26d229a354ce"
+    },
+    {
+      "fileName": "libopencore-amrnb-0.dll",
+      "sizeBytes": 174211,
+      "sha256": "8f9b1fd5fec2042a3b6af15eae54474210569c75bcc482fe702b45dcb3e96397"
+    },
+    {
+      "fileName": "libopencore-amrwb-0.dll",
+      "sizeBytes": 91267,
+      "sha256": "7482267efad926b69c8304ec631fd531a2fc5d99b481b59cb5b34d8540a38dc2"
+    },
+    {
+      "fileName": "libopenjp2-7.dll",
+      "sizeBytes": 519082,
+      "sha256": "123587086cb1a25d2a338fb9b7c1d6bda10bf9062625b4f08c6a92b3d9cafe47"
+    },
+    {
+      "fileName": "libopus-0.dll",
+      "sizeBytes": 500112,
+      "sha256": "90aa25a0a6525d7da48a7ae8dd3306e45b0c28ce09a73d2a02b56cd95418d5be"
+    },
+    {
+      "fileName": "libp11-kit-0.dll",
+      "sizeBytes": 1594910,
+      "sha256": "ada3949f3763db47a754eec56388f3305c41c259eb3bbae188a820fd01c5445b"
+    },
+    {
+      "fileName": "libpango-1.0-0.dll",
+      "sizeBytes": 434535,
+      "sha256": "078881c139e7dd422c4cb5f9c43b939712eb7ad4f3d7d25c41639873e8aec6d6"
+    },
+    {
+      "fileName": "libpangocairo-1.0-0.dll",
+      "sizeBytes": 83118,
+      "sha256": "b9f800abeafd27c07dc9f9fa4a41bb614564038ce7ac5753ca6c60c1d7d555cc"
+    },
+    {
+      "fileName": "libpangoft2-1.0-0.dll",
+      "sizeBytes": 111841,
+      "sha256": "38602e75c85e149bf7294bccb8792f54299daed45509a8ac4b3a18e3921ec56e"
+    },
+    {
+      "fileName": "libpangowin32-1.0-0.dll",
+      "sizeBytes": 111376,
+      "sha256": "2fb6d21cce830182c9d4bf22015dec9abbb0846ebce828ca0a5d4cefc74e46c6"
+    },
+    {
+      "fileName": "libpcre2-8-0.dll",
+      "sizeBytes": 707427,
+      "sha256": "ed6f43f96b0891a5b470e724f727bb4c12255354e609b40bd81fd5be6c0b56ac"
+    },
+    {
+      "fileName": "libpixman-1-0.dll",
+      "sizeBytes": 740378,
+      "sha256": "55ce45825eb8e825c635416171be4736147a6b0b690469f545d8c4ae8e85b4a3"
+    },
+    {
+      "fileName": "libplacebo-360.dll",
+      "sizeBytes": 1236730,
+      "sha256": "4edb51d4e74ede8d9543571ed5f6fe896c4fe4894e58a14dcfafbb9c0aa6ddc2"
+    },
+    {
+      "fileName": "libpng16-16.dll",
+      "sizeBytes": 264269,
+      "sha256": "3737838ee8d6b893df7bdabf7439775371a57dce7e17ee6b35586023c64bd9ab"
+    },
+    {
+      "fileName": "libpython3.14.dll",
+      "sizeBytes": 5581501,
+      "sha256": "fca939d406a406df399c0e44558501b4444dcc15235a6d31b9ec107272ecdbfa"
+    },
+    {
+      "fileName": "librav1e.dll",
+      "sizeBytes": 3527680,
+      "sha256": "6fe18e4a040c471dc13bcea44ecd2c6a3c040971542c6b798627e4c787056acb"
+    },
+    {
+      "fileName": "librsvg-2-2.dll",
+      "sizeBytes": 11755598,
+      "sha256": "f54d578420fc062ad703c3eea3b665ed4e676ae78be43f5bad02e1020f833c7a"
+    },
+    {
+      "fileName": "librtmp-1.dll",
+      "sizeBytes": 183492,
+      "sha256": "2c8c2ea1a686d954129b94c06dd2ab2163d45521211376ea2694f131d75ce6fc"
+    },
+    {
+      "fileName": "librubberband-2.dll",
+      "sizeBytes": 316780,
+      "sha256": "f15b59010dfbebadce5741932a39966ecdf87f9422d2082356c7ddc64928153e"
+    },
+    {
+      "fileName": "libsamplerate-0.dll",
+      "sizeBytes": 1502619,
+      "sha256": "1e08aeb1fecade2cf2d7a83463a1b375e13d5f2f008cdeea7409a3eff7ed9a0e"
+    },
+    {
+      "fileName": "libshaderc_shared.dll",
+      "sizeBytes": 10596561,
+      "sha256": "e9b484362c54a1dda64f1f0d20f0b1167ad26d32752130f4b4ce28dfa01a040e"
+    },
+    {
+      "fileName": "libsharpyuv-0.dll",
+      "sizeBytes": 53757,
+      "sha256": "ab0c9f61dc69b6bcdff1011e215f8d5fd6e5096aba9be3386ab87f217fbbeffe"
+    },
+    {
+      "fileName": "libsoxr.dll",
+      "sizeBytes": 312320,
+      "sha256": "5bb8f922b12995b0322b73bd94e2e6dadfeac58abc8beb4d0f69ca5f4747917d"
+    },
+    {
+      "fileName": "libspeex-1.dll",
+      "sizeBytes": 137822,
+      "sha256": "3cd8b5e812022307d8ba09747b648a7402fc4caa44b50e328b3424102ab98f3a"
+    },
+    {
+      "fileName": "libspirv-cross-c-shared.dll",
+      "sizeBytes": 3417093,
+      "sha256": "cc714a00bc07a0e601df77fa836e75683745b89a3bfaace192087a71cdf0a436"
+    },
+    {
+      "fileName": "libsrt.dll",
+      "sizeBytes": 859218,
+      "sha256": "b22b8f07a36d4b52aaa2601c70240fd7a8a111894881192edd1de5e236fc64fa"
+    },
+    {
+      "fileName": "libssh.dll",
+      "sizeBytes": 626451,
+      "sha256": "4e872f2b9329edfb3112c433a2c4c98efc915d0bca2b1b935a58e45e37ce0a3b"
+    },
+    {
+      "fileName": "libstdc++-6.dll",
+      "sizeBytes": 2661299,
+      "sha256": "887c21dbe2a211ac4d1a790e4f608b7dee27fae12352856963004e7a715d2e6c"
+    },
+    {
+      "fileName": "libSvtAv1Enc-4.dll",
+      "sizeBytes": 7573028,
+      "sha256": "c4d9e2ae03f80d43c0a16d1461503e1768b160cdba9f3fe9e95e339f69fc2b24"
+    },
+    {
+      "fileName": "libtasn1-6.dll",
+      "sizeBytes": 113467,
+      "sha256": "95821132a7d4ea90f7c37540118ad1459809ff23162d6dc3d5600b15755a644b"
+    },
+    {
+      "fileName": "libthai-0.dll",
+      "sizeBytes": 72294,
+      "sha256": "5d741974fdec19e0f6cddbcdb539428af0c7392740a056634714c2884157fdb9"
+    },
+    {
+      "fileName": "libtheoradec-2.dll",
+      "sizeBytes": 97211,
+      "sha256": "4f75e430b4e9a3e7c5e6d1da1f7999d8d75c5e505b8a34863cb4c6f82236a771"
+    },
+    {
+      "fileName": "libtheoraenc-2.dll",
+      "sizeBytes": 247180,
+      "sha256": "c8119dcf51d98673cc55ec47fd54ab60e65fbf6191f0b6fc907afa3ebdc26bb9"
+    },
+    {
+      "fileName": "libtiff-6.dll",
+      "sizeBytes": 625178,
+      "sha256": "47fe69165bf8e211aaa84224f51f145dc894e330fe7ca167f7c99419e0c8c894"
+    },
+    {
+      "fileName": "libuchardet.dll",
+      "sizeBytes": 198332,
+      "sha256": "ccc4fda9696395d3292bd6664080c2e3ae14a8b5a0c012774b7d34fa79d3dfe0"
+    },
+    {
+      "fileName": "libunibreak-7.dll",
+      "sizeBytes": 140772,
+      "sha256": "e146c2f36b2e36f620238f2bf0820ef9e74f5b39fbfb9ffe99183bb4a21809f0"
+    },
+    {
+      "fileName": "libunistring-5.dll",
+      "sizeBytes": 2251328,
+      "sha256": "b91e2850d3668d4931056a8f4d35783b8ec3eea3735485108a936a072cd16071"
+    },
+    {
+      "fileName": "libva_win32.dll",
+      "sizeBytes": 17070,
+      "sha256": "710033877d446638b686de916595e1470d194db55395b2f907abaff26298f5d3"
+    },
+    {
+      "fileName": "libva.dll",
+      "sizeBytes": 286510,
+      "sha256": "1600880518a5c9d454dc26f151c0bf4969f60cc7fb53ade023e1816ddefdf141"
+    },
+    {
+      "fileName": "libvapoursynth-script-0.dll",
+      "sizeBytes": 23647,
+      "sha256": "dcfae0b8138dd7915c2a64f94198a06102ec0a58b45fa2309eda845353b2b608"
+    },
+    {
+      "fileName": "libvapoursynth.dll",
+      "sizeBytes": 1696294,
+      "sha256": "e5e03259bc787a669c992f311ee0a930bc99d598fabe4e7120551e45a0023bcc"
+    },
+    {
+      "fileName": "libvidstab.dll",
+      "sizeBytes": 153183,
+      "sha256": "3a2d95ea86bbcf049d90fbaf7a8cf07516464b77d9475246303ced38df17e737"
+    },
+    {
+      "fileName": "libvorbis-0.dll",
+      "sizeBytes": 184216,
+      "sha256": "3282629e1b5d6ececcfde133b20fe73de5c81b6eadfbb4697e6718886c7c97a6"
+    },
+    {
+      "fileName": "libvorbisenc-2.dll",
+      "sizeBytes": 578809,
+      "sha256": "090f0734883464af440eb9084b22384951b95b1bf325236b322dbef7f93530aa"
+    },
+    {
+      "fileName": "libvpl-2.dll",
+      "sizeBytes": 480963,
+      "sha256": "670c4a28094b9f0d2aefe1e666c61e9e5eb7315f1ffd0bf12e4731727c6254e6"
+    },
+    {
+      "fileName": "libvpx-1.dll",
+      "sizeBytes": 4412330,
+      "sha256": "ce199be3f352d76a1994ca7e4b0549ca6f8a6700ba5f5bbde24adef262256f01"
+    },
+    {
+      "fileName": "libwebp-7.dll",
+      "sizeBytes": 749724,
+      "sha256": "c6c21a10f8cfe13270832e64640b82709e1d87b956b5f15af435a6c25acd6bbf"
+    },
+    {
+      "fileName": "libwebpmux-3.dll",
+      "sizeBytes": 82858,
+      "sha256": "2c8a2e9d7901ec65330f31f9989c2a07ef0506e903b485fcd8b241a6bab9b88f"
+    },
+    {
+      "fileName": "libwhisper-1.dll",
+      "sizeBytes": 507565,
+      "sha256": "7c2bdd574bfa2c264331e6af6fcdc983a4650d8fa2907aaef1d6c1b106ac2d2b"
+    },
+    {
+      "fileName": "libwinpthread-1.dll",
+      "sizeBytes": 63840,
+      "sha256": "2e74ef2965ec0d8f7e0543f40293b212d2f5c8680de147643ea6dd4b8b5cb749"
+    },
+    {
+      "fileName": "libx264-165.dll",
+      "sizeBytes": 2024174,
+      "sha256": "0d814d13db7eeac0ff5264ed86d376f9260746323107cb07affb6c306b240329"
+    },
+    {
+      "fileName": "libx265-217.dll",
+      "sizeBytes": 22667339,
+      "sha256": "23a4579cf07ad233818d53f941e846847876cb68f57e4492f943d26463cc995f"
+    },
+    {
+      "fileName": "libxml2-16.dll",
+      "sizeBytes": 1255475,
+      "sha256": "81e97f59e486f95de3b8b12973860102cddebbaaeedbbc22786aaec0728b2c68"
+    },
+    {
+      "fileName": "libzimg-2.dll",
+      "sizeBytes": 636837,
+      "sha256": "26ad6d01991171038ca5a4078a3854ea2f7765beb572e567a83ce15d495d75dc"
+    },
+    {
+      "fileName": "libzstd.dll",
+      "sizeBytes": 1218273,
+      "sha256": "b95c223a9548a9ecf51377c962e0bc8f0c51eb0c6f67a296dbc885996f0dd40d"
+    },
+    {
+      "fileName": "libzvbi-0.dll",
+      "sizeBytes": 450046,
+      "sha256": "fa1b722aa22739a9b147f7c918a981c51fc48ebd1269b192e412b6f346f816cc"
+    },
+    {
+      "fileName": "lua51.dll",
+      "sizeBytes": 235379,
+      "sha256": "2e56f589f273c1df4f73f8e33d6ee4bff07fca31ec2e2002e1188c139a9cedf1"
+    },
+    {
+      "fileName": "swresample-7.dll",
+      "sizeBytes": 185792,
+      "sha256": "d6d66f8b358cf2bc9c287ddc87d235faf1a55bf322b0044feb183e85c90379d2"
+    },
+    {
+      "fileName": "swscale-10.dll",
+      "sizeBytes": 2214871,
+      "sha256": "7e802078af97f36d8da0d56f83e63c1700021f589269568417ab707376d725db"
+    },
+    {
+      "fileName": "vulkan-1.dll",
+      "sizeBytes": 697427,
+      "sha256": "45fdd61626879ea828e162d18bc6419f46eb704162120450d4e1c9bec6366986"
+    },
+    {
+      "fileName": "xvidcore.dll",
+      "sizeBytes": 781411,
+      "sha256": "1c19803a7d0d8fe21064459dd51725ffdefb07a96079967417bf597178b4db33"
+    },
+    {
+      "fileName": "zlib1.dll",
+      "sizeBytes": 128488,
+      "sha256": "93e9243a44c29200eeacaf9658efe2558581770e4b11ca4b500e18e424a6e3b5"
+    }
+  ],
+  "correspondingSources": {
+    "fileName": "JebyPlayer-1.0.0-beta.1-mpv-corresponding-sources.zip",
+    "sizeBytes": 1609619309,
+    "sha256": "00b5fd1972d5776abeb23b174bca9960e3b6f637261c8270aa39ffa3364ff9c7"
+  }
 }

@@ -15,13 +15,15 @@ Jeby Player 是一个适用于 Windows 的 Emby 桌面播放器，采用原生 W
 
 ## 产品截图
 
-截图为实际应用界面，账号、作品及海报均为演示内容。
+截图来自连接实际媒体库的应用。影片名称、海报和播放画面保留，个人账号信息已遮盖；应用不附带影片。
 
 ![首页](images/home.png)
 
-![影片详情](images/details.png)
+![电影详情](images/movie-details.png)
 
-![设置](images/settings.png)
+![电视剧详情](images/series-details.png)
+
+![播放页（进度条显示状态）](images/player.png)
 
 ## 使用说明
 
