@@ -1,6 +1,7 @@
 # Jeby Player
 
-**适用于 Windows 的 Emby 桌面播放器。**  
+**适用于 Windows 的 Emby 桌面播放器。**
+
 An Emby desktop player for Windows, built with WPF and MPV.
 
 Jeby Player 连接你自己的 Emby Server，让你在桌面浏览媒体库、查看电影和剧集详情、继续观看并播放视频。界面以深色为主，使用原生 Windows 窗口和 MPV 播放内核。
@@ -39,6 +40,10 @@ Jeby Player 连接你自己的 Emby Server，让你在桌面浏览媒体库、�
 内容、字幕、章节以及直连或转码方式取决于服务器、账号权限和媒体本身。服务器没有预览图时，客户端可在本机按需生成，首次加载速度受视频与网络影响。
 
 ## 使用前需要什么
+
+从 GitHub Releases 下载 `JebyPlayer-1.0.0-beta.1-win-x64-selfcontained.zip`，完整解压后运行 `EmbyPlayer.App.exe`。此包自带 .NET 和 MPV，无需另外安装运行时。请保留解压目录内的 DLL 和 `third-party` 文件夹。
+
+`mpv-corresponding-sources.zip` 是播放内核及依赖的对应源码，普通使用无需下载。
 
 - Windows 10 或 Windows 11，x64。
 - 一台可访问的 Emby Server，以及有权播放媒体的账号。

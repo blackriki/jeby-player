@@ -31,7 +31,7 @@
 - FrameworkDependent 包由用户安装 x64 .NET 8 Desktop Runtime。
 - SelfContained 包由脚本读取实际 `runtimeconfig.json` 中的版本，从对应 NuGet runtime 包提取 .NET `LICENSE.TXT`、`THIRD-PARTY-NOTICES.TXT` 以及 WindowsDesktop `LICENSE`，复制到 `third-party/dotnet/<framework>/<version>/`，记录长度和 SHA256。
 
-实际许可文件必须随最终发布产物存在；已实现复制逻辑不等于最终 Public 管线已经验收通过。
+提交 `5679691` 的 SelfContained 产物已通过本地 Public 管线，使用 .NET 8.0.30。上述三份 .NET / WPF 许可原文已随包存在，并记录长度和 SHA256；`distributionReady` 为 `true`。GitHub 上传及远端 CI 尚待完成，不能据此称附件已经可公开下载。
 
 ## 开发与测试依赖
 

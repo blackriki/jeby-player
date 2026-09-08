@@ -1,15 +1,25 @@
 # Jeby Player 发布与维护
 
-发布目标：[blackriki/jeby-player](https://github.com/blackriki/jeby-player)。当前版本仅支持 Emby；Jellyfin 属于后续计划。最终公开管线和远端 Release 仍待完成，以下准备结果不等于已经发布。
+发布目标：[blackriki/jeby-player](https://github.com/blackriki/jeby-player)。当前版本仅支持 Emby；Jellyfin 属于后续计划。本地 Public 发布管线已通过；GitHub 上传、远端 CI 和 Release 尚待完成，本地验证不等于已经公开发布。
 
 ## 当前准备状态
 
 - 产品名称为 Jeby Player，自有代码采用 [GPL-3.0-or-later](../LICENSE)。工程、可执行文件及设置目录保留 EmbyPlayer 标识以兼容旧版本。
 - 播放运行时已更换为核验过的 MSYS2 MPV 0.41.0-7；[manifest](../src/EmbyPlayer.App/runtimes/win-x64/native/mpv-runtime.json) 为 `verified`，记录主 DLL、132 个 DLL 的运行时集合及 493 项许可文件记录。
 - MPV 对应源码 ZIP 已整理，约 1.61 GB，需与二进制 Release 一起提供。文件名和 SHA256 见 manifest；详见 [第三方清单](THIRD_PARTY_NOTICES.md)。
-- SelfContained 发布脚本已实现按实际 runtimeconfig 版本提取 .NET 与 WPF 许可材料、复制到 `third-party/dotnet/` 并核对哈希；最终产物仍需执行完整管线验证。
+- SelfContained 产物使用 .NET 8.0.30，已包含三份 .NET / WPF 许可原文；发布脚本按实际 runtimeconfig 版本复制到 `third-party/dotnet/` 并核对哈希。
 - 已核验新运行时的本地合成视频与带认证头的本地 HTTP 播放、暂停、seek、音轨、字幕导入及预览。不把这些结果等同于真实服务器 HTTPS、转码或 GPU 视觉验收。
 - 发布介绍采用用户授权展示的真实产品截图，并遮蔽用户名；不伪造演示账号、媒体内容或素材来源。截图展示前仍应检查私人地址及其他个人信息。
+
+## 已完成的本地发布验证
+
+发布提交 `5679691` 的 Public 管线通过：Release 构建零警告、零错误，1,698 项测试全部通过（Core 125、Emby 379、Player 92、UI 1,102）。可见窗口启动检查通过，发布 manifest 的 `distributionReady` 为 `true`。
+
+SelfContained ZIP 大小为 **152,731,645 字节**，SHA256：
+
+`212332ab69cf517e62ea8fc48ef76f4f5122450f44cd7f36fe0b8dd2ef57dca7`
+
+该记录对应上述提交和产物。后续文档更新不改变此二进制的校验值；代码或打包输入变更后需重新构建验证。GitHub 上传与远端 CI 结果将在完成后更新。
 
 ## 从源码构建
 
@@ -40,8 +50,8 @@ MPV 来源材料已补齐，原开发版 shinchiro 二进制的证据缺口已�
 
 ## 发布前最后检查
 
-1. 对最终源码快照运行文本检查、构建与相关测试，并核对 GitHub CI。
-2. 完成 Public 管线，检查实际 ZIP、版本、逐文件哈希、MPV 与 .NET 通知文件。
+1. 本地发布提交已完成文本检查、构建和测试；上传后核对对应 GitHub CI。
+2. Public 管线、ZIP 和随包材料已本地验证；上传后再次核对附件大小、SHA256 与版本。
 3. 同时提供 manifest 指定的 MPV 对应源码 ZIP 和校验值。
 4. 按 [测试计划](TEST_PLAN.md) 核对服务器登录、浏览、播放、字幕及进度同步；在 Release 说明中明确实际覆盖和未覆盖范围。
 5. 检查产品截图、安装说明、下载链接和已知限制，再发布 Release。
