@@ -1,0 +1,78 @@
+name: Windows build and tests
+
+on:
+  push:
+    branches: [master, 'codex/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install .NET 8 SDK and test runtimes
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install repository SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Check tracked and non-ignored files for sensitive content
+        run: ./scripts/check-sensitive-files.ps1
+
+      - name: Restore locked dependencies
+        run: dotnet restore EmbyPlayer.sln --locked-mode
+
+      - name: Build solution
+        run: dotnet build EmbyPlayer.sln --configuration Release --no-restore -m:1 -nr:false -p:UseSharedCompilation=false
+
+      # These three projects use fake HTTP/native MPV implementations. They do not
+      # require a server account, downloaded libmpv, video files, or a visible UI.
+      - name: Test Core, Emby API and player logic
+        run: |
+          $projects = @('Core', 'Emby', 'Player')
+          foreach ($project in $projects) {
+            dotnet test "tests/EmbyPlayer.$project.Tests/EmbyPlayer.$project.Tests.csproj" --configuration Release --no-build --no-restore --logger "console;verbosity=normal"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+
+      # Start with UI source/resource contracts that need neither an interactive
+      # desktop nor the local MPV binary. This is deliberately not the full UI suite.
+      # Full WPF window/overlay interaction, ReleasePipelineScriptTests (including
+      # native-runtime preflights), and EmbyPlayer.Acceptance remain local gates.
+      # CI does not download MPV, run the app, package a release, or upload binaries.
+      - name: Test UI source and resource contracts
+        run: |
+          $classes = @(
+            'ApplicationCompositionTests',
+            'ApplicationIconTests',
+            'BrowsePageIconSystemTests',
+            'FixedPageBackButtonXamlTests',
+            'MainWindowChromeTests',
+            'ProjectDependencyTests'
+          )
+          $filter = ($classes | ForEach-Object { "FullyQualifiedName~EmbyPlayer.UI.Tests.$_." }) -join '|'
+          dotnet test tests/EmbyPlayer.UI.Tests/EmbyPlayer.UI.Tests.csproj --configuration Release --no-build --no-restore --filter $filter --logger "console;verbosity=normal"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0-windows7.0": {
+      "embyplayer.core": {
+        "type": "Project"
+      },
+      "embyplayer.emby": {
+        "type": "Project",
+        "dependencies": {
+          "EmbyPlayer.Core": "[1.0.0, )"
+        }
+      },
+      "embyplayer.player": {
+        "type": "Project",
+        "dependencies": {
+          "EmbyPlayer.Core": "[1.0.0, )"
+        }
+      },
+      "embyplayer.ui": {
+        "type": "Project",
+        "dependencies": {
+          "EmbyPlayer.Core": "[1.0.0, )",
+          "EmbyPlayer.Player": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

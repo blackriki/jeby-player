@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Reuse the existing friend assembly for internal diagnostic service access. -->
+    <AssemblyName>EmbyPlayer.UI.Tests</AssemblyName>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <IsPackable>false</IsPackable>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(LibraryBrowseBuild)' == 'true'">
+    <DefineConstants>$(DefineConstants);LIBRARY_BROWSE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(LibraryBrowseBuild)' == 'true'">
+    <Compile Remove="AudioSwitchCheck.cs;ServerPlaybackCheck.cs;SettingsExportCheck.cs;UiSmokeCheck.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(LibraryBrowseBuild)' != 'true'">
+    <Compile Remove="LibraryBrowseCheck.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EmbyPlayer.App;EmbyPlayer.Core;EmbyPlayer.Emby;EmbyPlayer.Player;EmbyPlayer.UI">
+      <HintPath>$(ArtifactDirectory)/%(Identity).dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  <Target Name="RequireReleaseArtifact" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(ArtifactDirectory)' == ''" Text="Pass -p:ArtifactDirectory with the release payload directory." />
+    <Error Condition="'$(LibraryBrowseBuild)' != 'true' and !Exists('$(ArtifactDirectory)/release-manifest.json')" Text="ArtifactDirectory must contain release-manifest.json." />
+  </Target>
+</Project>

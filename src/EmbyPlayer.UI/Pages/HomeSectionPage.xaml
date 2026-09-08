@@ -1,0 +1,117 @@
+<UserControl x:Class="EmbyPlayer.UI.Pages.HomeSectionPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:EmbyPlayer.UI.Controls"
+             Loaded="OnLoaded" Unloaded="OnUnloaded">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+  </UserControl.Resources>
+
+  <Grid Background="{StaticResource AppBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid Margin="42,28,42,22">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Button Command="{Binding NavigateHomeCommand}"
+              HorizontalAlignment="Left"
+              AutomationProperties.AutomationId="HomeSection.Back"
+              AutomationProperties.Name="返回首页"
+              Style="{StaticResource PageBackButton}">
+        <StackPanel Orientation="Horizontal">
+          <controls:AppIcon Data="{StaticResource Icon.Back}" Style="{StaticResource PageBackButtonIcon}" />
+          <TextBlock Text="返回首页" VerticalAlignment="Center" />
+        </StackPanel>
+      </Button>
+      <TextBlock Grid.Row="1" Text="{Binding Title}" Margin="0,22,90,0"
+                 Foreground="{StaticResource TextPrimaryBrush}" FontSize="30" FontWeight="SemiBold" />
+      <Button Grid.Row="1" Command="{Binding RefreshCommand}"
+              HorizontalAlignment="Right" VerticalAlignment="Bottom"
+              ToolTip="刷新当前分类" AutomationProperties.AutomationId="HomeSection.Refresh"
+              AutomationProperties.Name="刷新当前分类" Style="{StaticResource PageBackButton}">
+        <StackPanel Orientation="Horizontal">
+          <controls:AppIcon Data="{StaticResource Icon.Refresh}" RenderMode="Stroke" Size="18" Margin="0,0,7,0" />
+          <TextBlock Text="刷新" VerticalAlignment="Center" />
+        </StackPanel>
+      </Button>
+    </Grid>
+
+    <ScrollViewer x:Name="SectionScrollViewer" Grid.Row="1"
+                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                  ScrollChanged="OnScrollChanged">
+      <StackPanel Margin="42,0,26,36">
+        <controls:PageStateView IsLoading="{Binding IsInitialLoading}" IsEmpty="{Binding IsEmpty}"
+                                HasError="{Binding IsErrorVisible}" ErrorMessage="{Binding ErrorMessage}"
+                                LoadingMessage="正在加载作品..." EmptyTitle="暂无作品"
+                                EmptyMessage="此分类暂时没有可显示的作品。"
+                                ErrorTitle="作品加载失败" RetryCommand="{Binding RetryCommand}"
+                                RetryAutomationName="重试加载分类" MinHeight="180" />
+        <StackPanel Visibility="{Binding IsContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <TextBlock Text="正在刷新..." Margin="0,0,0,18"
+                     Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Foreground="{StaticResource TextSecondaryBrush}" AutomationProperties.LiveSetting="Polite" />
+          <StackPanel Orientation="Horizontal" Margin="0,0,0,18"
+                      Visibility="{Binding IsRefreshErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="#FF9A9A" VerticalAlignment="Center" />
+            <Button Content="重试" Command="{Binding RetryCommand}" Margin="16,0,0,0"
+                    Style="{StaticResource AppSecondaryButtonStyle}" />
+          </StackPanel>
+          <ItemsControl x:Name="SectionItems" ItemsSource="{Binding Items}"
+                        AutomationProperties.AutomationId="HomeSection.Items"
+                        AutomationProperties.Name="{Binding Title, StringFormat={}{0}全部作品}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Button Width="176" Margin="0,0,18,24"
+                        Command="{Binding DataContext.OpenMediaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding}" Style="{StaticResource MediaSurfaceCardButtonStyle}"
+                        ToolTip="{Binding Title}" AutomationProperties.Name="{Binding Title, StringFormat=打开详情：{0}}">
+                  <StackPanel>
+                    <Grid Height="264">
+                      <controls:AuthenticatedImage ImageUrl="{Binding PosterUrl}" PlaceholderText="海报" Stretch="UniformToFill" />
+                      <Border Visibility="{Binding IsFavorite, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0"
+                              Style="{StaticResource MediaFavoriteBadgeStyle}">
+                        <controls:AppIcon Data="{StaticResource Icon.FavoriteFilled}" Size="13" Foreground="{StaticResource Icon.FavoriteBrush}" RenderMode="Fill" />
+                      </Border>
+                      <Border Visibility="{Binding IsPlayed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"
+                              Style="{StaticResource MediaPlayedBadgeStyle}">
+                        <controls:AppIcon Data="{StaticResource Icon.Watched}" RenderMode="Fill" Size="13" Foreground="{StaticResource Icon.WatchedBrush}" />
+                      </Border>
+                      <ProgressBar Value="{Binding ProgressValue, Mode=OneWay}" Height="4" VerticalAlignment="Bottom"
+                                   Visibility="{Binding HasProgress, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Style="{StaticResource MediaCardProgressBarStyle}" />
+                    </Grid>
+                    <StackPanel Margin="10,10,10,12">
+                      <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="14"
+                                 FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Text="{Binding SubtitleText}" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"
+                                 Margin="0,5,0,0" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                  </StackPanel>
+                </Button>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <TextBlock Text="正在加载更多..." HorizontalAlignment="Center" Margin="0,8,0,18"
+                     Visibility="{Binding IsLoadingMore, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Foreground="{StaticResource TextSecondaryBrush}" AutomationProperties.LiveSetting="Polite" />
+          <TextBlock Text="{Binding LoadMoreErrorMessage}" HorizontalAlignment="Center" Margin="0,0,0,12"
+                     Visibility="{Binding IsLoadMoreErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Foreground="#FF9A9A" TextWrapping="Wrap" />
+          <Button Content="{Binding LoadMoreButtonText}" Command="{Binding LoadMoreCommand}"
+                  Visibility="{Binding IsLoadMoreButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  HorizontalAlignment="Center" AutomationProperties.AutomationId="HomeSection.LoadMore"
+                  AutomationProperties.Name="{Binding LoadMoreButtonText}" Style="{StaticResource AppSecondaryButtonStyle}" />
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

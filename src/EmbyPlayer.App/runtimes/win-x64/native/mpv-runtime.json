@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "componentName": "libmpv-2",
+  "binary": {
+    "fileName": "libmpv-2.dll",
+    "sizeBytes": 117549568,
+    "sha256": "02FA97CBDB32A651ADDBB0EAFCDC8446E3B4CB7A09DA83518DAC4FBF8D62FD81",
+    "fileVersion": "v0.41.0-724-g71ebd0840",
+    "architecture": "AMD64"
+  },
+  "localArchive": {
+    "fileName": "mpv-dev-x86_64-20260607-git-71ebd08.7z",
+    "sha256": "FAA0BE46643CD889A1D816696F60B9962D7BB70E9D9D6E619DA368D0B22211D6"
+  },
+  "embeddedRevisionLabel": "71ebd0840",
+  "buildRecipeClue": "mpv-winbuild-cmake",
+  "buildRecipeRevision": null,
+  "sourceUrl": null,
+  "license": {
+    "expression": null,
+    "files": []
+  },
+  "provenanceStatus": "internal-only/unverified"
+}

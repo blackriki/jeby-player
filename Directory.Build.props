@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Product>Jeby Player</Product>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <Version Condition="'$(Version)' == ''">1.0.0-beta.1</Version>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BuildInParallel>false</BuildInParallel>
+    <RestoreBuildInParallel>false</RestoreBuildInParallel>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <NuGetLockFilePath Condition="'$(RuntimeIdentifier)' != ''">packages.$(RuntimeIdentifier).lock.json</NuGetLockFilePath>
+  </PropertyGroup>
+</Project>

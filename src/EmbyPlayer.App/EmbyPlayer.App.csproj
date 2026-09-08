@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyTitle>Jeby Player</AssemblyTitle>
+    <Description>Jeby Player - Windows desktop player for Emby</Description>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\app-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmbyPlayer.Core\EmbyPlayer.Core.csproj" />
+    <ProjectReference Include="..\EmbyPlayer.Emby\EmbyPlayer.Emby.csproj" />
+    <ProjectReference Include="..\EmbyPlayer.Player\EmbyPlayer.Player.csproj" />
+    <ProjectReference Include="..\EmbyPlayer.UI\EmbyPlayer.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\app-icon.ico" />
+    <Content Include="..\..\LICENSE"
+             Link="LICENSE"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="runtimes\win-x64\native\libmpv-2.dll"
+             Condition="Exists('runtimes\win-x64\native\libmpv-2.dll')"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             TargetPath="%(Filename)%(Extension)" />
+    <Content Include="runtimes\win-x64\native\mpv-runtime.json"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             TargetPath="%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmbyPlayer.Core\EmbyPlayer.Core.csproj" />
+    <ProjectReference Include="..\EmbyPlayer.Player\EmbyPlayer.Player.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\EmbyPlayer.App\Assets\app-icon.png" Link="Assets\app-icon.png" />
+    <None Remove="Assets\HomeIcons\*.png" />
+    <Resource Include="Assets\HomeIcons\*.png" />
+  </ItemGroup>
+</Project>

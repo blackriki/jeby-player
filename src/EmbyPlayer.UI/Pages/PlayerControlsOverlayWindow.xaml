@@ -1,0 +1,16 @@
+<Window x:Class="EmbyPlayer.UI.Pages.PlayerControlsOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:EmbyPlayer.UI.Pages"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        SizeToContent="Manual"
+        Topmost="False"
+        ShowActivated="False">
+  <Grid Background="#01000000">
+    <local:PlayerControlsOverlayView x:Name="OverlayView" />
+  </Grid>
+</Window>

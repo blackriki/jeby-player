@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+TestResults/
+*.user
+*.suo
+*.log
+*_wpftmp.csproj
+.idea/
+.vscode/
+src/EmbyPlayer.App/runtimes/win-x64/native/*.dll
+src/EmbyPlayer.App/runtimes/win-x64/native/*.exe
+src/EmbyPlayer.App/runtimes/win-x64/native/*.pdb
+.tmp/

@@ -1,0 +1,1454 @@
+<UserControl x:Class="EmbyPlayer.UI.Pages.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:home="clr-namespace:EmbyPlayer.Core.Home;assembly=EmbyPlayer.Core"
+             xmlns:controls="clr-namespace:EmbyPlayer.UI.Controls">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <SolidColorBrush x:Key="HomePageBackgroundBrush" Color="#080C12" />
+    <SolidColorBrush x:Key="HomeSurfaceBrush" Color="#101721" />
+    <SolidColorBrush x:Key="HomeCardSurfaceBrush" Color="#151D27" />
+    <SolidColorBrush x:Key="HomeCardHoverBrush" Color="#1D2834" />
+    <SolidColorBrush x:Key="HomeBorderBrush" Color="#324252" />
+    <SolidColorBrush x:Key="HomeBorderHoverBrush" Color="#465A6D" />
+    <SolidColorBrush x:Key="HomePrimaryTextBrush" Color="#F4F7FB" />
+    <SolidColorBrush x:Key="HomeSecondaryTextBrush" Color="#A6B1BE" />
+    <SolidColorBrush x:Key="HomeMutedTextBrush" Color="#737F8D" />
+    <SolidColorBrush x:Key="HomeFocusBrush" Color="#78D36F" />
+
+    <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource HomePrimaryTextBrush}" />
+      <Setter Property="FontSize" Value="24" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style x:Key="RowArrowButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource MediaRowArrowButtonStyle}" />
+
+    <Style x:Key="ViewAllButtonStyle" TargetType="Button">
+      <Setter Property="Foreground" Value="{StaticResource HomeSecondaryTextBrush}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="Padding" Value="8,6" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="ViewAllLabel" Text="查看全部" VerticalAlignment="Center" />
+                <controls:AppIcon Data="{StaticResource Icon.ChevronRight}"
+                                  RenderMode="Stroke" Size="13" Margin="4,0,0,0" />
+              </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HomeFocusBrush}" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HomeFocusBrush}" />
+                <Setter TargetName="ViewAllLabel" Property="TextDecorations" Value="Underline" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="0.65" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.4" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <DataTemplate x:Key="HomePosterCardTemplate">
+      <Grid x:Name="PosterCardRoot"
+            Width="160"
+            Margin="0,0,16,0"
+            KeyboardNavigation.TabNavigation="Local">
+        <Button Command="{Binding DataContext.OpenMediaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                CommandParameter="{Binding}"
+                ToolTip="{Binding Title, Mode=OneWay, StringFormat=打开详情：{0}}"
+                AutomationProperties.Name="{Binding Title, Mode=OneWay, StringFormat=打开详情：{0}}"
+                Width="Auto"
+                Margin="0"
+                Style="{DynamicResource CardButtonStyle}">
+          <StackPanel>
+            <Grid Height="240" Background="#111821">
+              <TextBlock Text="海报"
+                         Foreground="{StaticResource TextSecondaryBrush}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+              <controls:AuthenticatedImage ImageUrl="{Binding PosterUrl, Mode=OneWay}"
+                                           PlaceholderText="海报"
+                                           Stretch="UniformToFill">
+                <controls:AuthenticatedImage.Style>
+                  <Style TargetType="{x:Type controls:AuthenticatedImage}">
+                    <Setter Property="Opacity" Value="0.94" />
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding IsMouseOver, ElementName=PosterCardRoot}" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </controls:AuthenticatedImage.Style>
+              </controls:AuthenticatedImage>
+              <Border Height="1"
+                      Background="#26313D"
+                      VerticalAlignment="Bottom"
+                      IsHitTestVisible="False" />
+              <Border Background="#52000000"
+                      IsHitTestVisible="False">
+                <Border.Style>
+                  <Style TargetType="Border">
+                    <Setter Property="Opacity" Value="0" />
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding IsMouseOver, ElementName=PosterCardRoot}" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                        <DataTrigger.EnterActions>
+                          <BeginStoryboard>
+                            <Storyboard>
+                              <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                               From="0"
+                                               To="1"
+                                               Duration="0:0:0.14" />
+                            </Storyboard>
+                          </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                          <BeginStoryboard>
+                            <Storyboard>
+                              <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                               From="1"
+                                               To="0"
+                                               Duration="0:0:0.14" />
+                            </Storyboard>
+                          </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                      </DataTrigger>
+                      <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=PosterCardRoot}" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                      </DataTrigger>
+                      <DataTrigger Binding="{Binding IsPreparingPlayback}" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </Border.Style>
+              </Border>
+              <Border Visibility="{Binding IsFavorite, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Margin="0,8,8,0"
+                      Style="{StaticResource MediaFavoriteBadgeStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.FavoriteFilled}"
+                                  RenderMode="Fill"
+                                  Size="13"
+                                  Foreground="{StaticResource Icon.FavoriteBrush}" />
+              </Border>
+              <Border Visibility="{Binding IsPlayed, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="8,8,0,0"
+                      Style="{StaticResource MediaPlayedBadgeStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <controls:AppIcon Data="{StaticResource Icon.Watched}"
+                                    RenderMode="Fill"
+                                    Size="13"
+                                    Foreground="{StaticResource Icon.WatchedBrush}"
+                                    Margin="0,0,5,0" />
+                  <TextBlock Text="已看"
+                             Foreground="{StaticResource Icon.WatchedBrush}"
+                             FontSize="11"
+                             FontWeight="SemiBold" />
+                </StackPanel>
+              </Border>
+            </Grid>
+            <StackPanel Margin="10,9,10,12">
+              <TextBlock Text="{Binding Title}"
+                         Foreground="{StaticResource HomePrimaryTextBrush}"
+                         FontSize="14"
+                         FontWeight="SemiBold"
+                         TextTrimming="CharacterEllipsis" />
+              <TextBlock Text="{Binding YearText}"
+                         Visibility="{Binding HasYear, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Foreground="{StaticResource HomeSecondaryTextBrush}"
+                         FontSize="12"
+                         Margin="0,4,0,0" />
+            </StackPanel>
+          </StackPanel>
+        </Button>
+        <Button Command="{Binding DataContext.PlayMediaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                CommandParameter="{Binding}"
+                Visibility="{Binding IsPlayableMedia, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,96,0,0"
+                ToolTip="{Binding Title, Mode=OneWay, StringFormat=从头播放：{0}}"
+                ToolTipService.ShowOnDisabled="True"
+                AutomationProperties.Name="{Binding Title, Mode=OneWay, StringFormat=从头播放：{0}}"
+                AutomationProperties.HelpText="从头开始播放此媒体。">
+          <Button.Style>
+            <Style TargetType="Button" BasedOn="{StaticResource CardOverlayPlayButton}">
+              <Setter Property="Opacity" Value="0" />
+              <Setter Property="IsHitTestVisible" Value="False" />
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=PosterCardRoot}" Value="True">
+                  <Setter Property="Opacity" Value="1" />
+                  <Setter Property="IsHitTestVisible" Value="True" />
+                  <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                      <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="0"
+                                         To="1"
+                                         Duration="0:0:0.14" />
+                      </Storyboard>
+                    </BeginStoryboard>
+                  </DataTrigger.EnterActions>
+                  <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                      <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="1"
+                                         To="0"
+                                         Duration="0:0:0.14" />
+                      </Storyboard>
+                    </BeginStoryboard>
+                  </DataTrigger.ExitActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=PosterCardRoot}" Value="True">
+                  <Setter Property="Opacity" Value="1" />
+                  <Setter Property="IsHitTestVisible" Value="True" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsPreparingPlayback}" Value="True">
+                  <Setter Property="Opacity" Value="1" />
+                  <Setter Property="IsHitTestVisible" Value="False" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </Button.Style>
+        </Button>
+        <Border Visibility="{Binding IsPreparingPlayback, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Background="#E6101721"
+                BorderBrush="#32FFFFFF"
+                BorderThickness="1"
+                CornerRadius="6"
+                Padding="9,4"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,154,0,0"
+                Panel.ZIndex="21"
+                IsHitTestVisible="False">
+          <TextBlock Text="正在准备播放..."
+                     Foreground="#F4F7FB"
+                     FontSize="11"
+                     AutomationProperties.LiveSetting="Polite" />
+        </Border>
+      </Grid>
+    </DataTemplate>
+
+    <Style x:Key="HomePosterItemsControlStyle" TargetType="ItemsControl">
+      <Setter Property="Margin" Value="0,0,24,0" />
+      <Setter Property="ItemTemplate" Value="{StaticResource HomePosterCardTemplate}" />
+      <Setter Property="ItemsPanel">
+        <Setter.Value>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" />
+          </ItemsPanelTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <DataTemplate x:Key="HomeMediaSectionTemplate">
+      <StackPanel Margin="0,24,0,0">
+        <Grid Margin="0,0,0,14">
+          <TextBlock Text="{Binding Title}" Style="{StaticResource SectionTitleStyle}" />
+          <Button Command="{Binding DataContext.OpenSectionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  CommandParameter="{Binding Id}"
+                  AutomationProperties.AutomationId="{Binding Id, StringFormat=Home.ViewAll.{0}}"
+                  AutomationProperties.Name="{Binding Title, StringFormat=查看全部{0}}"
+                  ToolTip="{Binding Title, StringFormat=查看全部{0}}"
+                  Style="{StaticResource ViewAllButtonStyle}" />
+        </Grid>
+        <StackPanel Visibility="{Binding IsLoadFailed, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,12">
+          <TextBlock Text="暂时无法加载此分类"
+                     Foreground="{StaticResource HomeSecondaryTextBrush}"
+                     FontSize="14"
+                     VerticalAlignment="Center" />
+          <Button Command="{Binding DataContext.LoadCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  Content="重新加载"
+                  Margin="16,0,0,0"
+                  Style="{StaticResource AppPrimaryButtonStyle}" />
+        </StackPanel>
+        <TextBlock Text="{Binding Title, StringFormat=暂无{0}}"
+                   Visibility="{Binding IsEmpty, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Foreground="{StaticResource HomeSecondaryTextBrush}"
+                   FontSize="14"
+                   Margin="0,0,0,4" />
+        <Grid Tag="HomeMediaSectionRow"
+              Background="Transparent"
+              MouseEnter="OnCategoryRowMouseEnter"
+              MouseLeave="OnCategoryRowMouseLeave"
+              IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+          <ScrollViewer x:Name="CategoryScrollViewer"
+                        Visibility="{Binding HasItems, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        HorizontalScrollBarVisibility="Hidden"
+                         VerticalScrollBarVisibility="Disabled"
+                         Loaded="OnHorizontalRowLoaded"
+                         PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                        PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                        ScrollChanged="OnHorizontalRowScrollChanged"
+                        SizeChanged="OnHorizontalRowSizeChanged">
+            <ItemsControl ItemsSource="{Binding Items}"
+                          Style="{StaticResource HomePosterItemsControlStyle}" />
+          </ScrollViewer>
+          <Button Tag="{Binding ElementName=CategoryScrollViewer}"
+                  ToolTip="{Binding Title, StringFormat=向左滚动{0}}"
+                  AutomationProperties.Name="{Binding Title, StringFormat=向左滚动{0}}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnCategoryLeftClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="20" />
+          </Button>
+          <Button Tag="{Binding ElementName=CategoryScrollViewer}"
+                  ToolTip="{Binding Title, StringFormat=向右滚动{0}}"
+                  AutomationProperties.Name="{Binding Title, StringFormat=向右滚动{0}}"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnCategoryRightClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="20" />
+          </Button>
+        </Grid>
+      </StackPanel>
+    </DataTemplate>
+
+    <Style x:Key="CardButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource MediaSurfaceCardButtonStyle}">
+      <Setter Property="Width" Value="160" />
+      <Setter Property="Margin" Value="0,0,16,0" />
+    </Style>
+
+    <Style x:Key="ContinueCardButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource CardButtonStyle}">
+      <Setter Property="Width" Value="260" />
+      <Setter Property="Margin" Value="0,0,18,0" />
+    </Style>
+
+    <Style x:Key="HeroButtonStyle" TargetType="Button">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="{StaticResource HomeSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <controls:RoundedClipBorder x:Name="HeroChrome"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="16">
+              <ContentPresenter />
+            </controls:RoundedClipBorder>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="HeroChrome" Property="BorderBrush" Value="#32FFFFFF" />
+                <Setter TargetName="HeroChrome" Property="Background" Value="#111923" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="HeroChrome" Property="BorderBrush" Value="#78D36F" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="LibraryButtonStyle" TargetType="Button">
+      <Setter Property="Width" Value="176" />
+      <Setter Property="Margin" Value="6,0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid x:Name="LibraryRoot">
+              <Border x:Name="LibraryChrome"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      CornerRadius="10">
+                <Border.Background>
+                  <SolidColorBrush x:Name="LibraryBackgroundBrush" Color="#151D27" />
+                </Border.Background>
+                <Border.BorderBrush>
+                  <SolidColorBrush x:Name="LibraryBorderBrush" Color="#00000000" />
+                </Border.BorderBrush>
+                <ContentPresenter HorizontalAlignment="Stretch" />
+              </Border>
+              <Border x:Name="LibraryFocusRing"
+                      BorderBrush="Transparent"
+                      BorderThickness="2"
+                      CornerRadius="10"
+                      IsHitTestVisible="False" />
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <ColorAnimation Storyboard.TargetName="LibraryBackgroundBrush"
+                                      Storyboard.TargetProperty="Color"
+                                      To="#1D2834"
+                                      Duration="0:0:0.14" />
+                      <ColorAnimation Storyboard.TargetName="LibraryBorderBrush"
+                                      Storyboard.TargetProperty="Color"
+                                      To="#38FFFFFF"
+                                      Duration="0:0:0.14" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <ColorAnimation Storyboard.TargetName="LibraryBackgroundBrush"
+                                      Storyboard.TargetProperty="Color"
+                                      To="#151D27"
+                                      Duration="0:0:0.14" />
+                      <ColorAnimation Storyboard.TargetName="LibraryBorderBrush"
+                                      Storyboard.TargetProperty="Color"
+                                      To="#00000000"
+                                      Duration="0:0:0.14" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.ExitActions>
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="LibraryFocusRing" Property="BorderBrush" Value="#78D36F" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="LibraryRoot" Property="Opacity" Value="0.45" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="HeroNavigationButtonStyle" TargetType="Button">
+      <Setter Property="Width" Value="44" />
+      <Setter Property="Height" Value="44" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="#C0101721" />
+      <Setter Property="BorderBrush" Value="#70455362" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Foreground" Value="#F4F7FB" />
+      <Setter Property="FontSize" Value="28" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Opacity" Value="0.18" />
+      <Setter Property="Panel.ZIndex" Value="20" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="NavigationChrome"
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="22">
+              <ContentPresenter HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,-3,0,0" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="NavigationChrome" Property="Background" Value="#F0222C38" />
+                <Setter TargetName="NavigationChrome" Property="BorderBrush" Value="#AA78D36F" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="NavigationChrome" Property="Background" Value="#F02B3846" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="NavigationChrome" Property="BorderBrush" Value="#78D36F" />
+                <Setter Property="Opacity" Value="1" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="HeroIndicatorButtonStyle" TargetType="Button">
+      <Setter Property="Width" Value="28" />
+      <Setter Property="Height" Value="28" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="IsTabStop" Value="False" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="IndicatorChrome"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="14">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="IndicatorChrome" Property="Background" Value="#332A3542" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="LibraryIconStyle" TargetType="Image">
+      <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibraryMovie.png" />
+      <Setter Property="Width" Value="32" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="Stretch" Value="Uniform" />
+      <Setter Property="SnapsToDevicePixels" Value="True" />
+      <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding Type}" Value="电影">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibraryMovie.png" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Type}" Value="电视剧">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibrarySeries.png" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Type}" Value="电视节目">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibrarySeries.png" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Type}" Value="动画">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibraryAnimation.png" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Type}" Value="合集">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibraryBoxSet.png" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Type}" Value="播放列表">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibraryPlaylist.png" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Name}" Value="动画">
+          <Setter Property="Source" Value="/EmbyPlayer.UI;component/Assets/HomeIcons/Icon.LibraryAnimation.png" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="HomeTopButtonStyle" TargetType="Button">
+      <Setter Property="Height" Value="44" />
+      <Setter Property="Padding" Value="18,0" />
+      <Setter Property="MinWidth" Value="96" />
+      <Setter Property="Background" Value="{StaticResource HomeCardSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource HomeBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Foreground" Value="{StaticResource HomePrimaryTextBrush}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="TopButtonChrome"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="TopButtonChrome" Property="Background" Value="#1D2834" />
+                <Setter TargetName="TopButtonChrome" Property="BorderBrush" Value="#3A4A5A" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="TopButtonChrome" Property="Background" Value="#243140" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="TopButtonChrome" Property="BorderBrush" Value="#78D36F" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="TopButtonChrome" Property="Opacity" Value="0.45" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="HomeIconButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource HomeTopButtonStyle}">
+      <Setter Property="Width" Value="50" />
+      <Setter Property="MinWidth" Value="50" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.Background>
+      <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#070B10" Offset="0" />
+        <GradientStop Color="#0B1018" Offset="0.48" />
+        <GradientStop Color="#05080C" Offset="1" />
+      </LinearGradientBrush>
+    </Grid.Background>
+    <controls:PageStateView IsLoading="{Binding IsInitialLoading, Mode=OneWay}"
+                            HasError="{Binding IsErrorVisible, Mode=OneWay}"
+                            ErrorMessage="{Binding ErrorMessage, Mode=OneWay}"
+                            LoadingMessage="&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x9996;&#x9875;..."
+                            ErrorTitle="&#x9996;&#x9875;&#x52A0;&#x8F7D;&#x5931;&#x8D25;"
+                            ErrorHint="&#x8BF7;&#x68C0;&#x67E5;&#x7F51;&#x7EDC;&#x6216;&#x670D;&#x52A1;&#x5668;&#x72B6;&#x6001;&#x540E;&#x91CD;&#x8BD5;&#x3002;"
+                            ErrorIcon="{StaticResource Icon.Error}"
+                            RetryCommand="{Binding RetryCommand}"
+                            RetryToolTip="&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x9996;&#x9875;&#x5185;&#x5BB9;"
+                            RetryAutomationName="&#x91CD;&#x8BD5;&#x52A0;&#x8F7D;&#x9996;&#x9875;" />
+
+    <ScrollViewer x:Name="HomePageScrollViewer"
+                  Visibility="{Binding IsContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  PreviewMouseWheel="OnHomePagePreviewMouseWheel"
+                  VerticalScrollBarVisibility="Auto">
+      <StackPanel x:Name="HomeContentPanel"
+                  Margin="40,24,40,36">
+        <StackPanel.MaxWidth>1580</StackPanel.MaxWidth>
+        <Border Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0,0,0,12"
+                Padding="12,8"
+                CornerRadius="6"
+                Background="#B01A2028">
+          <TextBlock Text="&#x6B63;&#x5728;&#x5237;&#x65B0;&#x9996;&#x9875;&#x5185;&#x5BB9;..."
+                     Foreground="{StaticResource TextSecondaryBrush}"
+                     FontSize="12" />
+        </Border>
+        <Border Visibility="{Binding IsRefreshErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0,0,0,12"
+                Padding="12,8"
+                CornerRadius="6"
+                Background="#B02A171A"
+                BorderBrush="#5AFF7777"
+                BorderThickness="1">
+          <TextBlock Text="{Binding ErrorMessage, Mode=OneWay}"
+                     Foreground="#FF9A9A"
+                     FontSize="12"
+                     TextWrapping="Wrap" />
+        </Border>
+        <Grid x:Name="HomeHeaderGrid">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <TextBlock x:Name="HomeWelcomeTextBlock"
+                     Text="{Binding WelcomeText, Mode=OneWay}"
+                     Foreground="{StaticResource HomePrimaryTextBrush}"
+                     FontSize="28"
+                     FontWeight="SemiBold"
+                     TextTrimming="CharacterEllipsis"
+                     VerticalAlignment="Center" />
+          <WrapPanel x:Name="HomeHeaderActionsPanel"
+                     Grid.Column="1"
+                     MaxWidth="660"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center">
+            <TextBlock Text="{Binding SearchPlaceholderMessage, Mode=OneWay}"
+                       Visibility="{Binding IsSearchPlaceholderMessageVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Foreground="{StaticResource TextSecondaryBrush}"
+                       VerticalAlignment="Center"
+                       Margin="0,0,12,0" />
+            <TextBox x:Name="HomeSearchTextBox"
+                     MinWidth="180"
+                     Text="{Binding SearchKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource AppSearchTextBoxStyle}"
+                     ToolTip="输入关键词后按回车搜索"
+                     AutomationProperties.Name="搜索关键词"
+                     AutomationProperties.HelpText="输入电影、电视剧、单集或合集名称进行搜索。">
+              <TextBox.InputBindings>
+                <KeyBinding Key="Enter"
+                            Command="{Binding SubmitSearchCommand}" />
+              </TextBox.InputBindings>
+            </TextBox>
+            <Button x:Name="HomeWatchLaterButton" Command="{Binding OpenWatchLaterCommand}"
+                    Margin="10,0,0,0" ToolTip="稍后观看 · 保存在本机的待看作品"
+                    AutomationProperties.Name="稍后观看"
+                    Style="{StaticResource HomeIconButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.WatchLater}"
+                                Style="{StaticResource SolidActionIcon}" />
+            </Button>
+            <Button x:Name="HomeFavoritesButton" Command="{Binding OpenFavoritesCommand}"
+                    Margin="10,0,0,0"
+                    ToolTip="查看已收藏的媒体"
+                    AutomationProperties.Name="我的收藏"
+                    AutomationProperties.HelpText="打开已收藏电影、电视剧和视频列表。"
+                    Style="{StaticResource HomeIconButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.FavoriteFilled}"
+                                Style="{StaticResource SolidActionIcon}" />
+            </Button>
+            <Button ToolTip="打开设置"
+                    AutomationProperties.Name="设置"
+                    AutomationProperties.HelpText="打开账号和播放器偏好设置。"
+                    Command="{Binding OpenSettingsCommand}"
+                    Margin="10,0,0,0"
+                    Style="{StaticResource HomeIconButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.Settings}"
+                                Style="{StaticResource SolidActionIcon}" />
+            </Button>
+            <Button x:Name="HomeQueueButton" Content="{Binding PendingQueueText}"
+                    Visibility="{Binding HasPendingQueue, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding OpenPlaybackQueueCommand}" Margin="10,0,0,0"
+                    AutomationProperties.Name="播放队列" ToolTip="查看和调整本次会话的待播顺序"
+                    Style="{StaticResource HomeTopButtonStyle}" />
+          </WrapPanel>
+        </Grid>
+
+        <TextBlock Text="{Binding PlaybackErrorMessage, Mode=OneWay}"
+                   Visibility="{Binding IsPlaybackErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Foreground="#F3A6A6"
+                   FontSize="13"
+                   Margin="0,10,0,-12"
+                   AutomationProperties.LiveSetting="Assertive" />
+
+        <Grid x:Name="HeroCarouselRoot"
+              Visibility="{Binding HasHeroCard, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Margin="0,24,0,22"
+              MouseEnter="OnHeroPointerEntered"
+              MouseLeave="OnHeroPointerExited"
+              IsKeyboardFocusWithinChanged="OnHeroKeyboardFocusWithinChanged"
+              PreviewMouseDown="OnHeroPreviewMouseDown"
+              PreviewKeyDown="OnHeroPreviewKeyDown">
+          <Button Command="{Binding OpenMediaCommand}"
+                  CommandParameter="{Binding HeroCard, Mode=OneWay}"
+                  AutomationProperties.Name="{Binding HeroCard.Title, Mode=OneWay, StringFormat=今日推荐：{0}}"
+                  AutomationProperties.HelpText="打开当前推荐媒体的详情页。"
+                  Style="{StaticResource HeroButtonStyle}">
+            <Grid x:Name="HeroVisual" Height="310">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="42*" />
+                <ColumnDefinition Width="58*" />
+              </Grid.ColumnDefinitions>
+              <Border Grid.ColumnSpan="2" Background="#101722" />
+              <controls:AuthenticatedImage Grid.ColumnSpan="2"
+                                           ImageUrl="{Binding HeroCard.HeroImageUrl, Mode=OneWay}"
+                                           PlaceholderText="推荐图片"
+                                           Stretch="UniformToFill"
+                                           Opacity="0.92" />
+              <Border Grid.Column="1"
+                      Visibility="{Binding HeroCard.IsFavorite, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Margin="0,14,14,0"
+                      Style="{StaticResource MediaFavoriteBadgeStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.FavoriteFilled}"
+                                  RenderMode="Fill"
+                                  Size="13"
+                                  Foreground="{StaticResource Icon.FavoriteBrush}" />
+              </Border>
+              <Border Grid.Column="1"
+                      Visibility="{Binding HeroCard.IsPlayed, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="14,14,0,0"
+                      Style="{StaticResource MediaPlayedBadgeStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <controls:AppIcon Data="{StaticResource Icon.Watched}"
+                                    RenderMode="Fill"
+                                    Size="13"
+                                    Foreground="{StaticResource Icon.WatchedBrush}"
+                                    Margin="0,0,5,0" />
+                  <TextBlock Text="已看"
+                             Foreground="{StaticResource Icon.WatchedBrush}"
+                             FontSize="11"
+                             FontWeight="SemiBold" />
+                </StackPanel>
+              </Border>
+              <Rectangle Grid.ColumnSpan="2">
+                <Rectangle.Fill>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF070B10" Offset="0" />
+                    <GradientStop Color="#F8070B10" Offset="0.26" />
+                    <GradientStop Color="#E6070B10" Offset="0.4" />
+                    <GradientStop Color="#B8070B10" Offset="0.54" />
+                    <GradientStop Color="#68070B10" Offset="0.68" />
+                    <GradientStop Color="#24070B10" Offset="0.82" />
+                    <GradientStop Color="#00070B10" Offset="1" />
+                  </LinearGradientBrush>
+                </Rectangle.Fill>
+              </Rectangle>
+              <Rectangle Grid.ColumnSpan="2">
+                <Rectangle.Fill>
+                  <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                    <GradientStop Color="#9207090D" Offset="0" />
+                    <GradientStop Color="#3607090D" Offset="0.3" />
+                    <GradientStop Color="#0010151B" Offset="0.58" />
+                  </LinearGradientBrush>
+                </Rectangle.Fill>
+              </Rectangle>
+              <StackPanel Grid.Column="0"
+                          MaxWidth="520"
+                          Margin="40,30,32,32"
+                          VerticalAlignment="Center">
+                <TextBlock Text="今日推荐"
+                           Foreground="{StaticResource AccentBrush}"
+                           FontSize="14"
+                           FontWeight="SemiBold" />
+                <TextBlock x:Name="HeroTitleTextBlock"
+                           Text="{Binding HeroCard.Title, Mode=OneWay}"
+                           Margin="0,10,0,0"
+                           Foreground="{StaticResource HomePrimaryTextBrush}"
+                           FontSize="42"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"
+                           TextTrimming="CharacterEllipsis"
+                           MaxHeight="104" />
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                  <TextBlock Text="{Binding HeroCard.YearText, Mode=OneWay}"
+                             Visibility="{Binding HeroCard.HasYear, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Foreground="#C8D0DA"
+                             FontSize="14" />
+                  <TextBlock Text="  ·  "
+                             Visibility="{Binding HeroCard.HasYear, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Foreground="#7F8A96"
+                             FontSize="14" />
+                  <TextBlock Text="{Binding HeroCard.Type, Mode=OneWay}"
+                             Foreground="#C8D0DA"
+                             FontSize="14" />
+                </StackPanel>
+                <Border Margin="0,24,0,0"
+                        Padding="22,12"
+                        HorizontalAlignment="Left"
+                        CornerRadius="24"
+                        Background="{StaticResource AccentBrush}">
+                  <StackPanel Orientation="Horizontal">
+                    <controls:AppIcon Data="{StaticResource Icon.Info}"
+                                      RenderMode="Stroke"
+                                      Size="16"
+                                      Margin="0,0,10,0"
+                                      Foreground="#FFFFFF" />
+                    <TextBlock Text="打开详情"
+                               Foreground="#FFFFFF"
+                               FontWeight="SemiBold" />
+                  </StackPanel>
+                </Border>
+              </StackPanel>
+            </Grid>
+          </Button>
+
+          <Button x:Name="HeroPreviousButton"
+                  Command="{Binding PreviousHeroCommand}"
+                  Visibility="{Binding HasMultipleHeroCards, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Margin="14,0,0,0"
+                  ToolTip="上一个推荐"
+                  AutomationProperties.Name="上一个推荐">
+            <Button.Content>
+              <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}"
+                                RenderMode="Stroke"
+                                Size="20" />
+            </Button.Content>
+            <Button.Style>
+              <Style TargetType="Button" BasedOn="{StaticResource HeroNavigationButtonStyle}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsMouseOver, ElementName=HeroCarouselRoot}" Value="True">
+                    <Setter Property="Opacity" Value="0.92" />
+                  </DataTrigger>
+                  <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=HeroCarouselRoot}" Value="True">
+                    <Setter Property="Opacity" Value="0.92" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </Button.Style>
+          </Button>
+
+          <Button x:Name="HeroNextButton"
+                  Command="{Binding NextHeroCommand}"
+                  Visibility="{Binding HasMultipleHeroCards, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Margin="0,0,14,0"
+                  ToolTip="下一个推荐"
+                  AutomationProperties.Name="下一个推荐">
+            <Button.Content>
+              <controls:AppIcon Data="{StaticResource Icon.ChevronRight}"
+                                RenderMode="Stroke"
+                                Size="20" />
+            </Button.Content>
+            <Button.Style>
+              <Style TargetType="Button" BasedOn="{StaticResource HeroNavigationButtonStyle}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsMouseOver, ElementName=HeroCarouselRoot}" Value="True">
+                    <Setter Property="Opacity" Value="0.92" />
+                  </DataTrigger>
+                  <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=HeroCarouselRoot}" Value="True">
+                    <Setter Property="Opacity" Value="0.92" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </Button.Style>
+          </Button>
+
+          <ItemsControl ItemsSource="{Binding HeroItems}"
+                        Visibility="{Binding HasMultipleHeroCards, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,8"
+                        Panel.ZIndex="25"
+                        AutomationProperties.Name="推荐轮播位置">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Button Command="{Binding DataContext.SelectHeroCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding}"
+                        ToolTip="{Binding Title, Mode=OneWay, StringFormat=切换推荐：{0}}"
+                        AutomationProperties.Name="{Binding AutomationName, Mode=OneWay}"
+                        Style="{StaticResource HeroIndicatorButtonStyle}">
+                  <Grid Width="24" Height="24">
+                    <Border Height="6"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            CornerRadius="3">
+                      <Border.Style>
+                        <Style TargetType="Border">
+                          <Setter Property="Width" Value="6" />
+                          <Setter Property="Background" Value="#7B8795" />
+                          <Setter Property="Opacity" Value="0.72" />
+                          <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected, Mode=OneWay}" Value="True">
+                              <Setter Property="Width" Value="20" />
+                              <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+                              <Setter Property="Opacity" Value="1" />
+                            </DataTrigger>
+                          </Style.Triggers>
+                        </Style>
+                      </Border.Style>
+                    </Border>
+                  </Grid>
+                </Button>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Grid>
+
+        <controls:PageStateView IsEmpty="{Binding IsLibrariesEmpty, Mode=OneWay}"
+                                EmptyIcon="{StaticResource Icon.Empty}"
+                                EmptyTitle="&#x6682;&#x65E0;&#x53EF;&#x7528;&#x5A92;&#x4F53;&#x5E93;"
+                                EmptyMessage="&#x8BF7;&#x786E;&#x8BA4;&#x5F53;&#x524D;&#x8D26;&#x53F7;&#x6709;&#x53EF;&#x8BBF;&#x95EE;&#x7684;&#x5A92;&#x4F53;&#x5E93;&#x3002;"
+                                Margin="0,0,0,12" />
+        <Grid x:Name="LibraryRow"
+              Margin="0,0,0,20"
+              MouseEnter="OnLibraryRowMouseEnter"
+              MouseLeave="OnLibraryRowMouseLeave"
+              IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="LibraryLeftArrowColumn" Width="0" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition x:Name="LibraryRightArrowColumn" Width="0" />
+          </Grid.ColumnDefinitions>
+          <ScrollViewer x:Name="LibraryScrollViewer"
+                        Grid.Column="1"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Disabled"
+                        PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                        PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                        ScrollChanged="OnHorizontalRowScrollChanged"
+                        SizeChanged="OnHorizontalRowSizeChanged">
+            <ItemsControl x:Name="LibraryItemsControl"
+                          ItemsSource="{Binding Libraries}"
+                          Margin="-6,0,-6,0"
+                          AutomationProperties.Name="媒体库快捷入口">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Button Command="{Binding DataContext.OpenLibraryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          CommandParameter="{Binding}"
+                          ToolTip="{Binding Name, Mode=OneWay, StringFormat=打开媒体库：{0}}"
+                          AutomationProperties.Name="{Binding Name, Mode=OneWay, StringFormat=打开媒体库：{0}}"
+                          AutomationProperties.HelpText="打开这个媒体库，浏览其中的媒体内容。"
+                          Width="{Binding LibraryCardWidth, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                          Style="{StaticResource LibraryButtonStyle}">
+                    <Grid Height="72">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                      </Grid.ColumnDefinitions>
+                      <Grid Width="38"
+                            Height="38"
+                            Margin="14,0,0,0"
+                            VerticalAlignment="Center">
+                        <Image Style="{StaticResource LibraryIconStyle}" />
+                      </Grid>
+                      <StackPanel Grid.Column="1"
+                                  Margin="12,8,6,8"
+                                  VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Name}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource HomePrimaryTextBrush}"
+                                   TextTrimming="CharacterEllipsis" />
+                      </StackPanel>
+                      <controls:AppIcon Grid.Column="2" Margin="0,0,14,0" VerticalAlignment="Center">
+                        <controls:AppIcon.Style>
+                          <Style TargetType="{x:Type controls:AppIcon}"
+                                 BasedOn="{StaticResource {x:Type controls:AppIcon}}">
+                            <Setter Property="Data" Value="{StaticResource Icon.ChevronRight}" />
+                            <Setter Property="RenderMode" Value="Stroke" />
+                            <Setter Property="Size" Value="20" />
+                            <Setter Property="Foreground" Value="#8B95A1" />
+                            <Setter Property="RenderTransform">
+                              <Setter.Value>
+                                <TranslateTransform X="0" />
+                              </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                              <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                <Setter Property="Foreground" Value="#D7DEE7" />
+                                <Setter Property="RenderTransform">
+                                  <Setter.Value>
+                                    <TranslateTransform X="2" />
+                                  </Setter.Value>
+                                </Setter>
+                              </DataTrigger>
+                            </Style.Triggers>
+                          </Style>
+                        </controls:AppIcon.Style>
+                      </controls:AppIcon>
+                    </Grid>
+                  </Button>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+          <Button x:Name="LibraryLeftButton"
+                  Grid.Column="0"
+                  ToolTip="向左滚动媒体库入口"
+                  AutomationProperties.Name="向左滚动媒体库入口"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnLibraryLeftClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}"
+                              RenderMode="Stroke"
+                              Size="20" />
+          </Button>
+          <Button x:Name="LibraryRightButton"
+                  Grid.Column="2"
+                  ToolTip="向右滚动媒体库入口"
+                  AutomationProperties.Name="向右滚动媒体库入口"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnLibraryRightClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronRight}"
+                              RenderMode="Stroke"
+                              Size="20" />
+          </Button>
+        </Grid>
+
+        <Grid Margin="0,8,0,14">
+          <TextBlock Text="继续观看" Style="{StaticResource SectionTitleStyle}" />
+          <Button x:Name="ViewAllContinueWatchingButton"
+                  Command="{Binding OpenSectionCommand}"
+                  CommandParameter="{x:Static home:HomeSectionKind.ContinueWatching}"
+                  AutomationProperties.AutomationId="Home.ViewAll.ContinueWatching"
+                  AutomationProperties.Name="查看全部继续观看"
+                  ToolTip="查看全部继续观看"
+                  Style="{StaticResource ViewAllButtonStyle}" />
+        </Grid>
+        <controls:PageStateView IsEmpty="{Binding IsContinueWatchingEmpty, Mode=OneWay}"
+                                EmptyIcon="{StaticResource Icon.Empty}"
+                                EmptyTitle="&#x6682;&#x65E0;&#x7EE7;&#x7EED;&#x89C2;&#x770B;&#x5185;&#x5BB9;"
+                                EmptyMessage="&#x5F00;&#x59CB;&#x64AD;&#x653E;&#x5F71;&#x7247;&#x6216;&#x5355;&#x96C6;&#x540E;&#xFF0C;&#x8FD9;&#x91CC;&#x4F1A;&#x663E;&#x793A;&#x53EF;&#x7EE7;&#x7EED;&#x64AD;&#x653E;&#x7684;&#x5185;&#x5BB9;&#x3002;"
+                                Margin="0,0,0,8" />
+        <Grid x:Name="ContinueWatchingRow"
+              MouseEnter="OnContinueWatchingRowMouseEnter"
+              MouseLeave="OnContinueWatchingRowMouseLeave"
+              IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+          <ScrollViewer x:Name="ContinueWatchingScrollViewer"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Disabled"
+                        PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                        PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                        ScrollChanged="OnHorizontalRowScrollChanged"
+                        SizeChanged="OnHorizontalRowSizeChanged">
+            <ItemsControl ItemsSource="{Binding ContinueWatching}"
+                          Margin="0,0,24,0">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Grid x:Name="ContinueCardRoot"
+                        Width="260"
+                        Margin="0,0,18,0"
+                        KeyboardNavigation.TabNavigation="Local">
+                    <Button Command="{Binding DataContext.OpenContinueMediaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            ToolTip="{Binding Title, Mode=OneWay, StringFormat=打开详情：{0}}"
+                            AutomationProperties.Name="{Binding Title, Mode=OneWay, StringFormat=打开详情：{0}}"
+                            Width="Auto"
+                            Margin="0"
+                            Style="{StaticResource ContinueCardButtonStyle}">
+                      <StackPanel>
+                      <Grid Height="146" Background="#111821">
+                        <TextBlock Text="缩略图"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                        <controls:AuthenticatedImage ImageUrl="{Binding HeroImageUrl, Mode=OneWay}"
+                                                     PlaceholderText="缩略图"
+                                                     Stretch="UniformToFill">
+                          <controls:AuthenticatedImage.Style>
+                            <Style TargetType="{x:Type controls:AuthenticatedImage}">
+                              <Setter Property="Opacity" Value="0.94" />
+                              <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=ContinueCardRoot}" Value="True">
+                                  <Setter Property="Opacity" Value="1" />
+                                </DataTrigger>
+                              </Style.Triggers>
+                            </Style>
+                          </controls:AuthenticatedImage.Style>
+                        </controls:AuthenticatedImage>
+                        <Border Height="1"
+                                Background="#26313D"
+                                VerticalAlignment="Bottom"
+                                IsHitTestVisible="False" />
+                        <Border Background="#52000000"
+                                IsHitTestVisible="False">
+                          <Border.Style>
+                            <Style TargetType="Border">
+                              <Setter Property="Opacity" Value="0" />
+                              <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=ContinueCardRoot}" Value="True">
+                                  <Setter Property="Opacity" Value="1" />
+                                  <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                      <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         From="0"
+                                                         To="1"
+                                                         Duration="0:0:0.14" />
+                                      </Storyboard>
+                                    </BeginStoryboard>
+                                  </DataTrigger.EnterActions>
+                                  <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                      <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         From="1"
+                                                         To="0"
+                                                         Duration="0:0:0.14" />
+                                      </Storyboard>
+                                    </BeginStoryboard>
+                                  </DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=ContinueCardRoot}" Value="True">
+                                  <Setter Property="Opacity" Value="1" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsPreparingPlayback}" Value="True">
+                                  <Setter Property="Opacity" Value="1" />
+                                </DataTrigger>
+                              </Style.Triggers>
+                            </Style>
+                          </Border.Style>
+                        </Border>
+                        <Border Visibility="{Binding IsFavorite, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="0,8,8,0"
+                                Style="{StaticResource MediaFavoriteBadgeStyle}">
+                          <controls:AppIcon Data="{StaticResource Icon.FavoriteFilled}"
+                                            RenderMode="Fill"
+                                            Size="13"
+                                            Foreground="{StaticResource Icon.FavoriteBrush}" />
+                        </Border>
+                        <Border Visibility="{Binding IsPlayed, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Margin="8,8,0,0"
+                                Style="{StaticResource MediaPlayedBadgeStyle}">
+                          <StackPanel Orientation="Horizontal">
+                            <controls:AppIcon Data="{StaticResource Icon.Watched}"
+                                              RenderMode="Fill"
+                                              Size="13"
+                                              Foreground="{StaticResource Icon.WatchedBrush}"
+                                              Margin="0,0,5,0" />
+                            <TextBlock Text="已看"
+                                       Foreground="{StaticResource Icon.WatchedBrush}"
+                                       FontSize="11"
+                                       FontWeight="SemiBold" />
+                          </StackPanel>
+                        </Border>
+                      </Grid>
+                      <StackPanel Margin="10,9,10,10">
+                        <TextBlock Text="{Binding Title}"
+                                   Foreground="{StaticResource HomePrimaryTextBrush}"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding SubtitleText}"
+                                   Visibility="{Binding HasSubtitle, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Foreground="{StaticResource HomeSecondaryTextBrush}"
+                                   FontSize="12"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="0,4,0,0" />
+                        <ProgressBar Value="{Binding ProgressValue, Mode=OneWay}"
+                                     Visibility="{Binding HasProgress, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Height="3"
+                                     Margin="0,8,0,0"
+                                     Style="{StaticResource MediaCardProgressBarStyle}" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Button>
+                    <Button Command="{Binding DataContext.ContinueMediaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            Visibility="{Binding IsPlayableMedia, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,49,0,0"
+                            ToolTip="{Binding Title, Mode=OneWay, StringFormat=继续播放：{0}}"
+                            ToolTipService.ShowOnDisabled="True"
+                            AutomationProperties.Name="{Binding Title, Mode=OneWay, StringFormat=继续播放：{0}}"
+                            AutomationProperties.HelpText="从上次观看位置继续播放。">
+                      <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource CardOverlayPlayButton}">
+                          <Setter Property="Opacity" Value="0" />
+                          <Setter Property="IsHitTestVisible" Value="False" />
+                          <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=ContinueCardRoot}" Value="True">
+                              <Setter Property="Opacity" Value="1" />
+                              <Setter Property="IsHitTestVisible" Value="True" />
+                              <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                  <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                     From="0"
+                                                     To="1"
+                                                     Duration="0:0:0.14" />
+                                  </Storyboard>
+                                </BeginStoryboard>
+                              </DataTrigger.EnterActions>
+                              <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                  <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                     From="1"
+                                                     To="0"
+                                                     Duration="0:0:0.14" />
+                                  </Storyboard>
+                                </BeginStoryboard>
+                              </DataTrigger.ExitActions>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=ContinueCardRoot}" Value="True">
+                              <Setter Property="Opacity" Value="1" />
+                              <Setter Property="IsHitTestVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsPreparingPlayback}" Value="True">
+                              <Setter Property="Opacity" Value="1" />
+                              <Setter Property="IsHitTestVisible" Value="False" />
+                            </DataTrigger>
+                          </Style.Triggers>
+                        </Style>
+                      </Button.Style>
+                    </Button>
+                    <Border Visibility="{Binding IsPreparingPlayback, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Background="#E6101721"
+                            BorderBrush="#32FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="9,4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,108,0,0"
+                            Panel.ZIndex="21"
+                            IsHitTestVisible="False">
+                      <TextBlock Text="正在准备播放..."
+                                 Foreground="#F4F7FB"
+                                 FontSize="11"
+                                 AutomationProperties.LiveSetting="Polite" />
+                    </Border>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+          <Button x:Name="ContinueWatchingLeftButton"
+                  ToolTip="&#x5411;&#x5DE6;&#x6EDA;&#x52A8;"
+                  AutomationProperties.Name="向左滚动继续观看"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnContinueWatchingLeftClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}"
+                              RenderMode="Stroke"
+                              Size="20" />
+          </Button>
+          <Button x:Name="ContinueWatchingRightButton"
+                  ToolTip="&#x5411;&#x53F3;&#x6EDA;&#x52A8;"
+                  AutomationProperties.Name="向右滚动继续观看"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnContinueWatchingRightClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronRight}"
+                              RenderMode="Stroke"
+                              Size="20" />
+          </Button>
+        </Grid>
+
+        <StackPanel x:Name="HomeWatchLaterSection"
+                    Visibility="{Binding HasWatchLaterSection, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <Grid Margin="0,24,0,14">
+            <TextBlock Text="稍后观看" Style="{StaticResource SectionTitleStyle}" />
+            <Button Command="{Binding OpenWatchLaterCommand}" AutomationProperties.Name="查看全部稍后观看"
+                    ToolTip="查看全部稍后观看" Style="{StaticResource ViewAllButtonStyle}" />
+          </Grid>
+          <StackPanel Orientation="Horizontal" Margin="0,0,0,12"
+                      Visibility="{Binding HasWatchLaterPreviewError, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock Text="{Binding WatchLaterPreviewError}" Foreground="{StaticResource TextSecondaryBrush}"
+                       VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite" />
+            <Button Content="重试" Command="{Binding RetryWatchLaterPreviewCommand}"
+                    Margin="12,0,0,0" Style="{StaticResource PageBackButton}" />
+          </StackPanel>
+          <Grid Tag="HomeMediaSectionRow" MouseEnter="OnCategoryRowMouseEnter" MouseLeave="OnCategoryRowMouseLeave"
+                IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
+                          PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel" PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                          Loaded="OnHorizontalRowLoaded" ScrollChanged="OnHorizontalRowScrollChanged" SizeChanged="OnHorizontalRowSizeChanged">
+              <ItemsControl ItemsSource="{Binding WatchLaterPreview}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Button Width="176" Margin="0,0,18,0" ToolTip="{Binding Title}"
+                            Style="{StaticResource MediaSurfaceCardButtonStyle}"
+                            Command="{Binding DataContext.OpenWatchLaterItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}" AutomationProperties.Name="{Binding Title, StringFormat=打开详情：{0}}">
+                      <StackPanel>
+                        <controls:AuthenticatedImage Height="264" ImageUrl="{Binding ImageUrl}" PlaceholderText="海报" Stretch="UniformToFill" />
+                        <StackPanel Margin="10,10,10,12">
+                          <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="14"
+                                     FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                          <TextBlock Text="{Binding ProductionYear, TargetNullValue=年份未知}" Foreground="{StaticResource TextSecondaryBrush}"
+                                     FontSize="12" Margin="0,5,0,0" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Button>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </ScrollViewer>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed"
+                    ToolTip="向左滚动" AutomationProperties.Name="向左滚动稍后观看"
+                    Click="OnCategoryLeftClick" Style="{StaticResource RowArrowButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="20" />
+            </Button>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Collapsed"
+                    ToolTip="向右滚动" AutomationProperties.Name="向右滚动稍后观看"
+                    Click="OnCategoryRightClick" Style="{StaticResource RowArrowButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="20" />
+            </Button>
+          </Grid>
+        </StackPanel>
+
+        <Grid Margin="0,24,0,14">
+          <TextBlock Text="最近添加" Style="{StaticResource SectionTitleStyle}" />
+          <Button x:Name="ViewAllRecentlyAddedButton"
+                  Command="{Binding OpenSectionCommand}"
+                  CommandParameter="{x:Static home:HomeSectionKind.RecentlyAdded}"
+                  AutomationProperties.AutomationId="Home.ViewAll.RecentlyAdded"
+                  AutomationProperties.Name="查看全部最近添加"
+                  ToolTip="查看全部最近添加"
+                  Style="{StaticResource ViewAllButtonStyle}" />
+        </Grid>
+        <controls:PageStateView IsEmpty="{Binding IsRecentlyAddedEmpty, Mode=OneWay}"
+                                EmptyIcon="{StaticResource Icon.Empty}"
+                                EmptyTitle="&#x6682;&#x65E0;&#x6700;&#x8FD1;&#x6DFB;&#x52A0;&#x5185;&#x5BB9;"
+                                EmptyMessage="&#x670D;&#x52A1;&#x5668;&#x6682;&#x65F6;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x6700;&#x8FD1;&#x6DFB;&#x52A0;&#x7684;&#x5A92;&#x4F53;&#x3002;"
+                                Margin="0,0,0,8" />
+        <Grid x:Name="RecentlyAddedRow"
+              MouseEnter="OnRecentlyAddedRowMouseEnter"
+              MouseLeave="OnRecentlyAddedRowMouseLeave"
+              IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+          <ScrollViewer x:Name="RecentlyAddedScrollViewer"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Disabled"
+                        PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                        PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                        ScrollChanged="OnHorizontalRowScrollChanged"
+                        SizeChanged="OnHorizontalRowSizeChanged">
+            <ItemsControl ItemsSource="{Binding RecentlyAdded}"
+                          Style="{StaticResource HomePosterItemsControlStyle}" />
+          </ScrollViewer>
+          <Button x:Name="RecentlyAddedLeftButton"
+                  ToolTip="&#x5411;&#x5DE6;&#x6EDA;&#x52A8;"
+                  AutomationProperties.Name="向左滚动最近添加"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnRecentlyAddedLeftClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}"
+                              RenderMode="Stroke"
+                              Size="20" />
+          </Button>
+          <Button x:Name="RecentlyAddedRightButton"
+                  ToolTip="&#x5411;&#x53F3;&#x6EDA;&#x52A8;"
+                  AutomationProperties.Name="向右滚动最近添加"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Visibility="Collapsed"
+                  Click="OnRecentlyAddedRightClick"
+                  Style="{StaticResource RowArrowButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.ChevronRight}"
+                              RenderMode="Stroke"
+                              Size="20" />
+          </Button>
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding MediaSections}"
+                      ItemTemplate="{StaticResource HomeMediaSectionTemplate}" />
+
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

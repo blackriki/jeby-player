@@ -1,0 +1,476 @@
+<UserControl x:Class="EmbyPlayer.UI.Pages.SearchPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:EmbyPlayer.UI.Controls"
+             Loaded="OnLoaded"
+             Unloaded="OnUnloaded"
+             DataContextChanged="OnDataContextChanged">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <Style x:Key="SearchClearButtonStyle" TargetType="Button">
+      <Setter Property="Width" Value="34" />
+      <Setter Property="Height" Value="34" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Foreground" Value="#A8B0BA" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="Chrome"
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="8">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Chrome" Property="Background" Value="#263442" />
+                <Setter Property="Foreground" Value="#F4F7FB" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Chrome" Property="Background" Value="#1B2835" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Chrome" Property="BorderBrush" Value="#78D36F" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="HistoryTextButtonStyle" TargetType="Button">
+      <Setter Property="MinHeight" Value="36" />
+      <Setter Property="Padding" Value="10,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="Chrome"
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="6"
+                    Padding="{TemplateBinding Padding}">
+              <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Chrome" Property="Background" Value="#1D2732" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Chrome" Property="Background" Value="#233229" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="HistoryChipTextButtonStyle" TargetType="Button">
+      <Setter Property="MinHeight" Value="34" />
+      <Setter Property="Padding" Value="14,0,7,0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="Chrome" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Chrome" Property="Background" Value="#1D2732" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Chrome" Property="Background" Value="#233229" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="HistoryChipDeleteButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource SearchClearButtonStyle}">
+      <Setter Property="Width" Value="30" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="Margin" Value="0,2,3,2" />
+      <Setter Property="Foreground" Value="#718092" />
+    </Style>
+
+    <Style x:Key="PosterButtonStyle" TargetType="Button">
+      <Setter Property="Width" Value="168" />
+      <Setter Property="Margin" Value="0,0,16,22" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="#181B20" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <controls:RoundedClipBorder x:Name="CardChrome"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="10">
+              <ContentPresenter />
+            </controls:RoundedClipBorder>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="CardChrome" Property="Background" Value="#20242B" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="CardChrome" Property="Background" Value="#243029" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="SearchFilterButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource FilterChipButtonStyle}" />
+  </UserControl.Resources>
+
+  <Grid Background="{StaticResource AppBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Border x:Name="FixedBackScrim"
+            Grid.RowSpan="2"
+            Style="{StaticResource FixedPageBackScrim}" />
+
+    <Grid x:Name="FixedPageHeader"
+          Grid.Row="0"
+          Margin="34,28,34,0"
+          Panel.ZIndex="50">
+      <Button x:Name="FixedBackButton"
+              Command="{Binding NavigateHomeCommand}"
+              ToolTip="返回首页"
+              AutomationProperties.Name="返回首页"
+              AutomationProperties.HelpText="返回应用首页。"
+              Style="{StaticResource PageBackButton}">
+        <StackPanel Orientation="Horizontal">
+          <controls:AppIcon Data="{StaticResource Icon.Back}"
+                            RenderMode="Stroke"
+                            Style="{StaticResource PageBackButtonIcon}" />
+          <TextBlock Text="返回首页" VerticalAlignment="Center" />
+        </StackPanel>
+      </Button>
+    </Grid>
+
+    <ScrollViewer x:Name="SearchScrollViewer"
+                  Grid.Row="1"
+                  VerticalScrollBarVisibility="Auto"
+                  ScrollChanged="OnScrollChanged">
+      <StackPanel Margin="34,0,34,36">
+        <TextBlock Text="搜索"
+                   Foreground="{StaticResource TextPrimaryBrush}"
+                   FontSize="30"
+                   FontWeight="SemiBold" />
+
+        <Grid Width="640"
+              MaxWidth="720"
+              Margin="0,20,0,0"
+              HorizontalAlignment="Left">
+          <TextBox x:Name="SearchTextBox"
+                   Width="Auto"
+                   MinWidth="0"
+                   Padding="0,4,48,4"
+                   Text="{Binding Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource AppSearchTextBoxStyle}"
+                   KeyDown="OnSearchKeyDown"
+                   ToolTip="输入关键词搜索媒体"
+                   AutomationProperties.Name="搜索关键词"
+                   AutomationProperties.HelpText="输入至少两个字符，停止输入后自动搜索；按回车立即搜索。" />
+          <Button Command="{Binding ClearSearchCommand}"
+                  Visibility="{Binding HasKeyword, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Margin="0,0,5,0"
+                  ToolTip="清除搜索词"
+                  AutomationProperties.Name="清除搜索词"
+                  AutomationProperties.HelpText="清空当前关键词、结果并返回搜索初始状态。"
+                  Style="{StaticResource SearchClearButtonStyle}">
+            <controls:AppIcon Data="{StaticResource Icon.Close}"
+                              RenderMode="Stroke"
+                              Size="16" />
+          </Button>
+        </Grid>
+
+        <Border Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0,14,0,0"
+                Padding="12,8"
+                HorizontalAlignment="Left"
+                CornerRadius="6"
+                Background="#B01A2028">
+          <StackPanel Orientation="Horizontal">
+            <controls:LoadingSpinner Width="20" Height="20" />
+            <TextBlock Text="正在搜索新关键词……"
+                       Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource TextSecondaryBrush}"
+                       FontSize="12" />
+          </StackPanel>
+        </Border>
+
+        <Border Visibility="{Binding IsRefreshErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0,14,0,0"
+                Padding="12,8"
+                CornerRadius="6"
+                Background="#B02A171A"
+                BorderBrush="#5AFF7777"
+                BorderThickness="1">
+          <TextBlock Text="{Binding ErrorMessage, Mode=OneWay}"
+                     Foreground="#FF9A9A"
+                     FontSize="12"
+                     TextWrapping="Wrap" />
+        </Border>
+
+        <Grid Visibility="{Binding IsHistoryVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+              MaxWidth="720"
+              Margin="0,30,0,0"
+              HorizontalAlignment="Left">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+              <controls:AppIcon Data="{StaticResource Icon.History}"
+                                RenderMode="Stroke"
+                                Size="19"
+                                Foreground="#8F9CAA"
+                                Margin="0,0,10,0" />
+              <TextBlock Text="最近搜索"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         FontSize="20"
+                         FontWeight="SemiBold"
+                         VerticalAlignment="Center" />
+            </StackPanel>
+            <Button Grid.Column="1"
+                    Content="清除全部"
+                    Command="{Binding ClearHistoryCommand}"
+                    Padding="12,7"
+                    ToolTip="清除全部搜索历史"
+                    AutomationProperties.Name="清除全部搜索历史"
+                    Style="{StaticResource HistoryTextButtonStyle}" />
+          </Grid>
+          <ItemsControl Grid.Row="1" ItemsSource="{Binding SearchHistory}" Margin="0,14,0,0">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Border Margin="0,0,10,10"
+                        Background="#151C25"
+                        BorderBrush="#2A3642"
+                        BorderThickness="1"
+                        CornerRadius="18">
+                  <StackPanel Orientation="Horizontal">
+                    <Button
+                          Command="{Binding DataContext.SearchHistoryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          CommandParameter="{Binding}"
+                          ToolTip="{Binding StringFormat=搜索“{0}”}"
+                          AutomationProperties.Name="{Binding StringFormat=搜索历史：{0}}"
+                          Style="{StaticResource HistoryChipTextButtonStyle}">
+                      <TextBlock Text="{Binding}"
+                                 MaxWidth="190"
+                                 VerticalAlignment="Center"
+                                 TextTrimming="CharacterEllipsis" />
+                    </Button>
+                    <Button
+                          Command="{Binding DataContext.RemoveHistoryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          CommandParameter="{Binding}"
+                          ToolTip="删除此条搜索历史"
+                          AutomationProperties.Name="{Binding StringFormat=删除搜索历史：{0}}"
+                          Style="{StaticResource HistoryChipDeleteButtonStyle}">
+                      <controls:AppIcon Data="{StaticResource Icon.Close}"
+                                      RenderMode="Stroke"
+                                        Size="13" />
+                    </Button>
+                  </StackPanel>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Grid>
+
+        <Grid Visibility="{Binding IsInitialHintVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+              MinHeight="210"
+              Margin="0,28,0,0">
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <controls:AppIcon Data="{StaticResource Icon.Search}"
+                              RenderMode="Stroke"
+                              Style="{StaticResource EmptyStateIcon}" />
+            <TextBlock Text="{Binding InitialHintTitle}"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" />
+            <TextBlock Text="{Binding InitialHintMessage}"
+                       Margin="0,8,0,0"
+                       Foreground="{StaticResource TextSecondaryBrush}"
+                       FontSize="13"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+          </StackPanel>
+        </Grid>
+
+        <StackPanel Visibility="{Binding IsResultSummaryVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0,26,0,0">
+          <TextBlock Text="{Binding ResultTitle, Mode=OneWay}"
+                     Foreground="{StaticResource TextPrimaryBrush}"
+                     FontSize="22"
+                     FontWeight="SemiBold"
+                     TextTrimming="CharacterEllipsis" />
+          <TextBlock Text="{Binding ResultCountText, Mode=OneWay}"
+                     Margin="0,6,0,0"
+                     Foreground="{StaticResource TextSecondaryBrush}"
+                     FontSize="13" />
+        </StackPanel>
+
+        <ItemsControl ItemsSource="{Binding VisibleFilters}"
+                      Visibility="{Binding AreFiltersVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,14,0,0">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button Content="{Binding Label, Mode=OneWay}"
+                      Command="{Binding DataContext.SelectFilterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                      CommandParameter="{Binding}"
+                      ToolTip="{Binding Label, StringFormat=筛选：{0}}"
+                      AutomationProperties.Name="{Binding Label}"
+                      AutomationProperties.HelpText="切换搜索结果类型筛选。"
+                      Style="{StaticResource SearchFilterButtonStyle}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <controls:PageStateView IsLoading="{Binding IsInitialLoading, Mode=OneWay}"
+                                IsEmpty="{Binding IsNoResultsVisible, Mode=OneWay}"
+                                HasError="{Binding IsErrorVisible, Mode=OneWay}"
+                                ErrorMessage="{Binding ErrorMessage, Mode=OneWay}"
+                                LoadingMessage="正在搜索……"
+                                EmptyIcon="{StaticResource Icon.Empty}"
+                                EmptyTitle="{Binding NoResultsTitle, Mode=OneWay}"
+                                EmptyMessage="{Binding NoResultsMessage, Mode=OneWay}"
+                                ErrorTitle="搜索失败"
+                                ErrorHint="请检查网络或服务器状态后重试。"
+                                ErrorIcon="{StaticResource Icon.Error}"
+                                RetryCommand="{Binding RetryCommand}"
+                                RetryToolTip="重新执行当前搜索"
+                                RetryAutomationName="重试搜索"
+                                Margin="0,20,0,0"
+                                MinHeight="180" />
+
+        <ItemsControl x:Name="ResultItemsControl"
+                      ItemsSource="{Binding Results, Mode=OneWay}"
+                      Visibility="{Binding IsResultsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,18,0,0">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button Command="{Binding DataContext.OpenResultCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                      CommandParameter="{Binding}"
+                      ToolTip="{Binding Title}"
+                      AutomationProperties.Name="{Binding Title, StringFormat=打开详情：{0}}"
+                      Style="{StaticResource PosterButtonStyle}">
+                <StackPanel>
+                  <Grid Height="242" Background="#20242B">
+                    <controls:AuthenticatedImage ImageUrl="{Binding PosterUrl, Mode=OneWay}"
+                                                 PlaceholderText="海报"
+                                                 Stretch="UniformToFill" />
+                    <Border Visibility="{Binding IsFavorite, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,8,8,0"
+                            Style="{StaticResource MediaFavoriteBadgeStyle}">
+                      <controls:AppIcon Data="{StaticResource Icon.FavoriteFilled}"
+                                        RenderMode="Fill"
+                                        Foreground="{StaticResource Icon.FavoriteBrush}"
+                                        Style="{StaticResource MediaBadgeIcon}" />
+                    </Border>
+                    <Border Visibility="{Binding IsPlayed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="8,8,0,0"
+                            Style="{StaticResource MediaPlayedBadgeStyle}">
+                      <StackPanel Orientation="Horizontal">
+                        <controls:AppIcon Data="{StaticResource Icon.Watched}"
+                                          RenderMode="Fill"
+                                          Foreground="{StaticResource Icon.WatchedBrush}"
+                                          Margin="0,0,4,0"
+                                          Style="{StaticResource MediaBadgeIcon}" />
+                        <TextBlock Text="已看"
+                                   Foreground="{StaticResource Icon.WatchedBrush}"
+                                   FontSize="11"
+                                   FontWeight="SemiBold" />
+                      </StackPanel>
+                    </Border>
+                  </Grid>
+                  <StackPanel Margin="10,10,10,12">
+                    <TextBlock Text="{Binding Title}"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontWeight="SemiBold"
+                               TextTrimming="CharacterEllipsis" />
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                      <TextBlock Text="{Binding Type}"
+                                 Style="{StaticResource MediaTypeBadgeTextStyle}"
+                                 TextTrimming="CharacterEllipsis" />
+                      <TextBlock Text="{Binding YearText}"
+                                 Visibility="{Binding HasYear, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 Margin="8,0,0,0"
+                                 Foreground="{StaticResource TextSecondaryBrush}"
+                                 FontSize="12" />
+                    </StackPanel>
+                    <ProgressBar Value="{Binding ProgressValue, Mode=OneWay}"
+                                 Visibility="{Binding HasProgress, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 Margin="0,8,0,0"
+                                 Style="{StaticResource MediaCardProgressBarStyle}" />
+                  </StackPanel>
+                </StackPanel>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

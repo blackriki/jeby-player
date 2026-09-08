@@ -1,0 +1,54 @@
+name: 问题反馈 / Bug report
+description: 报告 Jeby Player 的故障或界面问题。
+title: '[Bug] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。这里的内容会公开显示，请勿提供服务器地址、账号密码、访问令牌、完整播放链接或私人媒体信息。
+        日志可从应用设置中的诊断导出功能获取；提交前仍请检查并遮盖截图和日志中的个人信息。
+  - type: input
+    id: version
+    attributes:
+      label: Jeby Player 版本
+      description: 填写设置页显示的版本；自行构建时附提交号。
+      placeholder: 版本号或提交号
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: Windows 版本、显示缩放比例，以及 Emby Server 版本（如已知）。播放问题可补充显卡、视频编码和字幕格式，无需提供媒体文件或服务器地址。
+      placeholder: '例如：Windows 11，缩放 125%，Emby Server 版本……'
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开……
+        2. 点击……
+        3. 出现……
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 描述错误提示、发生频率，以及重试或重启后是否恢复。可附已遮盖个人信息的截图。
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: 脱敏日志（可选）
+      description: 仅提交与本问题相关的日志片段；不要粘贴密码、令牌或完整播放链接。
+      render: text

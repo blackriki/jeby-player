@@ -1,0 +1,94 @@
+<UserControl x:Class="EmbyPlayer.UI.Pages.WatchLaterPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:EmbyPlayer.UI.Controls"
+             Loaded="OnLoaded" Unloaded="OnUnloaded">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+  </UserControl.Resources>
+  <Grid Background="{StaticResource AppBackgroundBrush}">
+    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+    <Grid Margin="42,28,42,24">
+      <Button Command="{Binding BackCommand}" HorizontalAlignment="Left"
+              AutomationProperties.AutomationId="WatchLater.Back" AutomationProperties.Name="返回首页"
+              Style="{StaticResource PageBackButton}">
+        <StackPanel Orientation="Horizontal">
+          <controls:AppIcon Data="{StaticResource Icon.Back}" Style="{StaticResource PageBackButtonIcon}" />
+          <TextBlock Text="返回" VerticalAlignment="Center" />
+        </StackPanel>
+      </Button>
+      <Button Command="{Binding RefreshCommand}" HorizontalAlignment="Right" ToolTip="刷新稍后观看列表"
+              AutomationProperties.AutomationId="WatchLater.Refresh" Style="{StaticResource PageBackButton}">
+        <StackPanel Orientation="Horizontal">
+          <controls:AppIcon Data="{StaticResource Icon.Refresh}" RenderMode="Stroke" Size="18" Margin="0,0,7,0" />
+          <TextBlock Text="刷新" VerticalAlignment="Center" />
+        </StackPanel>
+      </Button>
+    </Grid>
+    <ScrollViewer x:Name="WatchLaterScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled" ScrollChanged="OnScrollChanged">
+      <StackPanel Margin="42,0,26,36">
+        <TextBlock Text="稍后观看" FontSize="30" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" />
+        <TextBlock Text="当前服务器与账号的本地片单" Margin="0,10,0,26" Foreground="{StaticResource TextSecondaryBrush}" />
+        <controls:PageStateView IsLoading="{Binding IsInitialLoading}" IsEmpty="{Binding IsEmpty}"
+                                LoadingMessage="正在读取稍后观看..." EmptyTitle="还没有稍后观看的作品"
+                                EmptyMessage="在作品详情中加入稍后观看，想看时就能在这里找到。" MinHeight="160" />
+        <TextBlock Text="正在更新列表..." Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,18"
+                   Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   AutomationProperties.LiveSetting="Polite" />
+        <StackPanel Margin="0,0,16,24"
+                    Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <TextBlock Text="{Binding ErrorMessage}" TextWrapping="Wrap" Foreground="#FF9A9A"
+                     AutomationProperties.AutomationId="WatchLater.Error" AutomationProperties.LiveSetting="Polite" />
+          <WrapPanel Margin="0,12,0,0">
+            <Button Content="重试" Command="{Binding RetryCommand}" Margin="0,0,12,0"
+                    AutomationProperties.AutomationId="WatchLater.Retry" Style="{StaticResource AppSecondaryButtonStyle}" />
+            <Button Content="重置损坏列表" Command="{Binding ResetCorruptedCommand}"
+                    Visibility="{Binding IsCorrupted, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    AutomationProperties.AutomationId="WatchLater.Reset" Style="{StaticResource AppSecondaryButtonStyle}" />
+          </WrapPanel>
+        </StackPanel>
+        <Border Background="#1C242B" Padding="20" Margin="0,0,16,24" CornerRadius="8"
+                Visibility="{Binding IsResetConfirmationVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <StackPanel>
+            <TextBlock Text="重置当前账号的损坏列表？" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Text="此操作会新建空列表，并保留损坏文件副本。其他服务器和账号的列表不受影响。"
+                       TextWrapping="Wrap" Margin="0,10,0,16" Foreground="{StaticResource TextSecondaryBrush}" />
+            <WrapPanel>
+              <Button Content="确认重置" Command="{Binding ConfirmResetCommand}" Margin="0,0,12,0"
+                      AutomationProperties.AutomationId="WatchLater.ConfirmReset" Style="{StaticResource AppSecondaryButtonStyle}" />
+              <Button Content="取消" Command="{Binding CancelResetCommand}" Style="{StaticResource AppSecondaryButtonStyle}" />
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+        <ItemsControl x:Name="WatchLaterItems" ItemsSource="{Binding Items}"
+                      AutomationProperties.AutomationId="WatchLater.Items" AutomationProperties.Name="稍后观看作品">
+          <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Width="176" Margin="0,0,18,24">
+                <Button ToolTip="{Binding Title}" Style="{StaticResource MediaSurfaceCardButtonStyle}"
+                        Command="{Binding DataContext.OpenMediaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding}" AutomationProperties.Name="{Binding Title, StringFormat=打开详情：{0}}">
+                  <StackPanel>
+                    <controls:AuthenticatedImage Height="264" ImageUrl="{Binding ImageUrl}" PlaceholderText="海报" Stretch="UniformToFill" />
+                    <StackPanel Margin="10,10,10,12">
+                      <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="14"
+                                 FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Text="{Binding ProductionYear, TargetNullValue=年份未知}" Foreground="{StaticResource TextSecondaryBrush}"
+                                 FontSize="12" Margin="0,5,0,0" />
+                    </StackPanel>
+                  </StackPanel>
+                </Button>
+                <Button Content="移除" Margin="0,8,0,0" HorizontalAlignment="Right"
+                        Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding}" Style="{StaticResource PageBackButton}"
+                        AutomationProperties.Name="{Binding Title, StringFormat=从稍后观看移除：{0}}" />
+              </StackPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

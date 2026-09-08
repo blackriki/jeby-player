@@ -1,0 +1,33 @@
+name: 功能建议 / Feature request
+description: 提出能改善日常观影体验的建议。
+title: '[Feature] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先搜索已有建议。Jeby Player 是桌面媒体客户端，当前支持 Emby，Jellyfin 支持仍在计划中。
+        请勿提供服务器地址、账号密码、访问令牌或私人媒体信息。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 使用场景与遇到的问题
+      description: 说明你想完成什么，以及现在的操作哪里不方便。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 希望的体验
+      description: 描述操作入口、预期行为或交互方式；不需要技术实现方案。
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 当前替代办法（可选）
+      description: 你现在如何完成这件事，为什么仍希望改进？
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充说明（可选）
+      description: 可附已遮盖个人信息的示意图或公开参考链接。

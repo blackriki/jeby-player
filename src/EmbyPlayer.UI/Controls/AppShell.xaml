@@ -1,0 +1,79 @@
+<UserControl x:Class="EmbyPlayer.UI.Controls.AppShell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:EmbyPlayer.UI.Controls"
+             xmlns:navigation="clr-namespace:EmbyPlayer.UI.Navigation"
+             xmlns:pages="clr-namespace:EmbyPlayer.UI.Pages"
+             xmlns:viewModels="clr-namespace:EmbyPlayer.UI.ViewModels">
+  <UserControl.Resources>
+    <DataTemplate DataType="{x:Type viewModels:WatchLaterViewModel}">
+      <pages:WatchLaterPage />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModels:PlaybackQueueViewModel}">
+      <pages:PlaybackQueuePage />
+    </DataTemplate>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <DataTemplate DataType="{x:Type viewModels:ServerConnectionViewModel}">
+      <pages:ServerConnectionPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+      <pages:LoginPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+      <pages:HomePage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:HomeSectionViewModel}">
+      <pages:HomeSectionPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:LibraryViewModel}">
+      <pages:LibraryPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:SearchViewModel}">
+      <pages:SearchPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:MediaDetailViewModel}">
+      <pages:MediaDetailPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:PlayerViewModel}">
+      <pages:PlayerPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:PersonViewModel}">
+      <pages:PersonPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+      <pages:SettingsPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:PlaceholderPageViewModel}">
+      <controls:PlaceholderPage />
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid Background="{StaticResource AppBackgroundBrush}">
+    <ContentControl Content="{Binding CurrentPageViewModel}">
+      <ContentControl.Style>
+        <Style TargetType="ContentControl">
+          <Setter Property="Visibility" Value="Visible" />
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding IsStartupLoading}" Value="True">
+              <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </ContentControl.Style>
+    </ContentControl>
+    <controls:PageStateView IsLoading="{Binding IsStartupLoading, Mode=OneWay}"
+                            LoadingMessage="&#x6B63;&#x5728;&#x542F;&#x52A8; Jeby Player..." />
+  </Grid>
+
+</UserControl>

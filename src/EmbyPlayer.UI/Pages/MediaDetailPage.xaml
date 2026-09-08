@@ -1,0 +1,1580 @@
+<UserControl x:Class="EmbyPlayer.UI.Pages.MediaDetailPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:EmbyPlayer.UI.Controls">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <SolidColorBrush x:Key="DetailPageBackgroundBrush" Color="#080C12" />
+    <SolidColorBrush x:Key="DetailSurfaceBrush" Color="#101721" />
+    <SolidColorBrush x:Key="DetailCardSurfaceBrush" Color="#151D27" />
+    <SolidColorBrush x:Key="DetailCardHoverBrush" Color="#1D2834" />
+    <SolidColorBrush x:Key="DetailBorderBrush" Color="#324252" />
+    <SolidColorBrush x:Key="DetailPrimaryTextBrush" Color="#F4F7FB" />
+    <SolidColorBrush x:Key="DetailSecondaryTextBrush" Color="#A6B1BE" />
+    <SolidColorBrush x:Key="DetailMutedTextBrush" Color="#737F8D" />
+    <SolidColorBrush x:Key="DetailErrorSurfaceBrush" Color="#21171A" />
+    <SolidColorBrush x:Key="DetailErrorBorderBrush" Color="#59313A" />
+    <SolidColorBrush x:Key="DetailErrorTextBrush" Color="#FF8A8A" />
+    <SolidColorBrush x:Key="DetailFocusBrush" Color="#78D36F" />
+    <SolidColorBrush x:Key="DetailProgressTrackBrush" Color="#303640" />
+
+    <Style x:Key="DetailCompactActionButton" TargetType="Button" BasedOn="{StaticResource SecondaryActionButton}">
+      <Setter Property="Width" Value="48" />
+      <Setter Property="MinWidth" Value="48" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style x:Key="DetailCompactActionIcon" TargetType="controls:AppIcon" BasedOn="{StaticResource SolidActionIcon}">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style x:Key="DetailPlayedIcon" TargetType="controls:AppIcon" BasedOn="{StaticResource DetailCompactActionIcon}">
+      <Setter Property="Data" Value="{StaticResource Icon.Unwatched}" />
+      <Setter Property="Foreground" Value="{StaticResource DetailPrimaryTextBrush}" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding IsPlayed, Mode=OneWay}" Value="True">
+          <Setter Property="Data" Value="{StaticResource Icon.Watched}" />
+          <Setter Property="Foreground" Value="{StaticResource Icon.WatchedBrush}" />
+        </DataTrigger>
+        <Trigger Property="IsEnabled" Value="False">
+          <Setter Property="Foreground" Value="{StaticResource DetailMutedTextBrush}" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DetailFavoriteIcon" TargetType="controls:AppIcon" BasedOn="{StaticResource DetailCompactActionIcon}">
+      <Setter Property="Data" Value="{StaticResource Icon.FavoriteFilled}" />
+      <Setter Property="Foreground" Value="{StaticResource DetailPrimaryTextBrush}" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding IsFavorite, Mode=OneWay}" Value="True">
+          <Setter Property="Foreground" Value="{StaticResource Icon.FavoriteBrush}" />
+        </DataTrigger>
+        <Trigger Property="IsEnabled" Value="False">
+          <Setter Property="Foreground" Value="{StaticResource DetailMutedTextBrush}" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DetailWatchLaterIcon" TargetType="controls:AppIcon" BasedOn="{StaticResource DetailCompactActionIcon}">
+      <Setter Property="Data" Value="{StaticResource Icon.WatchLater}" />
+      <Setter Property="Foreground" Value="{StaticResource DetailPrimaryTextBrush}" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding IsSavedForLater, Mode=OneWay}" Value="True">
+          <Setter Property="Foreground" Value="{StaticResource Icon.WatchLaterBrush}" />
+        </DataTrigger>
+        <Trigger Property="IsEnabled" Value="False">
+          <Setter Property="Foreground" Value="{StaticResource DetailMutedTextBrush}" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DetailButtonStyle" TargetType="Button">
+      <Setter Property="Background" Value="#172231" />
+      <Setter Property="BorderBrush" Value="#354455" />
+      <Setter Property="Foreground" Value="{StaticResource DetailPrimaryTextBrush}" />
+      <Setter Property="Padding" Value="18,11" />
+      <Setter Property="MinWidth" Value="110" />
+      <Setter Property="MinHeight" Value="46" />
+      <Setter Property="Margin" Value="0,0,10,10" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="ButtonChrome"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="23">
+              <ContentPresenter Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ButtonChrome" Property="Background" Value="#213046" />
+                <Setter TargetName="ButtonChrome" Property="BorderBrush" Value="#52677D" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="ButtonChrome" Property="BorderBrush" Value="{StaticResource DetailFocusBrush}" />
+                <Setter TargetName="ButtonChrome" Property="BorderThickness" Value="2" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="ButtonChrome" Property="Background" Value="#111822" />
+                <Setter TargetName="ButtonChrome" Property="BorderBrush" Value="#253140" />
+                <Setter Property="Foreground" Value="#647181" />
+                <Setter Property="Cursor" Value="Arrow" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource DetailButtonStyle}">
+      <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+      <Setter Property="BorderBrush" Value="#63C85C" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+      <Setter Property="MinWidth" Value="132" />
+    </Style>
+
+    <Style x:Key="EpisodeTrackArrowButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource MediaRowArrowButtonStyle}" />
+
+    <Style x:Key="BackButtonStyle" TargetType="Button" BasedOn="{StaticResource DetailButtonStyle}">
+      <Setter Property="MinWidth" Value="86" />
+      <Setter Property="MinHeight" Value="38" />
+      <Setter Property="Padding" Value="14,8" />
+      <Setter Property="Background" Value="#A60B111A" />
+      <Setter Property="BorderBrush" Value="#384657" />
+    </Style>
+
+    <Style x:Key="MetaTextStyle" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource DetailSecondaryTextBrush}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Margin" Value="0,0,12,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MetaSeparatorStyle" TargetType="TextBlock" BasedOn="{StaticResource MetaTextStyle}">
+      <Setter Property="Text" Value="·" />
+      <Setter Property="Foreground" Value="{StaticResource DetailMutedTextBrush}" />
+    </Style>
+
+    <Style x:Key="GenreBadgeStyle" TargetType="Border">
+      <Setter Property="Background" Value="#1A2534" />
+      <Setter Property="BorderBrush" Value="#354657" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="15" />
+      <Setter Property="Padding" Value="12,6" />
+      <Setter Property="Margin" Value="0,0,8,8" />
+    </Style>
+
+    <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
+      <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+      <Setter Property="Background" Value="{StaticResource DetailProgressTrackBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Height" Value="6" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ProgressBar">
+            <Border Background="{TemplateBinding Background}"
+                    CornerRadius="3"
+                    ClipToBounds="True">
+              <Grid x:Name="PART_Track">
+                <Rectangle x:Name="PART_Indicator"
+                           HorizontalAlignment="Left"
+                           Fill="{TemplateBinding Foreground}"
+                           RadiusX="3"
+                           RadiusY="3" />
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="LoadingProgressBarStyle" TargetType="ProgressBar">
+      <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+      <Setter Property="Background" Value="{StaticResource DetailProgressTrackBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="SeasonCardButtonStyle" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource DetailCardSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource DetailPrimaryTextBrush}" />
+      <Setter Property="Padding" Value="14,9" />
+      <Setter Property="MinWidth" Value="116" />
+      <Setter Property="MinHeight" Value="58" />
+      <Setter Property="Margin" Value="0,0,12,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="SeasonChrome"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10">
+              <ContentPresenter Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="SeasonChrome" Property="Background" Value="{StaticResource DetailCardHoverBrush}" />
+                <Setter TargetName="SeasonChrome" Property="BorderBrush" Value="#4D6175" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="SeasonChrome" Property="BorderBrush" Value="{StaticResource DetailFocusBrush}" />
+                <Setter TargetName="SeasonChrome" Property="BorderThickness" Value="2" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding IsSelected, Mode=OneWay}" Value="True">
+          <Setter Property="Background" Value="#1B3328" />
+          <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="EpisodeNumberListBoxItemStyle" TargetType="ListBoxItem">
+      <Setter Property="Width" Value="48" />
+      <Setter Property="Height" Value="42" />
+      <Setter Property="Margin" Value="0,0,8,0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Foreground" Value="{StaticResource DetailSecondaryTextBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName, Mode=OneWay}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListBoxItem">
+            <Border x:Name="NumberChrome"
+                    Background="#1A222D"
+                    BorderBrush="#334252"
+                    BorderThickness="1"
+                    CornerRadius="21">
+              <ContentPresenter HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="NumberChrome" Property="Background" Value="{StaticResource DetailCardHoverBrush}" />
+                <Setter TargetName="NumberChrome" Property="BorderBrush" Value="#52677D" />
+              </Trigger>
+              <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="NumberChrome" Property="Background" Value="#F2F5F8" />
+                <Setter TargetName="NumberChrome" Property="BorderBrush" Value="#FFFFFF" />
+                <Setter Property="Foreground" Value="#111821" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter TargetName="NumberChrome" Property="BorderBrush" Value="{StaticResource DetailFocusBrush}" />
+                <Setter TargetName="NumberChrome" Property="BorderThickness" Value="2" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="EpisodeCardListBoxItemStyle" TargetType="ListBoxItem">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="0,0,18,0" />
+      <Setter Property="Width" Value="292" />
+      <Setter Property="Height" Value="334" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="VerticalContentAlignment" Value="Stretch" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListBoxItem">
+            <ContentPresenter HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch" />
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="EpisodeCardButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource MediaSurfaceCardButtonStyle}">
+      <Setter Property="Width" Value="292" />
+      <Setter Property="Height" Value="334" />
+      <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style x:Key="SimilarCardButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource MediaSurfaceCardButtonStyle}">
+      <Setter Property="Width" Value="160" />
+      <Setter Property="Margin" Value="0,0,16,8" />
+      <Setter Property="Foreground" Value="{StaticResource DetailPrimaryTextBrush}" />
+    </Style>
+
+    <Style x:Key="InformationalCardStyle" TargetType="controls:RoundedClipBorder">
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="{StaticResource DetailCardSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="ClipToBounds" Value="True" />
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+          <Setter Property="Background" Value="{StaticResource DetailCardHoverBrush}" />
+          <Setter Property="BorderBrush" Value="#38FFFFFF" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="StateCardStyle" TargetType="Border">
+      <Setter Property="Padding" Value="22" />
+      <Setter Property="CornerRadius" Value="14" />
+      <Setter Property="Background" Value="{StaticResource DetailCardSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource DetailBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+  </UserControl.Resources>
+
+  <Grid Background="{StaticResource DetailPageBackgroundBrush}">
+    <controls:PageStateView IsLoading="{Binding IsInitialLoading, Mode=OneWay}"
+                            HasError="{Binding IsErrorVisible, Mode=OneWay}"
+                            ErrorMessage="{Binding ErrorMessage, Mode=OneWay}"
+                            LoadingMessage="&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x5A92;&#x4F53;&#x8BE6;&#x60C5;..."
+                            ErrorTitle="&#x8BE6;&#x60C5;&#x52A0;&#x8F7D;&#x5931;&#x8D25;"
+                            ErrorHint="&#x8BF7;&#x5728;&#x7F51;&#x7EDC;&#x6062;&#x590D;&#x540E;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x3002;"
+                            ErrorIcon="{StaticResource Icon.Error}"
+                            RetryCommand="{Binding RetryCommand}"
+                            RetryToolTip="&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x5A92;&#x4F53;&#x8BE6;&#x60C5;"
+                            RetryAutomationName="&#x91CD;&#x8BD5;&#x52A0;&#x8F7D;&#x5A92;&#x4F53;&#x8BE6;&#x60C5;" />
+
+    <Button Command="{Binding BackCommand}"
+            Visibility="{Binding IsErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="0,210,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            ToolTip="&#x8FD4;&#x56DE;&#x4E0A;&#x4E00;&#x9875;"
+            AutomationProperties.Name="&#x8FD4;&#x56DE;"
+            AutomationProperties.HelpText="&#x8FD4;&#x56DE;&#x4E0A;&#x4E00;&#x4E2A;&#x9875;&#x9762;&#x3002;"
+            Style="{StaticResource PageBackButton}">
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <controls:AppIcon Data="{StaticResource Icon.Back}" Style="{StaticResource PageBackButtonIcon}" />
+        <TextBlock Text="&#x8FD4;&#x56DE;" VerticalAlignment="Center" />
+      </StackPanel>
+    </Button>
+
+    <ScrollViewer x:Name="MediaDetailScrollViewer"
+                  Visibility="{Binding IsContentVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  ScrollChanged="OnMediaDetailScrollChanged">
+      <Grid MinHeight="720">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="530" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#070A0F" ClipToBounds="True">
+          <Border>
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0A111B" Offset="0" />
+                <GradientStop Color="#0E1724" Offset="0.55" />
+                <GradientStop Color="#080C12" Offset="1" />
+              </LinearGradientBrush>
+            </Border.Background>
+          </Border>
+
+          <controls:AuthenticatedImage ImageUrl="{Binding BackdropUrl, Mode=OneWay}"
+                                       PlaceholderText="背景图"
+                                       Stretch="UniformToFill"
+                                       HorizontalAlignment="Stretch"
+                                       Opacity="0.96" />
+
+          <controls:AuthenticatedImage x:Name="EpisodeHeroLayer"
+                                       ImageUrl="{Binding SelectedEpisodeHeroUrl, Mode=OneWay}"
+                                       ShowPlaceholder="False"
+                                       Stretch="Uniform"
+                                       ImageHorizontalAlignment="Right"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch"
+                                       Opacity="0.96"
+                                       IsHitTestVisible="False"
+                                       Focusable="False" />
+
+          <Rectangle>
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#FF080C12" Offset="0" />
+                <GradientStop Color="#FA080C12" Offset="0.45" />
+                <GradientStop Color="#C8080C12" Offset="0.58" />
+                <GradientStop Color="#70080C12" Offset="0.74" />
+                <GradientStop Color="#18080C12" Offset="0.90" />
+                <GradientStop Color="#00080C12" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+
+          <Rectangle VerticalAlignment="Bottom" Height="150">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00080C12" Offset="0" />
+                <GradientStop Color="#D9080C12" Offset="0.76" />
+                <GradientStop Color="#FF080C12" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+
+        </Grid>
+
+        <Grid Grid.Row="0"
+              Grid.RowSpan="2"
+              Margin="54,130,54,0"
+              MaxWidth="1380"
+              HorizontalAlignment="Left">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="110" />
+            <ColumnDefinition Width="212" />
+          </Grid.ColumnDefinitions>
+
+          <StackPanel Grid.Column="0"
+                      MaxWidth="760"
+                      VerticalAlignment="Top">
+            <TextBlock Foreground="{StaticResource AccentBrush}"
+                       FontSize="13"
+                       FontWeight="SemiBold"
+                       Text="{Binding TypeText, Mode=OneWay, StringFormat={}{0}详情}" />
+
+            <TextBlock Text="{Binding Title, Mode=OneWay}"
+                       Margin="0,16,0,0"
+                       Foreground="{StaticResource DetailPrimaryTextBrush}"
+                       FontSize="52"
+                       FontWeight="Bold"
+                       LineHeight="58"
+                       TextWrapping="Wrap" />
+
+            <WrapPanel Margin="0,20,0,0">
+              <TextBlock Text="{Binding YearText, Mode=OneWay}" Style="{StaticResource MetaTextStyle}" />
+              <TextBlock Style="{StaticResource MetaSeparatorStyle}" />
+              <TextBlock Text="{Binding TypeText, Mode=OneWay}" Style="{StaticResource MetaTextStyle}" />
+              <TextBlock Style="{StaticResource MetaSeparatorStyle}" />
+              <TextBlock Text="{Binding DurationText, Mode=OneWay}" Style="{StaticResource MetaTextStyle}" />
+              <TextBlock Style="{StaticResource MetaSeparatorStyle}" />
+              <TextBlock Text="{Binding RatingText, Mode=OneWay}" Style="{StaticResource MetaTextStyle}" />
+            </WrapPanel>
+
+            <ItemsControl ItemsSource="{Binding Detail.Genres, Mode=OneWay}" Margin="0,20,0,0">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Border Style="{StaticResource GenreBadgeStyle}">
+                    <TextBlock Text="{Binding Mode=OneWay}"
+                               Foreground="{StaticResource DetailPrimaryTextBrush}"
+                               FontSize="13"
+                               FontWeight="SemiBold" />
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Text="{Binding OverviewText, Mode=OneWay}"
+                       Margin="0,24,0,0"
+                       Foreground="#DDE4EC"
+                       FontSize="16"
+                       LineHeight="25"
+                       MaxHeight="76"
+                       TextTrimming="CharacterEllipsis"
+                       TextWrapping="Wrap" />
+
+            <StackPanel Visibility="{Binding IsStandardProgressVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0,30,0,0"
+                        MaxWidth="860">
+              <TextBlock Text="{Binding ProgressText, Mode=OneWay}"
+                         Foreground="{StaticResource DetailSecondaryTextBrush}"
+                         FontSize="13"
+                         FontWeight="SemiBold" />
+              <ProgressBar Value="{Binding ProgressValue, Mode=OneWay}"
+                           Maximum="100"
+                           Margin="0,8,0,0"
+                           Style="{StaticResource ProgressBarStyle}" />
+            </StackPanel>
+
+            <StackPanel x:Name="DetailMovieActions" Orientation="Horizontal" Margin="0,28,0,0"
+                       Visibility="{Binding IsStandardPlaybackPanelVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+              <Button Command="{Binding PlayCommand}"
+                      ToolTip="播放当前媒体"
+                      AutomationProperties.Name="播放"
+                      AutomationProperties.HelpText="从默认位置开始播放当前媒体。"
+                      ToolTipService.ShowOnDisabled="True">
+                <Button.Style>
+                  <Style TargetType="Button" BasedOn="{StaticResource PrimaryActionButton}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding IsContinuePlaybackVisible, Mode=OneWay}" Value="True">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Data="{StaticResource Icon.Play}" Style="{StaticResource PrimaryActionButtonIcon}" />
+                  <TextBlock Text="播放" VerticalAlignment="Center" />
+                </StackPanel>
+              </Button>
+              <Button Command="{Binding ContinuePlayCommand}"
+                      Visibility="{Binding IsContinuePlaybackVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ToolTip="从上次进度继续播放"
+                      AutomationProperties.Name="继续播放"
+                      AutomationProperties.HelpText="从服务器记录的播放进度继续播放。"
+                      ToolTipService.ShowOnDisabled="True"
+                      Style="{StaticResource PrimaryActionButton}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Data="{StaticResource Icon.Play}" Style="{StaticResource PrimaryActionButtonIcon}" />
+                  <TextBlock Text="继续播放" VerticalAlignment="Center" />
+                </StackPanel>
+              </Button>
+              <Button Command="{Binding AddToQueueCommand}"
+                      Visibility="{Binding HasPersonalMediaActions, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      AutomationProperties.Name="加入待播" AutomationProperties.AutomationId="Detail.AddToQueue"
+                      ToolTip="加入本次播放队列；电视剧加入当前选中的单集" ToolTipService.ShowOnDisabled="True"
+                      Style="{StaticResource SecondaryActionButton}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Data="{StaticResource Icon.QueueAdd}" Style="{StaticResource PrimaryActionButtonIcon}" />
+                  <TextBlock Text="加入待播" VerticalAlignment="Center" />
+                </StackPanel>
+              </Button>
+              <Button Command="{Binding RestartPlayCommand}"
+                      ToolTip="从头播放"
+                      AutomationProperties.Name="从头播放"
+                      AutomationProperties.HelpText="忽略续播进度，从开头播放。"
+                      ToolTipService.ShowOnDisabled="True"
+                      Style="{StaticResource DetailCompactActionButton}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Data="{StaticResource Icon.Restart}" Style="{StaticResource DetailCompactActionIcon}" />
+                </StackPanel>
+              </Button>
+              <Button Command="{Binding ToggleFavoriteCommand}"
+                      ToolTip="添加到收藏或取消收藏；已收藏时再次点击会取消收藏"
+                      AutomationProperties.Name="{Binding FavoriteButtonText, Mode=OneWay}"
+                      AutomationProperties.HelpText="根据当前收藏状态添加到收藏或取消收藏。"
+                      ToolTipService.ShowOnDisabled="True"
+                      Style="{StaticResource DetailCompactActionButton}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Style="{StaticResource DetailFavoriteIcon}" />
+                </StackPanel>
+              </Button>
+              <Button Command="{Binding ToggleWatchLaterCommand}"
+                      Visibility="{Binding HasPersonalMediaActions, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      AutomationProperties.Name="{Binding WatchLaterButtonText}" AutomationProperties.AutomationId="Detail.WatchLater"
+                      ToolTip="{Binding WatchLaterButtonText}" ToolTipService.ShowOnDisabled="True">
+                <Button.Style>
+                  <Style TargetType="Button" BasedOn="{StaticResource DetailCompactActionButton}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding IsSavedForLater}" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource DetailFocusBrush}" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Style="{StaticResource DetailWatchLaterIcon}" />
+                </StackPanel>
+              </Button>
+              <Button Command="{Binding TogglePlayedCommand}"
+                      ToolTip="标记为已观看或标记为未观看"
+                      AutomationProperties.Name="{Binding PlayedButtonText, Mode=OneWay}"
+                      AutomationProperties.HelpText="根据当前观看状态标记为已观看或未观看。"
+                      ToolTipService.ShowOnDisabled="True"
+                      Style="{StaticResource DetailCompactActionButton}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Style="{StaticResource DetailPlayedIcon}" />
+                </StackPanel>
+              </Button>
+            </StackPanel>
+
+            <Border Visibility="{Binding IsNonSeriesPlaybackUnavailableVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0,30,0,0"
+                    Padding="16,13"
+                    MaxWidth="380"
+                    CornerRadius="12"
+                    Background="#141E2B"
+                    BorderBrush="{StaticResource DetailBorderBrush}"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left">
+              <TextBlock Text="{Binding PlaybackUnavailableText, Mode=OneWay}"
+                         Foreground="{StaticResource DetailSecondaryTextBrush}" />
+            </Border>
+
+            <StackPanel Visibility="{Binding IsSeriesActionPanelVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0,30,0,0"
+                        MaxWidth="860">
+              <TextBlock Text="{Binding SeriesPlaybackTargetText, Mode=OneWay}"
+                         Visibility="{Binding IsSeriesPlaybackTargetVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Foreground="{StaticResource DetailSecondaryTextBrush}"
+                         FontSize="14"
+                         FontWeight="SemiBold"
+                         TextWrapping="Wrap"
+                         TextTrimming="CharacterEllipsis" />
+
+              <StackPanel Visibility="{Binding IsSeriesResumeProgressVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Margin="0,16,0,0">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="{Binding SeriesResumeProgressText, Mode=OneWay}"
+                             Foreground="{StaticResource DetailSecondaryTextBrush}"
+                             FontSize="13"
+                             FontWeight="SemiBold" />
+                  <TextBlock Grid.Column="1"
+                             Text="{Binding SeriesResumePositionText, Mode=OneWay}"
+                             Foreground="{StaticResource DetailSecondaryTextBrush}"
+                             FontSize="13"
+                             FontWeight="SemiBold" />
+                </Grid>
+                <ProgressBar Value="{Binding SeriesResumeProgressValue, Mode=OneWay}"
+                             Maximum="100"
+                             Margin="0,9,0,0"
+                             Style="{StaticResource ProgressBarStyle}" />
+              </StackPanel>
+
+              <StackPanel x:Name="DetailSeriesActions" Orientation="Horizontal" Margin="0,28,0,0">
+                <Button Command="{Binding SeriesPlayCommand}"
+                        Visibility="{Binding IsSeriesPrimaryButtonVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        ToolTip="播放当前剧集推荐的单集"
+                        AutomationProperties.Name="{Binding SeriesPrimaryButtonText, Mode=OneWay}"
+                        AutomationProperties.HelpText="播放当前剧集的续播、下一集或第一集。"
+                        ToolTipService.ShowOnDisabled="True"
+                        Style="{StaticResource PrimaryActionButton}">
+                  <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <controls:AppIcon Data="{StaticResource Icon.Play}" Style="{StaticResource PrimaryActionButtonIcon}" />
+                    <TextBlock Text="{Binding SeriesPrimaryButtonText, Mode=OneWay}" VerticalAlignment="Center" />
+                  </StackPanel>
+                </Button>
+                <Button Command="{Binding AddToQueueCommand}"
+                      Visibility="{Binding HasPersonalMediaActions, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      AutomationProperties.Name="加入待播" AutomationProperties.AutomationId="Detail.AddToQueue"
+                      ToolTip="加入本次播放队列；电视剧加入当前选中的单集" ToolTipService.ShowOnDisabled="True"
+                      Style="{StaticResource SecondaryActionButton}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Data="{StaticResource Icon.QueueAdd}" Style="{StaticResource PrimaryActionButtonIcon}" />
+                  <TextBlock Text="加入待播" VerticalAlignment="Center" />
+                </StackPanel>
+              </Button>
+                <Button Command="{Binding ToggleFavoriteCommand}"
+                        ToolTip="添加到收藏或取消收藏；已收藏时再次点击会取消收藏"
+                        AutomationProperties.Name="{Binding FavoriteButtonText, Mode=OneWay}"
+                        AutomationProperties.HelpText="根据当前收藏状态添加到收藏或取消收藏。"
+                        ToolTipService.ShowOnDisabled="True"
+                        Style="{StaticResource DetailCompactActionButton}">
+                  <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <controls:AppIcon Style="{StaticResource DetailFavoriteIcon}" />
+                  </StackPanel>
+                </Button>
+                <Button Command="{Binding ToggleWatchLaterCommand}"
+                      Visibility="{Binding HasPersonalMediaActions, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      AutomationProperties.Name="{Binding WatchLaterButtonText}" AutomationProperties.AutomationId="Detail.WatchLater"
+                      ToolTip="{Binding WatchLaterButtonText}" ToolTipService.ShowOnDisabled="True">
+                <Button.Style>
+                  <Style TargetType="Button" BasedOn="{StaticResource DetailCompactActionButton}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding IsSavedForLater}" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource DetailFocusBrush}" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                  <controls:AppIcon Style="{StaticResource DetailWatchLaterIcon}" />
+                </StackPanel>
+              </Button>
+                <Button Command="{Binding TogglePlayedCommand}"
+                        ToolTip="标记为已观看或标记为未观看"
+                        AutomationProperties.Name="{Binding PlayedButtonText, Mode=OneWay}"
+                        AutomationProperties.HelpText="根据当前观看状态标记为已观看或未观看。"
+                        ToolTipService.ShowOnDisabled="True"
+                        Style="{StaticResource DetailCompactActionButton}">
+                  <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <controls:AppIcon Style="{StaticResource DetailPlayedIcon}" />
+                  </StackPanel>
+                </Button>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding HasPersonalMediaActions, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,12,0,0">
+              <WrapPanel>
+                <Button Content="刷新待看状态" Command="{Binding RefreshWatchLaterCommand}"
+                        Visibility="{Binding IsWatchLaterReadError, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        AutomationProperties.Name="刷新稍后观看状态" Style="{StaticResource SecondaryActionButton}" />
+              </WrapPanel>
+              <TextBlock Text="{Binding PersonalMediaMessage}" Foreground="{StaticResource DetailSecondaryTextBrush}"
+                         TextWrapping="Wrap" Margin="0,4,0,0" AutomationProperties.LiveSetting="Polite" />
+            </StackPanel>
+            <TextBlock Text="{Binding FavoriteErrorMessage, Mode=OneWay}"
+                       Visibility="{Binding IsFavoriteErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Margin="0,2,0,0"
+                       Foreground="{StaticResource DetailErrorTextBrush}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="{Binding PlayedErrorMessage, Mode=OneWay}"
+                       Visibility="{Binding IsPlayedErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Margin="0,2,0,0"
+                       Foreground="{StaticResource DetailErrorTextBrush}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="{Binding PlaybackSyncWarningMessage, Mode=OneWay}"
+                       Visibility="{Binding IsPlaybackSyncWarningVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Margin="0,2,0,0"
+                       Foreground="{StaticResource DetailSecondaryTextBrush}"
+                       TextWrapping="Wrap" />
+
+            <StackPanel Visibility="{Binding IsPreparingPlayback, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0,12,0,0"
+                        MaxWidth="360">
+              <ProgressBar Width="180"
+                           Height="4"
+                           IsIndeterminate="True"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource LoadingProgressBarStyle}" />
+              <!-- Legacy XAML text assertion compatibility: Text="姝ｅ湪鍑嗗鎾斁..." -->
+              <TextBlock Text="正在准备播放..."
+                         Margin="0,10,0,0"
+                         Foreground="{StaticResource DetailSecondaryTextBrush}" />
+            </StackPanel>
+
+            <Border Visibility="{Binding IsPlaybackErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0,14,0,0"
+                    Padding="16"
+                    MaxWidth="540"
+                    CornerRadius="12"
+                    Background="{StaticResource DetailErrorSurfaceBrush}"
+                    BorderBrush="{StaticResource DetailErrorBorderBrush}"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left">
+              <StackPanel>
+                <TextBlock Text="{Binding PlaybackErrorMessage, Mode=OneWay}"
+                           Foreground="{StaticResource DetailErrorTextBrush}"
+                           TextWrapping="Wrap" />
+                <Button Command="{Binding RetryPlaybackCommand}"
+                        Margin="0,12,0,0"
+                        HorizontalAlignment="Left"
+                        ToolTip="重新准备播放"
+                        AutomationProperties.Name="重试播放"
+                        AutomationProperties.HelpText="重新获取播放信息并准备播放。"
+                        Style="{StaticResource CompactIconButton}">
+                  <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <controls:AppIcon Data="{StaticResource Icon.Retry}" Style="{StaticResource SecondaryActionButtonIcon}" />
+                    <TextBlock Text="重试" VerticalAlignment="Center" />
+                  </StackPanel>
+                </Button>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+
+          <controls:RoundedClipBorder Grid.Column="2"
+                                      Width="212"
+                                      Height="318"
+                                      Margin="0,190,0,0"
+                                      CornerRadius="14"
+                                      Background="#141A23"
+                                      BorderBrush="#405061"
+                                      BorderThickness="1"
+                                      VerticalAlignment="Top"
+                                      ClipToBounds="True">
+            <controls:RoundedClipBorder.Effect>
+              <DropShadowEffect BlurRadius="26"
+                                ShadowDepth="14"
+                                Direction="270"
+                                Color="#99000000"
+                                Opacity="0.45" />
+            </controls:RoundedClipBorder.Effect>
+            <Grid>
+              <TextBlock Text="海报"
+                         Foreground="{StaticResource DetailMutedTextBrush}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         FontSize="13"
+                         FontWeight="SemiBold" />
+              <controls:AuthenticatedImage ImageUrl="{Binding PosterUrl, Mode=OneWay}"
+                                           PlaceholderText="海报"
+                                           Stretch="UniformToFill" />
+            </Grid>
+          </controls:RoundedClipBorder>
+        </Grid>
+
+        <StackPanel x:Name="SupplementarySectionRoot"
+                    Grid.Row="1"
+                    MaxWidth="1300"
+                    HorizontalAlignment="Left"
+                    Visibility="{Binding IsSupplementarySectionVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <StackPanel.Style>
+            <Style TargetType="StackPanel">
+              <Setter Property="Margin" Value="54,108,54,72" />
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSeriesDetail, Mode=OneWay}" Value="True">
+                  <Setter Property="Margin" Value="54,164,54,72" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </StackPanel.Style>
+          <StackPanel x:Name="EpisodeSectionRoot"
+                      Visibility="{Binding IsSeriesSectionVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <TextBlock Text="季与单集"
+                     Foreground="{StaticResource DetailPrimaryTextBrush}"
+                     FontSize="26"
+                     FontWeight="SemiBold" />
+
+          <controls:PageStateView IsLoading="{Binding IsInitialSeasonsLoading, Mode=OneWay}"
+                                  IsEmpty="{Binding IsSeasonsEmpty, Mode=OneWay}"
+                                  HasError="{Binding IsSeasonErrorVisible, Mode=OneWay}"
+                                  ErrorMessage="{Binding SeasonErrorMessage, Mode=OneWay}"
+                                  LoadingMessage="&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x5B63;&#x5217;&#x8868;..."
+                                  EmptyTitle="&#x6682;&#x65E0;&#x5B63;&#x4FE1;&#x606F;"
+                                  EmptyMessage="&#x670D;&#x52A1;&#x5668;&#x6682;&#x65F6;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x8BE5;&#x7535;&#x89C6;&#x5267;&#x7684;&#x5B63;&#x4FE1;&#x606F;&#x3002;"
+                                  EmptyIcon="{StaticResource Icon.Empty}"
+                                  ErrorTitle="&#x5B63;&#x5217;&#x8868;&#x52A0;&#x8F7D;&#x5931;&#x8D25;"
+                                  ErrorIcon="{StaticResource Icon.Error}"
+                                  RetryCommand="{Binding RetrySeasonsCommand}"
+                                  RetryAutomationName="&#x91CD;&#x8BD5;&#x52A0;&#x8F7D;&#x5B63;&#x5217;&#x8868;"
+                                  Margin="0,24,0,0"
+                                  MinHeight="150" />
+
+          <TextBlock Visibility="{Binding IsRefreshingSeasons, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Text="&#x6B63;&#x5728;&#x5237;&#x65B0;&#x5B63;&#x5217;&#x8868;..."
+                     Margin="0,14,0,0"
+                     Foreground="{StaticResource DetailSecondaryTextBrush}"
+                     FontSize="12" />
+
+          <Border Visibility="{Binding IsSeasonRefreshErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Margin="0,18,0,0"
+                  Padding="12,8"
+                  CornerRadius="6"
+                  Background="{StaticResource DetailErrorSurfaceBrush}"
+                  BorderBrush="{StaticResource DetailErrorBorderBrush}"
+                  BorderThickness="1">
+            <TextBlock Text="{Binding SeasonErrorMessage, Mode=OneWay}"
+                       Foreground="{StaticResource DetailErrorTextBrush}"
+                       FontSize="12"
+                       TextWrapping="Wrap" />
+          </Border>
+
+          <Grid x:Name="SeasonRow"
+                Visibility="{Binding IsSeasonsListVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0,24,0,0"
+                Background="Transparent"
+                MouseEnter="OnHorizontalRowMouseEnter"
+                MouseLeave="OnHorizontalRowMouseLeave"
+                IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+            <ScrollViewer x:Name="SeasonScrollViewer"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Disabled"
+                          Focusable="True"
+                          Loaded="OnHorizontalRowLoaded"
+                          PreviewMouseWheel="OnSeasonSelectorPreviewMouseWheel"
+                          PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                          ScrollChanged="OnHorizontalRowScrollChanged"
+                          SizeChanged="OnHorizontalRowSizeChanged"
+                          AutomationProperties.Name="季选择器">
+              <ItemsControl ItemsSource="{Binding Seasons, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Button Command="{Binding DataContext.SelectSeasonCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource SeasonCardButtonStyle}">
+                      <StackPanel>
+                        <TextBlock Text="{Binding Name, Mode=OneWay}"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="继续 / 未看"
+                                   Visibility="{Binding HasResumeOrUnwatched, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Margin="0,5,0,0"
+                                   Foreground="{StaticResource DetailSecondaryTextBrush}"
+                                   FontSize="12" />
+                      </StackPanel>
+                    </Button>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </ScrollViewer>
+            <Button x:Name="SeasonPreviousButton"
+                    CommandParameter="{Binding ElementName=SeasonScrollViewer}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed"
+                    ToolTip="向左浏览季"
+                    AutomationProperties.Name="向左浏览季"
+                    Click="OnHorizontalRowLeftClick"
+                    Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="20" />
+            </Button>
+            <Button x:Name="SeasonNextButton"
+                    CommandParameter="{Binding ElementName=SeasonScrollViewer}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed"
+                    ToolTip="向右浏览季"
+                    AutomationProperties.Name="向右浏览季"
+                    Click="OnHorizontalRowRightClick"
+                    Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+              <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="20" />
+            </Button>
+          </Grid>
+
+          <controls:PageStateView IsLoading="{Binding IsInitialEpisodesLoading, Mode=OneWay}"
+                                  IsEmpty="{Binding IsEpisodesEmpty, Mode=OneWay}"
+                                  HasError="{Binding IsEpisodeErrorVisible, Mode=OneWay}"
+                                  ErrorMessage="{Binding EpisodeErrorMessage, Mode=OneWay}"
+                                  LoadingMessage="&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x5355;&#x96C6;..."
+                                  EmptyTitle="&#x5F53;&#x524D;&#x5B63;&#x6682;&#x65E0;&#x5355;&#x96C6;"
+                                  EmptyMessage="&#x8BF7;&#x9009;&#x62E9;&#x5176;&#x4ED6;&#x5B63;&#xFF0C;&#x6216;&#x7A0D;&#x540E;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x3002;"
+                                  EmptyIcon="{StaticResource Icon.Empty}"
+                                  ErrorTitle="&#x5355;&#x96C6;&#x5217;&#x8868;&#x52A0;&#x8F7D;&#x5931;&#x8D25;"
+                                  ErrorIcon="{StaticResource Icon.Error}"
+                                  RetryCommand="{Binding RetryEpisodesCommand}"
+                                  RetryAutomationName="&#x91CD;&#x8BD5;&#x52A0;&#x8F7D;&#x5355;&#x96C6;&#x5217;&#x8868;"
+                                  Margin="0,26,0,0"
+                                  MinHeight="170" />
+
+          <TextBlock Visibility="{Binding IsRefreshingEpisodes, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Text="&#x6B63;&#x5728;&#x5237;&#x65B0;&#x5355;&#x96C6;&#x5217;&#x8868;..."
+                     Margin="0,14,0,0"
+                     Foreground="{StaticResource DetailSecondaryTextBrush}"
+                     FontSize="12" />
+
+          <Border Visibility="{Binding IsEpisodeRefreshErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Margin="0,18,0,0"
+                  Padding="12,8"
+                  CornerRadius="6"
+                  Background="{StaticResource DetailErrorSurfaceBrush}"
+                  BorderBrush="{StaticResource DetailErrorBorderBrush}"
+                  BorderThickness="1">
+            <TextBlock Text="{Binding EpisodeErrorMessage, Mode=OneWay}"
+                       Foreground="{StaticResource DetailErrorTextBrush}"
+                       FontSize="12"
+                       TextWrapping="Wrap" />
+          </Border>
+
+          <Grid Visibility="{Binding IsEpisodesListVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0,24,0,0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="EpisodeNumberRow"
+                  Grid.Row="0"
+                  Background="Transparent"
+                  MouseEnter="OnHorizontalRowMouseEnter"
+                  MouseLeave="OnHorizontalRowMouseLeave"
+                  IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+              <ListBox x:Name="EpisodeNumberListBox"
+                     ItemsSource="{Binding Episodes, Mode=OneWay}"
+                     SelectedItem="{Binding SelectedEpisode, Mode=TwoWay}"
+                     ItemContainerStyle="{StaticResource EpisodeNumberListBoxItemStyle}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Padding="0"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.VirtualizationMode="Recycling"
+                     VirtualizingPanel.ScrollUnit="Pixel"
+                     PreviewMouseWheel="OnEpisodeTrackPreviewMouseWheel"
+                     PreviewKeyDown="OnEpisodeTrackPreviewKeyDown"
+                     SizeChanged="OnEpisodeTrackSizeChanged"
+                     RequestBringIntoView="OnEpisodeTrackRequestBringIntoView"
+                     ScrollViewer.ScrollChanged="OnEpisodeTrackScrollChanged"
+                     AutomationProperties.Name="快速选择集数">
+              <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ListBox.ItemsPanel>
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding QuickNumberText, Mode=OneWay}"
+                             FontSize="14"
+                             FontWeight="SemiBold"
+                             AutomationProperties.Name="{Binding AutomationName, Mode=OneWay}" />
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+              </ListBox>
+              <Button x:Name="EpisodeNumberPreviousButton"
+                      CommandParameter="{Binding ElementName=EpisodeNumberListBox}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="4,0,0,0"
+                      ToolTip="向左浏览集数"
+                      AutomationProperties.Name="向左浏览集数"
+                      Visibility="Collapsed"
+                      Click="OnHorizontalRowLeftClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="19" />
+              </Button>
+              <Button x:Name="EpisodeNumberNextButton"
+                      CommandParameter="{Binding ElementName=EpisodeNumberListBox}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Margin="0,0,4,0"
+                      ToolTip="向右浏览集数"
+                      AutomationProperties.Name="向右浏览集数"
+                      Visibility="Collapsed"
+                      Click="OnHorizontalRowRightClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="19" />
+              </Button>
+            </Grid>
+
+            <Grid x:Name="EpisodeCardRow"
+                  Grid.Row="1"
+                  Margin="0,18,0,0"
+                  Background="Transparent"
+                  MouseEnter="OnHorizontalRowMouseEnter"
+                  MouseLeave="OnHorizontalRowMouseLeave"
+                  IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+              <ListBox x:Name="EpisodeCardListBox"
+                     ItemsSource="{Binding Episodes, Mode=OneWay}"
+                     SelectedItem="{Binding SelectedEpisode, Mode=TwoWay}"
+                     ItemContainerStyle="{StaticResource EpisodeCardListBoxItemStyle}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Padding="0"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.VirtualizationMode="Recycling"
+                     VirtualizingPanel.ScrollUnit="Pixel"
+                     PreviewMouseWheel="OnEpisodeTrackPreviewMouseWheel"
+                     PreviewKeyDown="OnEpisodeTrackPreviewKeyDown"
+                     SizeChanged="OnEpisodeTrackSizeChanged"
+                     RequestBringIntoView="OnEpisodeTrackRequestBringIntoView"
+                     ScrollViewer.ScrollChanged="OnEpisodeTrackScrollChanged"
+                     AutomationProperties.Name="分集卡片">
+              <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ListBox.ItemsPanel>
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Button x:Name="EpisodeCardButton"
+                          Command="{Binding DataContext.PlayEpisodeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          CommandParameter="{Binding}"
+                          ToolTip="{Binding PlayAutomationName, Mode=OneWay}"
+                          AutomationProperties.Name="{Binding PlayAutomationName, Mode=OneWay}"
+                          AutomationProperties.HelpText="{Binding AutomationName, Mode=OneWay}"
+                          Style="{StaticResource EpisodeCardButtonStyle}">
+                    <Grid x:Name="EpisodeCardRoot">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="164" />
+                        <RowDefinition Height="*" />
+                      </Grid.RowDefinitions>
+
+                      <Grid Background="#141A23">
+                        <TextBlock Text="暂无缩略图"
+                                   Foreground="{StaticResource DetailMutedTextBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="SemiBold" />
+                        <controls:AuthenticatedImage ImageUrl="{Binding ThumbnailUrl, Mode=OneWay}"
+                                                     PlaceholderText="暂无缩略图"
+                                                     Stretch="UniformToFill" />
+                        <Border Visibility="{Binding IsPlayed, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Margin="10"
+                                Style="{StaticResource MediaPlayedBadgeStyle}">
+                          <StackPanel Orientation="Horizontal">
+                            <controls:AppIcon Data="{StaticResource Icon.Watched}"
+                                              RenderMode="Fill"
+                                              Size="13"
+                                              Foreground="{StaticResource Icon.WatchedBrush}"
+                                              Margin="0,0,5,0" />
+                            <TextBlock Text="已看"
+                                       Foreground="{StaticResource Icon.WatchedBrush}"
+                                       FontSize="11"
+                                       FontWeight="SemiBold" />
+                          </StackPanel>
+                        </Border>
+                        <ProgressBar Value="{Binding ProgressValue, Mode=OneWay}"
+                                     Visibility="{Binding HasProgress, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Margin="10,0,10,9"
+                                     VerticalAlignment="Bottom"
+                                     Style="{StaticResource MediaCardProgressBarStyle}" />
+                        <Grid IsHitTestVisible="False">
+                          <Grid.Style>
+                            <Style TargetType="Grid">
+                              <Setter Property="Opacity" Value="0" />
+                              <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=EpisodeCardRoot}" Value="True">
+                                  <Setter Property="Opacity" Value="1" />
+                                  <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                      <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         From="0"
+                                                         To="1"
+                                                         Duration="0:0:0.14" />
+                                      </Storyboard>
+                                    </BeginStoryboard>
+                                  </DataTrigger.EnterActions>
+                                  <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                      <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         From="1"
+                                                         To="0"
+                                                         Duration="0:0:0.14" />
+                                      </Storyboard>
+                                    </BeginStoryboard>
+                                  </DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=EpisodeCardButton}" Value="True">
+                                  <Setter Property="Opacity" Value="1" />
+                                </DataTrigger>
+                              </Style.Triggers>
+                            </Style>
+                          </Grid.Style>
+                          <Border Background="#52000000" />
+                          <Button HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Focusable="False"
+                                  IsTabStop="False"
+                                  IsHitTestVisible="False"
+                                  Style="{StaticResource CardOverlayPlayButton}" />
+                        </Grid>
+                      </Grid>
+
+                      <Grid Grid.Row="1" Margin="13,11,13,12">
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="Auto" />
+                          <RowDefinition Height="Auto" />
+                          <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                          <TextBlock Text="{Binding NumberText, Mode=OneWay}"
+                                     Foreground="{StaticResource AccentBrush}"
+                                     FontSize="12"
+                                     FontWeight="SemiBold" />
+                          <TextBlock Text="·"
+                                     Margin="10,0"
+                                     Foreground="{StaticResource DetailMutedTextBrush}"
+                                     FontSize="12" />
+                          <TextBlock Text="{Binding DurationText, Mode=OneWay}"
+                                     Foreground="{StaticResource DetailMutedTextBrush}"
+                                     FontSize="12"
+                                     TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Title, Mode=OneWay}"
+                                   Margin="0,7,0,0"
+                                   MaxHeight="44"
+                                   Foreground="{StaticResource DetailPrimaryTextBrush}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   LineHeight="20"
+                                   TextWrapping="Wrap"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock Grid.Row="2"
+                                   Text="{Binding OverviewText, Mode=OneWay}"
+                                   Margin="0,8,0,0"
+                                   MaxHeight="60"
+                                   Foreground="{StaticResource DetailSecondaryTextBrush}"
+                                   FontSize="13"
+                                   LineHeight="20"
+                                   TextWrapping="Wrap"
+                                   TextTrimming="CharacterEllipsis" />
+                      </Grid>
+
+                      <Border Grid.RowSpan="2"
+                              Background="#101B3328"
+                              BorderBrush="#B052B54B"
+                              BorderThickness="2"
+                              CornerRadius="10"
+                              IsHitTestVisible="False"
+                              Visibility="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    </Grid>
+                  </Button>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+              </ListBox>
+              <Button x:Name="EpisodeCardPreviousButton"
+                      CommandParameter="{Binding ElementName=EpisodeCardListBox}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="4,0,0,0"
+                      ToolTip="向左浏览分集卡片"
+                      AutomationProperties.Name="向左浏览分集卡片"
+                      Visibility="Collapsed"
+                      Click="OnHorizontalRowLeftClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="19" />
+              </Button>
+              <Button x:Name="EpisodeCardNextButton"
+                      CommandParameter="{Binding ElementName=EpisodeCardListBox}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Margin="0,0,4,0"
+                      ToolTip="向右浏览分集卡片"
+                      AutomationProperties.Name="向右浏览分集卡片"
+                      Visibility="Collapsed"
+                      Click="OnHorizontalRowRightClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="19" />
+              </Button>
+            </Grid>
+          </Grid>
+
+          </StackPanel>
+
+          <StackPanel x:Name="PeopleSection"
+                      Visibility="{Binding IsPeopleSectionVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,44,0,0">
+            <TextBlock Text="演职人员"
+                       Foreground="{StaticResource DetailPrimaryTextBrush}"
+                       FontSize="24"
+                       FontWeight="SemiBold" />
+            <Grid x:Name="PeopleRow"
+                  Margin="0,20,0,0"
+                  Background="Transparent"
+                  MouseEnter="OnHorizontalRowMouseEnter"
+                  MouseLeave="OnHorizontalRowMouseLeave"
+                  IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+              <ScrollViewer x:Name="PeopleScrollViewer"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Disabled"
+                            PanningMode="HorizontalOnly"
+                            Focusable="True"
+                            Loaded="OnHorizontalRowLoaded"
+                            PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                            PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                            ScrollChanged="OnHorizontalRowScrollChanged"
+                            SizeChanged="OnHorizontalRowSizeChanged"
+                            AutomationProperties.Name="演职人员横向列表">
+                <ItemsControl ItemsSource="{Binding People, Mode=OneWay}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <Button Width="148"
+                                                   Height="250"
+                                                   Margin="0,0,16,8"
+                                                   ToolTip="{Binding Name, Mode=OneWay, StringFormat=演职人员：{0}}"
+                                                   AutomationProperties.Name="{Binding Name, Mode=OneWay, StringFormat=演职人员：{0}}"
+                                                   AutomationProperties.HelpText="{Binding Role, Mode=OneWay}"
+                                                   Command="{Binding DataContext.OpenPersonCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                   CommandParameter="{Binding}"
+                                                   Style="{StaticResource MediaSurfaceCardButtonStyle}">
+                        <Grid>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="196" />
+                            <RowDefinition Height="*" />
+                          </Grid.RowDefinitions>
+                          <Grid Background="#141A23">
+                            <controls:AuthenticatedImage ImageUrl="{Binding ImageUrl, Mode=OneWay}"
+                                                         PlaceholderText="暂无人物图片"
+                                                         Stretch="UniformToFill" />
+                          </Grid>
+                          <StackPanel Grid.Row="1" Margin="10,9,10,8">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}"
+                                       Foreground="{StaticResource DetailPrimaryTextBrush}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{Binding Role, Mode=OneWay}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{StaticResource DetailSecondaryTextBrush}"
+                                       FontSize="12"
+                                       TextTrimming="CharacterEllipsis" />
+                          </StackPanel>
+                        </Grid>
+                      </Button>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+              <Button x:Name="PeoplePreviousButton"
+                      CommandParameter="{Binding ElementName=PeopleScrollViewer}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Visibility="Collapsed"
+                      ToolTip="向左浏览演职人员"
+                      AutomationProperties.Name="向左浏览演职人员"
+                      Click="OnHorizontalRowLeftClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="20" />
+              </Button>
+              <Button x:Name="PeopleNextButton"
+                      CommandParameter="{Binding ElementName=PeopleScrollViewer}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Visibility="Collapsed"
+                      ToolTip="向右浏览演职人员"
+                      AutomationProperties.Name="向右浏览演职人员"
+                      Click="OnHorizontalRowRightClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="20" />
+              </Button>
+            </Grid>
+          </StackPanel>
+
+          <StackPanel x:Name="ArtworkSection"
+                      Visibility="{Binding IsArtworkSectionVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,44,0,0">
+            <TextBlock Text="艺术图"
+                       Foreground="{StaticResource DetailPrimaryTextBrush}"
+                       FontSize="24"
+                       FontWeight="SemiBold" />
+            <Grid x:Name="ArtworkRow"
+                  Margin="0,20,0,0"
+                  Background="Transparent"
+                  MouseEnter="OnHorizontalRowMouseEnter"
+                  MouseLeave="OnHorizontalRowMouseLeave"
+                  IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+              <ScrollViewer x:Name="ArtworkScrollViewer"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Disabled"
+                            PanningMode="HorizontalOnly"
+                            Focusable="True"
+                            Loaded="OnHorizontalRowLoaded"
+                            PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                            PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                            ScrollChanged="OnHorizontalRowScrollChanged"
+                            SizeChanged="OnHorizontalRowSizeChanged"
+                            AutomationProperties.Name="艺术图横向列表">
+                <ItemsControl ItemsSource="{Binding ArtworkUrls, Mode=OneWay}"
+                              AlternationCount="12">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <controls:RoundedClipBorder Width="324"
+                                                   Height="182"
+                                                   Margin="0,0,18,8"
+                                                   ToolTip="艺术图缩略图"
+                                                   AutomationProperties.Name="{Binding RelativeSource={RelativeSource AncestorType=ContentPresenter}, Path=(ItemsControl.AlternationIndex), StringFormat=艺术图 {0}}"
+                                                   AutomationProperties.HelpText="仅展示艺术图缩略图，不打开预览。"
+                                                   Style="{StaticResource InformationalCardStyle}">
+                        <controls:AuthenticatedImage ImageUrl="{Binding Mode=OneWay}"
+                                                     PlaceholderText="暂无艺术图"
+                                                     Stretch="UniformToFill" />
+                      </controls:RoundedClipBorder>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+              <Button x:Name="ArtworkPreviousButton"
+                      CommandParameter="{Binding ElementName=ArtworkScrollViewer}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Visibility="Collapsed"
+                      ToolTip="向左浏览艺术图"
+                      AutomationProperties.Name="向左浏览艺术图"
+                      Click="OnHorizontalRowLeftClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="20" />
+              </Button>
+              <Button x:Name="ArtworkNextButton"
+                      CommandParameter="{Binding ElementName=ArtworkScrollViewer}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Visibility="Collapsed"
+                      ToolTip="向右浏览艺术图"
+                      AutomationProperties.Name="向右浏览艺术图"
+                      Click="OnHorizontalRowRightClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="20" />
+              </Button>
+            </Grid>
+          </StackPanel>
+
+          <StackPanel x:Name="SimilarSection"
+                      Visibility="{Binding IsSimilarSectionVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,44,0,0">
+            <TextBlock Text="类似作品"
+                       Foreground="{StaticResource DetailPrimaryTextBrush}"
+                       FontSize="24"
+                       FontWeight="SemiBold" />
+
+            <controls:PageStateView IsLoading="{Binding IsSimilarInitialLoading, Mode=OneWay}"
+                                    HasError="{Binding IsSimilarErrorVisible, Mode=OneWay}"
+                                    ErrorMessage="{Binding SimilarErrorMessage, Mode=OneWay}"
+                                    LoadingMessage="正在加载类似作品..."
+                                    ErrorTitle="类似作品加载失败"
+                                    ErrorHint="其他详情内容仍可正常使用。"
+                                    ErrorIcon="{StaticResource Icon.Error}"
+                                    RetryCommand="{Binding RetrySimilarCommand}"
+                                    RetryAutomationName="重试加载类似作品"
+                                    Margin="0,18,0,0"
+                                    MinHeight="140" />
+
+            <Grid x:Name="SimilarRow"
+                  Visibility="{Binding IsSimilarItemsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Margin="0,20,0,0"
+                   Background="Transparent"
+                   MouseEnter="OnHorizontalRowMouseEnter"
+                   MouseLeave="OnHorizontalRowMouseLeave"
+                   IsKeyboardFocusWithinChanged="OnHorizontalRowKeyboardFocusWithinChanged">
+              <ScrollViewer x:Name="SimilarScrollViewer"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Disabled"
+                            PanningMode="HorizontalOnly"
+                            Focusable="True"
+                            Loaded="OnHorizontalRowLoaded"
+                            PreviewMouseWheel="OnHorizontalRowPreviewMouseWheel"
+                            PreviewKeyDown="OnHorizontalRowPreviewKeyDown"
+                            ScrollChanged="OnHorizontalRowScrollChanged"
+                            SizeChanged="OnHorizontalRowSizeChanged"
+                            AutomationProperties.Name="类似作品横向列表">
+                <ItemsControl ItemsSource="{Binding SimilarItems, Mode=OneWay}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <Button Command="{Binding DataContext.OpenSimilarCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              CommandParameter="{Binding}"
+                              ToolTip="{Binding Title, Mode=OneWay, StringFormat=打开详情：{0}}"
+                              AutomationProperties.Name="{Binding AutomationName, Mode=OneWay}"
+                              Style="{StaticResource SimilarCardButtonStyle}">
+                        <StackPanel>
+                          <Grid Height="240" Background="#111821">
+                            <TextBlock Text="海报"
+                                       Foreground="{StaticResource DetailMutedTextBrush}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                            <controls:AuthenticatedImage ImageUrl="{Binding PosterUrl, Mode=OneWay}"
+                                                         PlaceholderText="海报"
+                                                         Stretch="UniformToFill" />
+                            <Border Visibility="{Binding IsPlayed, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="8"
+                                    Style="{StaticResource MediaPlayedBadgeStyle}">
+                              <StackPanel Orientation="Horizontal">
+                                <controls:AppIcon Data="{StaticResource Icon.Watched}"
+                                                  RenderMode="Fill"
+                                                  Size="13"
+                                                  Foreground="{StaticResource Icon.WatchedBrush}"
+                                                  Margin="0,0,5,0" />
+                                <TextBlock Text="已看"
+                                           Foreground="{StaticResource Icon.WatchedBrush}"
+                                           FontSize="11"
+                                           FontWeight="SemiBold" />
+                              </StackPanel>
+                            </Border>
+                            <ProgressBar Value="{Binding ProgressValue, Mode=OneWay}"
+                                         Visibility="{Binding HasProgress, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                         VerticalAlignment="Bottom"
+                                         Margin="8"
+                                         Style="{StaticResource MediaCardProgressBarStyle}" />
+                          </Grid>
+                          <StackPanel Margin="10,9,10,12">
+                            <TextBlock Text="{Binding Title, Mode=OneWay}"
+                                       Foreground="{StaticResource DetailPrimaryTextBrush}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{Binding YearText, Mode=OneWay}"
+                                       Visibility="{Binding HasYear, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{StaticResource DetailSecondaryTextBrush}"
+                                       FontSize="12" />
+                          </StackPanel>
+                        </StackPanel>
+                      </Button>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+              <Button x:Name="SimilarPreviousButton"
+                      CommandParameter="{Binding ElementName=SimilarScrollViewer}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Visibility="Collapsed"
+                      ToolTip="向左浏览类似作品"
+                      AutomationProperties.Name="向左浏览类似作品"
+                      Click="OnHorizontalRowLeftClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronLeft}" RenderMode="Stroke" Size="20" />
+              </Button>
+              <Button x:Name="SimilarNextButton"
+                      CommandParameter="{Binding ElementName=SimilarScrollViewer}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Visibility="Collapsed"
+                      ToolTip="向右浏览类似作品"
+                      AutomationProperties.Name="向右浏览类似作品"
+                      Click="OnHorizontalRowRightClick"
+                      Style="{StaticResource EpisodeTrackArrowButtonStyle}">
+                <controls:AppIcon Data="{StaticResource Icon.ChevronRight}" RenderMode="Stroke" Size="20" />
+              </Button>
+            </Grid>
+          </StackPanel>
+        </StackPanel>
+      </Grid>
+    </ScrollViewer>
+
+    <Border x:Name="FixedBackScrim"
+            Visibility="{Binding IsContentVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Style="{StaticResource FixedPageBackScrim}" />
+
+    <Button x:Name="FixedBackButton"
+            Command="{Binding BackCommand}"
+            Visibility="{Binding IsContentVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="54,32,0,0"
+            ToolTip="返回上一页"
+            AutomationProperties.Name="返回"
+            AutomationProperties.HelpText="返回上一个页面。"
+            Panel.ZIndex="50"
+            Style="{StaticResource PageBackButton}">
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <controls:AppIcon Data="{StaticResource Icon.Back}" Style="{StaticResource PageBackButtonIcon}" />
+        <TextBlock Text="返回" VerticalAlignment="Center" />
+      </StackPanel>
+    </Button>
+
+    <Border Visibility="{Binding IsRefreshing, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="0,20,28,0"
+            Padding="12,8"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            CornerRadius="6"
+            Background="#D0182028"
+            Panel.ZIndex="60">
+      <TextBlock Text="&#x6B63;&#x5728;&#x5237;&#x65B0;&#x8BE6;&#x60C5;..."
+                 Foreground="{StaticResource DetailSecondaryTextBrush}"
+                 FontSize="12" />
+    </Border>
+    <Border Visibility="{Binding IsRefreshErrorVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="0,20,28,0"
+            Padding="12,8"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            CornerRadius="6"
+            Background="#D02A171A"
+            BorderBrush="#5AFF7777"
+            BorderThickness="1"
+            Panel.ZIndex="60">
+      <TextBlock Text="{Binding ErrorMessage, Mode=OneWay}"
+                 MaxWidth="420"
+                 Foreground="#FF9A9A"
+                 FontSize="12"
+                 TextWrapping="Wrap" />
+    </Border>
+  </Grid>
+</UserControl>
