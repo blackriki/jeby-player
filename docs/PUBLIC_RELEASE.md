@@ -1,29 +1,10 @@
-# Jeby Player 发布与维护
+# 开发与发布
 
-公开仓库：[blackriki/jeby-player](https://github.com/blackriki/jeby-player)。当前版本仅支持 Emby；Jellyfin 属于后续计划。本地 Public 发布管线及 [GitHub CI](https://github.com/blackriki/jeby-player/actions/runs/34250184690) 已通过。公开下载附件见 [Releases](https://github.com/blackriki/jeby-player/releases)。
+## 开发环境
 
-## 当前准备状态
-
-- 产品名称为 Jeby Player，自有代码采用 [GPL-3.0-or-later](../LICENSE)。工程、可执行文件及设置目录保留 EmbyPlayer 标识以兼容旧版本。
-- 播放运行时已更换为核验过的 MSYS2 MPV 0.41.0-7；[manifest](../src/EmbyPlayer.App/runtimes/win-x64/native/mpv-runtime.json) 为 `verified`，记录主 DLL、132 个 DLL 的运行时集合及 493 项许可文件记录。
-- MPV 对应源码 ZIP 已整理，约 1.61 GB，需与二进制 Release 一起提供。文件名和 SHA256 见 manifest；详见 [第三方清单](THIRD_PARTY_NOTICES.md)。
-- SelfContained 产物使用 .NET 8.0.30，已包含三份 .NET / WPF 许可原文；发布脚本按实际 runtimeconfig 版本复制到 `third-party/dotnet/` 并核对哈希。
-- 已核验新运行时的本地合成视频与带认证头的本地 HTTP 播放、暂停、seek、音轨、字幕导入及预览。不把这些结果等同于真实服务器 HTTPS、转码或 GPU 视觉验收。
-- 发布介绍采用用户授权展示的真实产品截图，并遮蔽用户名；不伪造演示账号、媒体内容或素材来源。截图展示前仍应检查私人地址及其他个人信息。
-
-## 已完成的本地发布验证
-
-发布提交 `5679691` 的 Public 管线通过：Release 构建零警告、零错误，1,698 项测试全部通过（Core 125、Emby 379、Player 92、UI 1,102）。可见窗口启动检查通过，发布 manifest 的 `distributionReady` 为 `true`。
-
-SelfContained ZIP 大小为 **152,731,645 字节**，SHA256：
-
-`212332ab69cf517e62ea8fc48ef76f4f5122450f44cd7f36fe0b8dd2ef57dca7`
-
-该记录对应上述提交和产物。后续文档更新不改变此二进制的校验值；代码或打包输入变更后需重新构建验证。GitHub 上传与远端 CI 结果将在完成后更新。
-
-## 从源码构建
-
-需要 Windows 10/11 x64、[global.json](../global.json) 指定的 .NET SDK，以及 .NET 8 Desktop Runtime。仓库不提交运行时 DLL；只构建和浏览界面不要求 MPV，播放需要完整且与 manifest 匹配的 native DLL 集合，不能只复制主 DLL。
+- Windows 10 / 11 x64。
+- [global.json](../global.json) 指定的 .NET SDK。
+- .NET 8 Desktop Runtime，用于运行 WPF 应用和测试。
 
 ```powershell
 dotnet restore EmbyPlayer.sln --locked-mode --disable-parallel
@@ -31,35 +12,51 @@ dotnet build EmbyPlayer.sln --no-restore
 .\scripts\run-app.ps1
 ```
 
-完整验证使用 `.\scripts\build-test.ps1`，发布管线测试需要匹配的 MPV 运行时。GitHub CI 运行无需真实服务器、交互桌面及 native DLL 的测试子集；最终结果以对应提交的 CI 与 Release 说明为准。
+工程、命名空间和可执行文件沿用 `EmbyPlayer` 标识，产品显示名称为 Jeby Player。设置和凭据存储标识保持兼容。
 
-## 公开打包
+## MPV 运行时
 
-命令在仓库根目录执行。准备完整 native 运行时与许可证文件，确保工作树干净，再执行：
+原生 DLL 不纳入 Git 仓库。播放和完整发布验证需要与 [mpv-runtime.json](../src/EmbyPlayer.App/runtimes/win-x64/native/mpv-runtime.json) 匹配的全部 DLL，放置于：
+
+`src/EmbyPlayer.App/runtimes/win-x64/native/`
+
+清单记录主 DLL、依赖、文件哈希和许可证材料。组件来源及对应源码见 [第三方组件](THIRD_PARTY_NOTICES.md)。缺少 MPV 时仍可构建应用和浏览媒体库。
+
+## 测试
+
+```powershell
+.\scripts\build-test.ps1
+```
+
+完整测试包含 WPF 界面和发布脚本检查，需要 Windows 交互桌面及匹配的原生运行时。[GitHub CI](https://github.com/blackriki/jeby-player/actions) 运行构建、Core / Emby / Player 测试及不依赖交互桌面的 UI 契约测试。实际服务器与播放验收见 [测试计划](TEST_PLAN.md)。
+
+## 打包
+
+在干净的工作树中准备原生运行时和许可文件后执行：
 
 ```powershell
 .\scripts\publish-release.ps1 -Version 1.0.0-beta.1 -Deployment SelfContained -Channel Public -PreflightOnly
 .\scripts\publish-release.ps1 -Version 1.0.0-beta.1 -Deployment SelfContained -Channel Public
 ```
 
-MPV 来源材料已补齐，原开发版 shinchiro 二进制的证据缺口已不再是当前运行时状态；旧核验记录仅作为被替换版本的历史调查。不得通过 Internal、脏工作树或跳过检查替代 Public 发布。预检成功只代表前置条件满足，不代表完整测试、打包和启动验收已完成。
+`SelfContained` 包自带 .NET；`FrameworkDependent` 包需要额外安装 .NET 8 Desktop Runtime。
 
-[发布脚本](../scripts/publish-release.ps1) 检查 Git 状态、敏感文本、locked restore、Release 构建和测试，核对 native 文件与许可证哈希，再发布 payload、运行窗口启动检查、生成逐文件 SHA256 manifest 与 ZIP。输出位于 `.tmp/release-staging/`，Public 包名为 `JebyPlayer-<version>-win-x64-<deployment>`。
+发布脚本执行锁定依赖还原、构建、测试、运行时校验和窗口启动检查，并生成 ZIP 与逐文件哈希清单。输出位于 `.tmp/release-staging/`。带有 `RELEASE-FAILED.txt` 的目录为失败产物。
 
-`SelfContained` 自带 .NET 运行时；`FrameworkDependent` 需要用户安装 x64 .NET 8 Desktop Runtime。两者都必须包含经过核验的完整 native DLL 集合、项目 LICENSE 和适用第三方通知。发布包不得包含 PDB；存在 `RELEASE-FAILED.txt` 的产物不可分发。
+## 发布附件
 
-## 发布前最后检查
+每个二进制版本提供：
 
-1. 本地发布提交已完成文本检查、构建和测试；上传后核对对应 GitHub CI。
-2. Public 管线、ZIP 和随包材料已本地验证；上传后再次核对附件大小、SHA256 与版本。
-3. 同时提供 manifest 指定的 MPV 对应源码 ZIP 和校验值。
-4. 按 [测试计划](TEST_PLAN.md) 核对服务器登录、浏览、播放、字幕及进度同步；在 Release 说明中明确实际覆盖和未覆盖范围。
-5. 检查产品截图、安装说明、下载链接和已知限制，再发布 Release。
+- Windows 应用 ZIP。
+- MPV 及依赖的对应源码归档。
+- `SHA256SUMS.txt` 下载校验文件。
 
-## 本机验收与回退
+应用包包含项目 LICENSE、`third-party/mpv/` 和 `third-party/dotnet/` 下的许可材料。上传后核对附件大小和 SHA256。发行版本见 [GitHub Releases](https://github.com/blackriki/jeby-player/releases)。
+
+## 本地部署与回退
 
 ```powershell
 .\scripts\deploy-daily.ps1 -InstallRoot .\.tmp\daily-install
 ```
 
-默认安装根为 `%LOCALAPPDATA%\Programs\EmbyPlayer`，可通过参数选择验收目录。部署脚本验证新输出后轮换 `current` 与 `previous`，保留上一版用于回退；运行中的应用会阻止部署，脚本不替用户强制退出。异常事务残留应先检查，不能盲目覆盖。
+部署脚本验证新输出后轮换 `current` 和 `previous`，保留上一版用于回退。运行中的应用会阻止替换。未指定目录时，默认安装到 `%LOCALAPPDATA%\Programs\EmbyPlayer`。

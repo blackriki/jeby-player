@@ -1,10 +1,12 @@
-# Product screenshots
+# 产品截图
 
-Captured from the running Jeby Player application connected to an actual user media library. The user authorized publication of the visible film titles, posters and playback frames. The home-page account name has been covered with an opaque mask; the other captures contain no visible account or server details.
+以下截图展示 Jeby Player 的实际界面。首页截图已遮蔽账号名称。
 
-- home.png: home, media libraries, continue watching and recently added.
-- movie-details.png: movie details and cast.
-- series-details.png: series details, seasons and episodes.
-- player.png: actual playback frame with the progress bar and controls visible.
+| 文件 | 内容 |
+| --- | --- |
+| [home.png](home.png) | 首页、媒体库、继续观看和最近添加 |
+| [movie-details.png](movie-details.png) | 电影详情与演职人员 |
+| [series-details.png](series-details.png) | 剧集详情、季与单集 |
+| [player.png](player.png) | 播放画面、进度条与播放控制 |
 
-Media artwork and film content remain the property of their respective rights holders. These screenshots illustrate the client interface; the application does not distribute the pictured films. Raw captures containing account information are not included in this repository.
+海报和视频内容的权利归各自权利人所有。截图用于展示客户端功能，应用不提供其中的影视内容。
