@@ -8,20 +8,20 @@
       "embyplayer.emby": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )"
         }
       },
       "embyplayer.player": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )"
         }
       },
       "embyplayer.ui": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )",
-          "EmbyPlayer.Player": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )",
+          "EmbyPlayer.Player": "[1.0.0-beta.2, )"
         }
       }
     },

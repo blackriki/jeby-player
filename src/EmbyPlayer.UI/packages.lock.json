@@ -11,7 +11,6 @@
           "EmbyPlayer.Core": "[1.0.0-beta.2, )"
         }
       }
-    },
-    "net8.0-windows7.0/win-x64": {}
+    }
   }
 }
