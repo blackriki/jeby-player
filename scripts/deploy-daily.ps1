@@ -16,7 +16,7 @@ if ([string]::IsNullOrWhiteSpace($InstallRoot)) {
         throw "Unable to resolve LocalApplicationData for the default daily InstallRoot."
     }
 
-    $installRootFull = [System.IO.Path]::GetFullPath((Join-Path $localAppData "Programs\EmbyPlayer"))
+    $installRootFull = [System.IO.Path]::GetFullPath((Join-Path $localAppData "Programs\JebyPlayer"))
 }
 elseif ([System.IO.Path]::IsPathRooted($InstallRoot)) {
     $installRootFull = [System.IO.Path]::GetFullPath($InstallRoot)

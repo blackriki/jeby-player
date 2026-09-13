@@ -59,4 +59,4 @@ dotnet build EmbyPlayer.sln --no-restore
 .\scripts\deploy-daily.ps1 -InstallRoot .\.tmp\daily-install
 ```
 
-部署脚本验证新输出后轮换 `current` 和 `previous`，保留上一版用于回退。运行中的应用会阻止替换。未指定目录时，默认安装到 `%LOCALAPPDATA%\Programs\EmbyPlayer`。
+部署脚本验证新输出后轮换 `current` 和 `previous`，保留上一版用于回退。运行中的应用会阻止替换。未指定目录时，默认安装到 `%LOCALAPPDATA%\Programs\JebyPlayer`。更新已有安装时，使用 `-InstallRoot` 指定原安装目录，以保留其回退版本。

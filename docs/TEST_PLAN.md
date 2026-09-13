@@ -1,4 +1,4 @@
-# Windows Emby Player 1.0 Test Plan
+# Jeby Player 1.0 Test Plan
 
 ## 1. Purpose
 
@@ -480,7 +480,7 @@ Prepare or mock these cases:
 - The entry invokes the existing release pipeline as tested SelfContained Internal with visible-window smoke, `-DirectoryOnly`, and the Internal-only non-force smoke mode. It must not create a disposable ZIP, pass `-SkipTests` or `-SkipLaunchSmoke`, write standard `bin\Release`, or hardcode a machine-specific install path. Formal release defaults still produce the immutable ZIP and Public rejects the non-force mode.
 - Formal and daily smoke start only their owned executable with `--release-smoke`. Policy tests prove this exact marker bypasses the settings close guard while an ordinary launch and lookalike arguments still use it; publish passes the marker, then `CloseMainWindow` can end the dedicated instance naturally.
 - A real unresponsive smoke fixture proves the daily-safe cleanup branch leaves the exact process alive and reports its PID after graceful close fails; this failure must occur before promotion. Daily code must never transitively reach force termination.
-- Payload promotion rejects PDB, invalid/mismatched manifests, reparse files/directories or ancestors, filesystem-root targets, and a running `EmbyPlayer.App`; it never calls a broad process stop.
+- Payload promotion rejects PDB, invalid/mismatched manifests, reparse files/directories or ancestors, filesystem-root targets, and a running `JebyPlayer` or legacy `EmbyPlayer.App`; it never calls a broad process stop.
 - First promotion creates only `current`. A second promotion leaves the new payload in `current`, the former payload in `previous`, and no `.next-*`, `.rollback-*`, or `.previous-old-*` transaction directory.
 - Inject failure on the second directory move (`.next-*` to `current`) and prove the original `current` is restored, no false `previous` is created, and owned transaction paths are cleaned.
 - On a third deployment, inject partial deletion failure for `.previous-old-*` after the new `current` and healthy `previous` are committed. Prove the healthy pair remains, the damaged oldest copy is retained only as transaction evidence, and no rollback replaces `previous`.
