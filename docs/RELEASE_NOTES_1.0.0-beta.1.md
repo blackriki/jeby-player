@@ -4,7 +4,9 @@
 
 ## 下载与安装
 
-下载 **[Windows 应用包（约 153 MB）](https://github.com/blackriki/jeby-player/releases/download/v1.0.0-beta.1/JebyPlayer-1.0.0-beta.1-win-x64-selfcontained.zip)**，完整解压后运行 `EmbyPlayer.App.exe`，输入服务器地址并登录。
+下载 **[Windows 应用包（约 153 MB）](https://github.com/blackriki/jeby-player/releases/download/v1.0.0-beta.1/JebyPlayer-1.0.0-beta.1-win-x64-selfcontained.zip)**，完整解压后双击启动文件，打开 Jeby Player，再输入服务器地址并登录。
+
+本版本启动文件名为 `EmbyPlayer.App.exe`，产品名称为 **Jeby Player**。
 
 应用包自带 .NET 和 MPV，无需另装运行时。`mpv-corresponding-sources.zip` 是播放内核及依赖的源码附件，日常使用无需下载。`SHA256SUMS.txt` 用于校验下载文件。
 
