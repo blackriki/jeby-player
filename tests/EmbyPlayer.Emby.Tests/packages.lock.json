@@ -121,7 +121,7 @@
       "embyplayer.emby": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )"
         }
       }
     }

@@ -115,35 +115,35 @@
         "resolved": "1.6.0",
         "contentHash": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ=="
       },
-      "embyplayer.app": {
-        "type": "Project",
-        "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )",
-          "EmbyPlayer.Emby": "[1.0.0, )",
-          "EmbyPlayer.Player": "[1.0.0, )",
-          "EmbyPlayer.UI": "[1.0.0, )"
-        }
-      },
       "embyplayer.core": {
         "type": "Project"
       },
       "embyplayer.emby": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )"
         }
       },
       "embyplayer.player": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )"
         }
       },
       "embyplayer.ui": {
         "type": "Project",
         "dependencies": {
-          "EmbyPlayer.Core": "[1.0.0, )",
-          "EmbyPlayer.Player": "[1.0.0, )"
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )",
+          "EmbyPlayer.Player": "[1.0.0-beta.2, )"
+        }
+      },
+      "JebyPlayer": {
+        "type": "Project",
+        "dependencies": {
+          "EmbyPlayer.Core": "[1.0.0-beta.2, )",
+          "EmbyPlayer.Emby": "[1.0.0-beta.2, )",
+          "EmbyPlayer.Player": "[1.0.0-beta.2, )",
+          "EmbyPlayer.UI": "[1.0.0-beta.2, )"
         }
       }
     }
