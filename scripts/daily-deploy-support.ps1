@@ -37,7 +37,7 @@ function Assert-DailyNoReparsePointAncestors([string] $Path) {
 }
 
 function Assert-DailyPlayerNotRunning {
-    $runningPlayers = @(Get-Process -Name "EmbyPlayer.App" -ErrorAction SilentlyContinue)
+    $runningPlayers = @(Get-Process -Name "JebyPlayer", "EmbyPlayer.App" -ErrorAction SilentlyContinue)
     if ($runningPlayers.Count -gt 0) {
         $processIds = @($runningPlayers | ForEach-Object { $_.Id }) -join ", "
         throw "Jeby Player is running (PID: $processIds). Close it and retry; daily deployment never stops the app."
@@ -133,8 +133,8 @@ function Assert-DailyPayload(
     }
 
     $requiredFiles = @(
-        "EmbyPlayer.App.exe",
-        "EmbyPlayer.App.dll",
+        "JebyPlayer.exe",
+        "JebyPlayer.dll",
         "EmbyPlayer.Core.dll",
         "EmbyPlayer.Emby.dll",
         "EmbyPlayer.Player.dll",

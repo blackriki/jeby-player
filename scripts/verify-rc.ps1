@@ -221,7 +221,7 @@ try {
 
     if ($canExecute -and $RunWindowLifecycle) {
         [void] (Invoke-RcStep "window-lifecycle" {
-            & (Join-Path $PSScriptRoot "verify-window-lifecycle.ps1") -ExecutablePath (Join-Path $artifactFull "EmbyPlayer.App.exe")
+            & (Join-Path $PSScriptRoot "verify-window-lifecycle.ps1") -ExecutablePath (Join-Path $artifactFull "JebyPlayer.exe")
             if (-not $?) { throw "Window lifecycle verification failed." }
         })
     }

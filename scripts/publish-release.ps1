@@ -513,7 +513,7 @@ if ($selfContained) {
     }
     $globalPackagesRoot = $Matches[1].Trim()
     $dotnetLicenseEvidence = @(Copy-DotNetRuntimeLicenseEvidence `
-        -RuntimeConfigPath (Join-Path $publishDirectory "EmbyPlayer.App.runtimeconfig.json") `
+        -RuntimeConfigPath (Join-Path $publishDirectory "JebyPlayer.runtimeconfig.json") `
         -GlobalPackagesRoot $globalPackagesRoot `
         -PublishDirectory $publishDirectory)
 }
@@ -524,8 +524,8 @@ if ($publishedPdbFiles.Count -gt 0) {
 }
 
 $requiredPayloadFiles = @(
-    "EmbyPlayer.App.exe",
-    "EmbyPlayer.App.dll",
+    "JebyPlayer.exe",
+    "JebyPlayer.dll",
     "EmbyPlayer.Core.dll",
     "EmbyPlayer.Emby.dll",
     "EmbyPlayer.Player.dll",
@@ -574,7 +574,7 @@ $launchSmoke = if ($SkipLaunchSmoke) {
 }
 else {
     Invoke-LaunchSmoke `
-        -executablePath (Join-Path $publishDirectory "EmbyPlayer.App.exe") `
+        -executablePath (Join-Path $publishDirectory "JebyPlayer.exe") `
         -AllowForceTermination (-not $SafeLaunchSmoke)
 }
 

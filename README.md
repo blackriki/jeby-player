@@ -4,19 +4,19 @@
 
 Jeby Player 使用原生 WPF 界面和 MPV 播放内核，连接你的 Emby 服务器，在桌面上浏览媒体库、管理片单并观看电影和剧集。
 
-[下载 Windows 测试版](https://github.com/blackriki/jeby-player/releases/tag/v1.0.0-beta.1) · [问题反馈](https://github.com/blackriki/jeby-player/issues) · [更新记录](CHANGELOG.md)
+[下载 Windows 测试版](https://github.com/blackriki/jeby-player/releases/tag/v1.0.0-beta.2) · [问题反馈](https://github.com/blackriki/jeby-player/issues) · [更新记录](CHANGELOG.md)
 
 ## 安装与使用
 
 支持 **Windows 10 / 11 x64**，需要可访问的 Emby 服务器和有效账号。
 
-1. 在发布页下载 `JebyPlayer-1.0.0-beta.1-win-x64-selfcontained.zip`。
-2. 完整解压，双击启动文件 `EmbyPlayer.App.exe`，打开 Jeby Player。
+1. 在发布页下载 `JebyPlayer-1.0.0-beta.2-win-x64-selfcontained.zip`。
+2. 完整解压，双击 `JebyPlayer.exe`，打开 Jeby Player。
 3. 输入服务器地址并登录，选择影片开始播放。
 
 下载包自带 .NET 和 MPV，无需额外安装运行时。请保留解压目录中的依赖文件。发布页的 `mpv-corresponding-sources.zip` 是播放内核及依赖的源码附件，日常使用无需下载。
 
-当前版本为 **1.0.0-beta.1**，支持 Emby，暂不支持 Jellyfin。该版本的产品名称为 Jeby Player，启动文件仍沿用 `EmbyPlayer.App.exe`。
+当前版本为 **1.0.0-beta.2**，支持 Emby，暂不支持 Jellyfin。
 
 ## 功能
 

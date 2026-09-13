@@ -18,11 +18,11 @@ internal static partial class Program
         using var http = new HttpClient(new RejectNetworkHandler());
         var invalidAddress = await new EmbyServerConnectionService(http).ConnectAsync("://", cancellationToken);
         result.Assert("ui-invalid-address-local-validation", invalidAddress.Error == ServerConnectionError.InvalidUrl);
-        var executable = Path.Combine(root, "EmbyPlayer.App.exe");
+        var executable = Path.Combine(root, "JebyPlayer.exe");
         using (var manifest = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root, "release-manifest.json"))))
         {
             var entry = manifest.RootElement.GetProperty("files").EnumerateArray().Single(
-                item => item.GetProperty("relativePath").GetString() == "EmbyPlayer.App.exe");
+                item => item.GetProperty("relativePath").GetString() == "JebyPlayer.exe");
             result.Assert("ui-executable-binding", HashFile(executable).Equals(entry.GetProperty("sha256").GetString(), StringComparison.OrdinalIgnoreCase)
                 && new FileInfo(executable).Length == entry.GetProperty("sizeBytes").GetInt64());
         }

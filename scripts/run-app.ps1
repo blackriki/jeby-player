@@ -21,7 +21,7 @@ try {
         dotnet build $project --no-restore -v minimal -m:1
     }
 
-    Get-Process -Name "EmbyPlayer.App" -ErrorAction SilentlyContinue |
+    Get-Process -Name "JebyPlayer", "EmbyPlayer.App" -ErrorAction SilentlyContinue |
         Where-Object {
             $_.Path -and
             [System.IO.Path]::GetFullPath($_.Path).StartsWith($outputDirFull, [StringComparison]::OrdinalIgnoreCase)

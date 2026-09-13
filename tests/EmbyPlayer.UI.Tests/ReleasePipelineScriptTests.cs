@@ -134,7 +134,7 @@ public sealed class ReleasePipelineScriptTests
         StringAssert.Contains(script, "Published payload must not contain PDB files");
         StringAssert.Contains(script, "-p:DebugType=None");
         StringAssert.Contains(validationScript, "Get-FileSha256");
-        StringAssert.Contains(script, "EmbyPlayer.App.exe");
+        StringAssert.Contains(script, "JebyPlayer.exe");
         StringAssert.Contains(script, "EmbyPlayer.Core.dll");
         StringAssert.Contains(script, "EmbyPlayer.Emby.dll");
         StringAssert.Contains(script, "EmbyPlayer.Player.dll");
@@ -483,13 +483,16 @@ public sealed class ReleasePipelineScriptTests
         }
     }
 
-    [TestMethod]
-    public async Task DailyPromotion_RunningPlayerGuardRejectsWithoutStoppingProcess()
+    [DataTestMethod]
+    [DataRow("EmbyPlayer.App")]
+    [DataRow("JebyPlayer")]
+    public async Task DailyPromotion_RunningPlayerGuardRejectsWithoutStoppingProcess(string runningProcessName)
     {
         var helperPath = Path.Combine(FindRepositoryRoot(), "scripts", "daily-deploy-support.ps1");
         var result = await RunPowerShellCommandAsync(
             $"$ErrorActionPreference='Stop'; . '{QuotePowerShell(helperPath)}'; "
-            + "function Get-Process { param($Name,$ErrorAction) if($Name -ne 'EmbyPlayer.App'){ throw 'Wrong process query' }; [pscustomobject]@{Id=54321} }; "
+            + $"$runningProcessName='{runningProcessName}'; "
+            + "function Get-Process { param($Name,$ErrorAction) if($Name -contains $runningProcessName){ [pscustomobject]@{Id=54321} } }; "
             + "function Stop-Process { throw 'Guard must never stop a process' }; Assert-DailyPlayerNotRunning");
         Assert.AreNotEqual(0, result.ExitCode);
         StringAssert.Contains(result.CombinedOutput, "54321");
@@ -517,7 +520,7 @@ public sealed class ReleasePipelineScriptTests
                 new { name = "Microsoft.NETCore.App", version = scenario == "unsafe-version" ? "../outside" : "8.0.11" },
                 new { name = "Microsoft.WindowsDesktop.App", version = "8.0.23" }
             };
-            var runtimeConfig = Path.Combine(published, "EmbyPlayer.App.runtimeconfig.json");
+            var runtimeConfig = Path.Combine(published, "JebyPlayer.runtimeconfig.json");
             await File.WriteAllTextAsync(runtimeConfig, JsonSerializer.Serialize(new
             {
                 runtimeOptions = new { includedFrameworks = scenario == "missing-framework" ? frameworks.Take(1).ToArray() : frameworks }
@@ -857,7 +860,7 @@ public sealed class ReleasePipelineScriptTests
             StringAssert.Contains(entryScript, "Open-DailyDeploymentLock");
             StringAssert.Contains(entryScript, "Invoke-DailyReleasePublish");
             StringAssert.Contains(entryScript, "Invoke-DailyBuildTransaction");
-            StringAssert.Contains(supportScript, "Get-Process -Name \"EmbyPlayer.App\"");
+            StringAssert.Contains(supportScript, "Get-Process -Name \"JebyPlayer\", \"EmbyPlayer.App\"");
             Assert.IsFalse(entryScript.Contains("D:\\", StringComparison.OrdinalIgnoreCase));
         }
         finally
@@ -1445,8 +1448,8 @@ public sealed class ReleasePipelineScriptTests
         Directory.CreateDirectory(payloadRoot);
         var requiredFiles = new[]
         {
-            "EmbyPlayer.App.exe",
-            "EmbyPlayer.App.dll",
+            "JebyPlayer.exe",
+            "JebyPlayer.dll",
             "EmbyPlayer.Core.dll",
             "EmbyPlayer.Emby.dll",
             "EmbyPlayer.Player.dll",

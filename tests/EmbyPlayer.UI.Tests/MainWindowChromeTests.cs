@@ -13,13 +13,13 @@ public sealed class MainWindowChromeTests
         var code = await File.ReadAllTextAsync(MainWindowPath(root, "MainWindow.xaml.cs"));
 
         Assert.IsTrue(ReleaseSmokeLaunchPolicy.IsReleaseSmoke(
-            new[] { "EmbyPlayer.App.exe", ReleaseSmokeLaunchPolicy.Argument }));
+            new[] { "JebyPlayer.exe", ReleaseSmokeLaunchPolicy.Argument }));
         Assert.IsFalse(ReleaseSmokeLaunchPolicy.RequiresSettingsCloseGuard(
-            new[] { "EmbyPlayer.App.exe", ReleaseSmokeLaunchPolicy.Argument }));
+            new[] { "JebyPlayer.exe", ReleaseSmokeLaunchPolicy.Argument }));
         Assert.IsFalse(ReleaseSmokeLaunchPolicy.IsReleaseSmoke(
-            new[] { "EmbyPlayer.App.exe", "--release-smoke-other" }));
+            new[] { "JebyPlayer.exe", "--release-smoke-other" }));
         Assert.IsTrue(ReleaseSmokeLaunchPolicy.RequiresSettingsCloseGuard(
-            new[] { "EmbyPlayer.App.exe" }));
+            new[] { "JebyPlayer.exe" }));
         StringAssert.Contains(code, "isReleaseSmoke = ReleaseSmokeLaunchPolicy.IsReleaseSmoke(");
         StringAssert.Contains(code, "lifecycleCoordinator.EvaluateClosing(");
         StringAssert.Contains(code, "SettingsViewModel.RequestWindowClose,");

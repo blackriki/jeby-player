@@ -12,7 +12,7 @@ dotnet build EmbyPlayer.sln --no-restore
 .\scripts\run-app.ps1
 ```
 
-工程、命名空间和可执行文件沿用 `EmbyPlayer` 标识，产品显示名称为 Jeby Player。设置和凭据存储标识保持兼容。
+启动文件为 `JebyPlayer.exe`，产品显示名称为 Jeby Player。工程和命名空间沿用 `EmbyPlayer` 标识。设置和凭据存储标识保持兼容。
 
 ## MPV 运行时
 
@@ -35,8 +35,8 @@ dotnet build EmbyPlayer.sln --no-restore
 在干净的工作树中准备原生运行时和许可文件后执行：
 
 ```powershell
-.\scripts\publish-release.ps1 -Version 1.0.0-beta.1 -Deployment SelfContained -Channel Public -PreflightOnly
-.\scripts\publish-release.ps1 -Version 1.0.0-beta.1 -Deployment SelfContained -Channel Public
+.\scripts\publish-release.ps1 -Version 1.0.0-beta.2 -Deployment SelfContained -Channel Public -PreflightOnly
+.\scripts\publish-release.ps1 -Version 1.0.0-beta.2 -Deployment SelfContained -Channel Public
 ```
 
 `SelfContained` 包自带 .NET；`FrameworkDependent` 包需要额外安装 .NET 8 Desktop Runtime。

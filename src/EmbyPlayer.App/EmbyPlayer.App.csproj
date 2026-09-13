@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <AssemblyName>JebyPlayer</AssemblyName>
+    <RootNamespace>EmbyPlayer.App</RootNamespace>
     <AssemblyTitle>Jeby Player</AssemblyTitle>
     <Description>Jeby Player - Windows desktop player for Emby</Description>
     <TargetFramework>net8.0-windows</TargetFramework>

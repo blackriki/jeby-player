@@ -488,7 +488,7 @@ Prepare or mock these cases:
 
 ### Manual
 
-- With the player closed, deploy twice to an isolated workspace `-InstallRoot`; launch `current\EmbyPlayer.App.exe`, then verify `previous` is the preceding payload and there is never more than one previous copy.
+- With the player closed, deploy twice to an isolated workspace `-InstallRoot`; launch `current\JebyPlayer.exe`, then verify `previous` is the preceding payload and there is never more than one previous copy.
 - Keep the installed player open and retry deployment. Confirm the command gives a friendly close-and-retry error, leaves `current` untouched, and does not stop the process.
 - Hold `.daily-deploy.lock` from another process and retry the same InstallRoot. Confirm the contender fails before build and the holder's state remains untouched.
 - Force the daily smoke process to ignore its close request. Confirm deployment reports the still-running PID, does not force-stop it, and does not promote a new `current`.
